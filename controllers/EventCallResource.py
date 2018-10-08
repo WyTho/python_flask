@@ -1,6 +1,5 @@
 from flask_restful import Resource, request
 from models.EventCall import EventCallModel
-import json
 
 
 class EventCallsResource(Resource):
@@ -11,7 +10,6 @@ class EventCallsResource(Resource):
         return {"event_calls": all_in_json}, 200
 
     def post(self):
-        print(str(request.data))
         event = EventCallModel(str(request.data))
         event.save_to_db()
         return event.to_json(), 201

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69df5673-f189-4468-9721-acef6bad6722" name="Default" comment="added EvetnCall&#10;and object that saves the form&#10;&#10;Now when getting an item this class will query for groups on top of the item itself but leave the groups items empty to avoid looping.&#10;visa versa for getting a group">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/controllers/EventCallResource.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/EventCall.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
+    <list default="true" id="69df5673-f189-4468-9721-acef6bad6722" name="Default" comment="Removed u">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/EventCallResource.py" afterPath="$PROJECT_DIR$/controllers/EventCallResource.py" />
     </list>
     <ignored path="selficient_flask_restful_3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,14 +93,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventCallResource.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EventCallResource.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/EventCallResource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="204">
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,6 +224,20 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="env">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="python_flask">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="controllers">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -231,7 +252,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="Item.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Item.py&#10;Item&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;Items&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/selficient_flask_restful_3/controllers/ItemsResource.py&#10;Event&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/selficient_flask_restful_3/controllers/EventsResource.py&#10;app.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/selficient_flask_restful_3/app.py" />
   </component>
@@ -419,7 +440,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539001548215</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added EventCall&#10;This object has a json field. This is a stringified version of request.data&#10;This object is used to temporarily store data that the homelynk will supply.&#10;&#10;runs at /event_call&#10;contains&#10; - id&#10; - json&#10; - timestamp">
+      <created>1539004474436</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1539004474436</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -487,7 +515,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added Gitignore" />
     <MESSAGE value="added ItemGroup&#10;and object that links Items and Groups&#10;&#10;Now when getting an item this class will query for groups on top of the item itself but leave the groups items empty to avoid looping.&#10;visa versa for getting a group" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ItemGroup&#10;and object that links Items and Groups&#10;&#10;Now when getting an item this class will query for groups on top of the item itself but leave the groups items empty to avoid looping.&#10;visa versa for getting a group" />
+    <MESSAGE value="added EventCall&#10;This object has a json field. This is a stringified version of request.data&#10;This object is used to temporarily store data that the homelynk will supply.&#10;&#10;runs at /event_call&#10;contains&#10; - id&#10; - json&#10; - timestamp" />
+    <option name="LAST_COMMIT_MESSAGE" value="added EventCall&#10;This object has a json field. This is a stringified version of request.data&#10;This object is used to temporarily store data that the homelynk will supply.&#10;&#10;runs at /event_call&#10;contains&#10; - id&#10; - json&#10; - timestamp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -752,13 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/ItemsResource.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -887,11 +909,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/EventCallResource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="204">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
