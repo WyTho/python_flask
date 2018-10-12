@@ -16,13 +16,14 @@ class DayModel(db.Model):
     def to_json(self):
         return {
             'id': self.id,
+            'timestamp': self.date_timestamp,
             'values': [hour.value for hour in self.hours]
         }
 
     @classmethod
     def find_by_id(cls, day_id):
         day = cls.query.filter_by(id=day_id).first()
-        day.events = Hour.HourModel.find_by_day_id(day.id)
+        day.set_hours(Hour.HourModel.find_by_day_id(day.id))
         return day
 
     @classmethod
@@ -32,12 +33,15 @@ class DayModel(db.Model):
             day = DayModel(graph_id, date_timestamp)
             day.save_to_db()
 
-        day.hours = Hour.HourModel.find_by_day_id(day.id)
+        day.set_hours(Hour.HourModel.find_by_day_id(day.id))
         return day
 
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+    def set_hours(self, hours):
+        self.hours = hours
 
     def __repr__(self):
         return "<Day id:'{}'>".format(self.id)

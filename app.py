@@ -26,7 +26,7 @@ api.add_resource(EventCallsResource, '/event_call')
 api.add_resource(EventCallResource, '/event_call/<int:event_call_id>')
 
 api.add_resource(GraphsResource, '/graph')
-api.add_resource(GraphResource, '/graph/<int:graph_id>')
+api.add_resource(GraphResource, '/graph/<string:title>')
 
 if __name__ == "__main__":
     from db import db
