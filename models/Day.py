@@ -1,6 +1,6 @@
 from db import db
 from models import Hour
-
+from operator import itemgetter
 
 class DayModel(db.Model):
     __tablename__ = 'day'
@@ -23,7 +23,7 @@ class DayModel(db.Model):
     @classmethod
     def find_by_id(cls, day_id):
         day = cls.query.filter_by(id=day_id).first()
-        day.set_hours(Hour.HourModel.find_by_day_id(day.id))
+        day.hours = Hour.HourModel.find_by_day_id(day.id)
         return day
 
     @classmethod
@@ -33,7 +33,7 @@ class DayModel(db.Model):
             day = DayModel(graph_id, date_timestamp)
             day.save_to_db()
 
-        day.set_hours(Hour.HourModel.find_by_day_id(day.id))
+        day.hours = Hour.HourModel.find_by_day_id(day.id)
         return day
 
     def save_to_db(self):
@@ -42,6 +42,21 @@ class DayModel(db.Model):
 
     def set_hours(self, hours):
         self.hours = hours
+
+    def add_hour(self, hour):
+        self.hours.append(hour)
+        self.organize_hours()
+
+    def organize_hours(self):
+        sorted_hours = []
+        for i in range(0, 24):
+            for hour in self.hours:
+                if hour.hour == i:
+                    sorted_hours.append(hour)
+        self.hours = sorted_hours
+
+    def has_24_hours(self):
+        return len(self.hours) == 24
 
     def __repr__(self):
         return "<Day id:'{}'>".format(self.id)

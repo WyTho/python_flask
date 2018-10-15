@@ -56,12 +56,19 @@ class GraphModel(db.Model):
     def find_by_title(cls, title, **kwargs):
         graph = cls.query.filter_by(title=title).first()
 
+        starting_date_timestamp = None
+        ending_date_timestamp = None
+        if 'starting_date_timestamp' in kwargs:
+            starting_date_timestamp = kwargs['starting_date_timestamp']
+        if 'ending_date_timestamp' in kwargs:
+            ending_date_timestamp = kwargs['ending_date_timestamp']
+
         # @todo test while using params
-        if kwargs['starting_date_timestamp']:
-            graph.set_starting_date(datetime.fromtimestamp(kwargs['starting_date_timestamp']))
+        if starting_date_timestamp is not None:
+            graph.set_starting_date(datetime.fromtimestamp(starting_date_timestamp))
             graph.set_ending_date(graph.starting_date + timedelta(weeks=6))
-        elif kwargs['ending_date_timestamp']:
-            graph.set_ending_date(datetime.fromtimestamp(kwargs['ending_date_timestamp']))
+        elif ending_date_timestamp is not None:
+            graph.set_ending_date(datetime.fromtimestamp(ending_date_timestamp))
             graph.set_starting_date(graph.ending_date - timedelta(weeks=6))
         else:
             last_day_of_current_week = date.today() + timedelta(days=(7 - date.today().weekday()))
@@ -71,7 +78,7 @@ class GraphModel(db.Model):
         i = 0
         weeks = []
         date_ = graph.starting_date
-        while i < 8:
+        while i < 6:
             weeks.append(Week.WeekModel(date_.timestamp(), graph.id))
             date_ = date_ + timedelta(weeks=1)
             i += 1
