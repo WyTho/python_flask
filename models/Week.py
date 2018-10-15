@@ -1,6 +1,6 @@
 from datetime import timedelta, datetime
 from models.Day import DayModel
-
+from operator import itemgetter
 
 class WeekModel():
     starting_date_timestamp = None
@@ -29,3 +29,15 @@ class WeekModel():
 
     def set_days(self, days):
         self.days = days
+
+    def add_day(self, day):
+        self.days = self.days.append(day)
+        self.organize_days()
+
+    def has_7_days(self):
+        return len(self.days) == 7
+
+    def organize_days(self):
+        sorted_days = sorted(self.days, key=itemgetter('date_timestamp'))
+        self.days = sorted_days
+

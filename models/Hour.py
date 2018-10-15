@@ -14,6 +14,7 @@ class HourModel(db.Model):
         self.hour = hour
         self.value = value
         self.is_final_value = is_final_value
+        print(self)
 
     def to_json(self):
         return {
@@ -30,8 +31,8 @@ class HourModel(db.Model):
 
     @classmethod
     def find_by_day_id(cls, day_id):
-        hour = cls.query.filter_by(day_id=day_id).all()
-        return hour
+        hours = cls.query.filter_by(day_id=day_id).limit(24).all()
+        return hours
 
     @classmethod
     def has_hour_with_day_id_and_hour(cls, day_id, hour):
@@ -45,6 +46,9 @@ class HourModel(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+    def has_value(self):
+        return self.value is not None
 
     def __repr__(self):
         return "<Hour id:'{}' hour:'{}' value:'{}'>".format(self.id, self.hour, self.value)

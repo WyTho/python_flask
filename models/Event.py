@@ -36,6 +36,21 @@ class EventModel(db.Model):
     def find_all_by_item_id(cls, item_id):
         return cls.query.filter_by(item_id=item_id).all()
 
+    @classmethod
+    def filter(cls, **kwargs):
+
+        results = cls.query
+        if 'item_id' in kwargs:
+            results = results.filter_by(item_id=kwargs['item_id'])
+        if 'data_type' in kwargs:
+            results = results.filter_by(data_type=kwargs['data_type'])
+        if 'after_timestamp' in kwargs:
+            results = results.filter(EventModel.timestamp > kwargs['after_timestamp'])
+        if 'before_timestamp' in kwargs:
+            results = results.filter(EventModel.timestamp < kwargs['before_timestamp'])
+
+        return results.all()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
