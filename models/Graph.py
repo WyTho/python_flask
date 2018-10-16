@@ -1,19 +1,21 @@
 from datetime import date, datetime, timedelta, time
-
 from db import db
 from models import Week
+from models.DataTypeEnum import DataTypeEnum
 
 
 class GraphModel(db.Model):
     __tablename__ = 'graph'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False, unique=True)
+    data_type = db.Column(db.Enum(DataTypeEnum))
     starting_date = None
     ending_date = None
     weeks = []
 
-    def __init__(self, title, **kwargs):
+    def __init__(self, title, data_type_enum, **kwargs):
         self.title = title
+        self.data_type = data_type_enum
         if kwargs['starting_date']:
             self.set_starting_date(kwargs['starting_date'])
         if kwargs['ending_date']:
@@ -23,6 +25,7 @@ class GraphModel(db.Model):
         return {
             'id': self.id,
             'title': self.title,
+            'data_type': self.data_type.value,
             'weeks': [week.to_json() for week in self.weeks]
         }
 

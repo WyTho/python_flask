@@ -1,4 +1,8 @@
-class DataTypeEnum:
+import enum
+from db import db
+
+
+class DataTypeEnum(enum.Enum):
     TEMPERATURE = 'TEMPERATURE'
 
     value = None
@@ -9,3 +13,8 @@ class DataTypeEnum:
 
     def is_temperature(self):
         return self.value == self.TEMPERATURE
+
+t = db.Table(
+    'data', db.MetaData(),
+    db.Column('value', db.Enum(DataTypeEnum))
+)

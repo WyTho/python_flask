@@ -10,13 +10,13 @@ class AverageTemperatureProcessor:
         day = DayModel.find_by_id(hour.day_id)
         after_datetime = (datetime.fromtimestamp(day.date_timestamp) + timedelta(hours=hour.hour))
         before_datetime = (datetime.fromtimestamp(day.date_timestamp) + timedelta(hours=hour.hour + 1))
-        events = EventModel.filter(data_type=DataTypeEnum.TEMPERATURE,
+        events = EventModel.filter(data_type=DataTypeEnum.TEMPERATURE.value,
                                    after_timestamp=after_datetime.timestamp(),
                                    before_timestamp=before_datetime.timestamp())
 
         temperature_sum = 0
         for event in events:
-            temperature_sum = temperature_sum + event.data
+            temperature_sum += float(event.data)
         if temperature_sum == 0:
             value = 0
         else:
@@ -24,3 +24,5 @@ class AverageTemperatureProcessor:
 
         is_final_value = before_datetime.timestamp() < datetime.now().timestamp()
         hour.update(value, is_final_value)
+        print('updated hour: ')
+        print(hour)
