@@ -25,7 +25,7 @@ class ItemModel(db.Model):
             'name': self.name,
             'address': self.address,
             'comment': self.comment,
-            'events': [event.to_json() for event in self.events],
+            # 'events': [event.to_json() for event in self.events],
             'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
         }
 

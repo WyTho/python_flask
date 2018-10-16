@@ -17,6 +17,6 @@ class EventCallsResource(Resource):
 
 class EventCallResource(Resource):
 
-    def get(self, event_id):
-        event = EventCallModel.find_by_id(event_id)
+    def get(self, event_call_id):
+        event = EventCallModel.find_by_id(event_call_id)
         return event.to_json()

@@ -22,7 +22,8 @@ class GroupModel(db.Model):
                     'name': item.name,
                     'address': item.address,
                     'comment': item.comment,
-                    'events': [event.to_json() for event in item.events]} for item in self.items],
+                    # 'events': [event.to_json() for event in item.events]
+                } for item in self.items],
         }
 
     @classmethod
