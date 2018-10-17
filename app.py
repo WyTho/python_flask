@@ -14,20 +14,20 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  # 'mysql://username
 api = Api(app)
 
 
-api.add_resource(ItemsResource, '/item')
-api.add_resource(ItemResource, '/item/<int:item_id>')
+api.add_resource(ItemsResource, '/api/item')
+api.add_resource(ItemResource, '/api/item/<int:item_id>')
 
-api.add_resource(EventsResource, '/event')
-api.add_resource(EventResource, '/event/<int:event_id>')
+api.add_resource(EventsResource, '/api/event')
+api.add_resource(EventResource, '/api/event/<int:event_id>')
 
-api.add_resource(GroupsResource, '/group')
-api.add_resource(GroupResource, '/group/<int:group_id>')
+api.add_resource(GroupsResource, '/api/group')
+api.add_resource(GroupResource, '/api/group/<int:group_id>')
 
-api.add_resource(EventCallsResource, '/event_call')
-api.add_resource(EventCallResource, '/event_call/<int:event_call_id>')
+api.add_resource(EventCallsResource, '/api/event_call')
+api.add_resource(EventCallResource, '/api/event_call/<int:event_call_id>')
 
-api.add_resource(GraphsResource, '/graph')
-api.add_resource(GraphResource, '/graph/<string:title>')
+api.add_resource(GraphsResource, '/api/graph')
+api.add_resource(GraphResource, '/api/graph/<string:title>')
 
 if __name__ == "__main__":
     from db import db
