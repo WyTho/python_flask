@@ -6,16 +6,19 @@ class GroupModel(db.Model):
     __tablename__ = 'group'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    is_module = db.Column(db.Boolean, default=False)
     items = []
 
-    def __init__(self, name):
+    def __init__(self, name, is_module):
         self.name = name
+        self.is_module = is_module
         self.items = ItemGroup.ItemGroupModel.find_items_by_group_id(self.id)
 
     def to_json(self):
         return {
             'id': self.id,
             'name': self.name,
+            'is_module': self.is_module,
             'items': [
                 {
                     'id': item.id,

@@ -1,6 +1,7 @@
 from flask_restful import Resource, request
 from models.Group import GroupModel
 from models.ItemGroup import ItemGroupModel
+from models.Item import ItemModel
 
 
 class GroupsResource(Resource):
@@ -12,10 +13,11 @@ class GroupsResource(Resource):
 
     def post(self):
         name = request.form['name']
-
-        group = GroupModel(name)
+        is_module = request.form['is_module']
+        group = GroupModel(name, is_module)
         group.save_to_db()
         return group.to_json(), 201
+
 
 class GroupResource(Resource):
 
@@ -25,7 +27,12 @@ class GroupResource(Resource):
 
     def put(self, group_id):
         item_id = request.form['item_id']
-        item_group = ItemGroupModel(item_id, group_id)
-        item_group.save_to_db()
-        group = GroupModel.find_by_id(group_id)
-        return group.to_json()
+        item = ItemModel.find_by_id(item_id)
+        if not item.is_in_module:
+            item_group = ItemGroupModel(item_id, group_id)
+            item_group.save_to_db()
+            group = GroupModel.find_by_id(group_id)
+            return group.to_json()
+        else:
+            # @todo throw real error
+            return 'error'

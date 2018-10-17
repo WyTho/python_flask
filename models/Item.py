@@ -50,6 +50,12 @@ class ItemModel(db.Model):
         item.events = Event.EventModel.find_all_by_item_id(item_id)
         return item
 
+    def is_in_module(self):
+        for group in self.groups:
+            if group.is_module:
+                return True
+        return False
+
     def update(self, **kwargs):
         if kwargs['name']:
             self.name = kwargs['name']

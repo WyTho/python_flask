@@ -5,6 +5,7 @@ from controllers.EventsResource import EventsResource, EventResource
 from controllers.GroupsResource import GroupsResource, GroupResource
 from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
+from models.Group import GroupModel
 
 
 app = Flask(__name__)
