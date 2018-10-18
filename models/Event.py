@@ -1,16 +1,17 @@
 from db import db
+from models.DataTypeEnum import DataTypeEnum
 
 
 class EventModel(db.Model):
     __tablename__ = 'event'
     id = db.Column(db.Integer, primary_key=True)
-    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
-    data_type = db.Column(db.String, nullable=False)
+    usage_id = db.Column(db.Integer, db.ForeignKey('usage.id'))
+    data_type = db.Column(db.Enum(DataTypeEnum), nullable=False)
     data = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.Integer, nullable=False, default=0)
 
-    def __init__(self, item_id, data_type, data, timestamp):
-        self.item_id = item_id
+    def __init__(self, usage_id, data_type, data, timestamp):
+        self.usage_id = usage_id
         self.data_type = data_type
         self.data = data
         self.timestamp = timestamp
@@ -18,7 +19,7 @@ class EventModel(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'item_id': self.item_id,
+            'usage_id': self.usage_id,
             'data_type': self.data_type,
             'data': self.data,
             'timestamp': self.timestamp
@@ -33,15 +34,15 @@ class EventModel(db.Model):
         return cls.query.filter_by(id=event_id).first()
 
     @classmethod
-    def find_all_by_item_id(cls, item_id):
-        return cls.query.filter_by(item_id=item_id).all()
+    def find_all_by_usage_id(cls, usage_id):
+        return cls.query.filter_by(usage_id=usage_id).all()
 
     @classmethod
     def filter(cls, **kwargs):
 
         results = cls.query
-        if 'item_id' in kwargs:
-            results = results.filter_by(item_id=kwargs['item_id'])
+        if 'usage_id' in kwargs:
+            results = results.filter_by(usage_Id=kwargs['usage_id'])
         if 'data_type' in kwargs:
             results = results.filter_by(data_type=kwargs['data_type'])
         if 'after_timestamp' in kwargs:
@@ -56,5 +57,5 @@ class EventModel(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Event id:'{}', item_id:'{}', data_type:'{}', data:'{}', timestamp:'{}'>"\
-            .format(self.id, self.item_id, self.data_type, self.data, self.timestamp)
+        return "<Event id:'{}', usage_id:'{}', data_type:'{}', data:'{}', timestamp:'{}'>"\
+            .format(self.id, self.usage_id, self.data_type, self.data, self.timestamp)

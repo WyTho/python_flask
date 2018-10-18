@@ -34,5 +34,4 @@ class GroupResource(Resource):
             group = GroupModel.find_by_id(group_id)
             return group.to_json()
         else:
-            # @todo throw real error
-            return 'error'
+            raise ValueError('Item cannot be in two different modules')

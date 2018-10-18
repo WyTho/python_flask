@@ -1,5 +1,5 @@
 from db import db
-from . import Event
+from models.Usage import UsageModel
 from . import ItemGroup
 
 
@@ -9,14 +9,14 @@ class ItemModel(db.Model):
     name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     comment = db.Column(db.String, nullable=False)
-    events = []
+    usages = []
     groups = []
 
     def __init__(self, name, address, comment):
         self.name = name
         self.address = address
         self.comment = comment
-        self.events = Event.EventModel.find_all_by_item_id(self.id)
+        self.events = UsageModel.find_all_by_item_id(self.id)
         self.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(self.id)
 
     def to_json(self):
@@ -25,7 +25,7 @@ class ItemModel(db.Model):
             'name': self.name,
             'address': self.address,
             'comment': self.comment,
-            # 'events': [event.to_json() for event in self.events],
+            'usages': [usage.to_json() for usage in self.usages],
             'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
         }
 
@@ -33,21 +33,23 @@ class ItemModel(db.Model):
     def find_all(cls):
         items = cls.query.all()
         for item in items:
-            item.events = Event.EventModel.find_all_by_item_id(item.id)
+            item.usages = UsageModel.find_all_by_item_id(item.id)
             item.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(item.id)
         return items
 
     @classmethod
     def find_by_id(cls, item_id):
         item = cls.query.filter_by(id=item_id).first()
-        item.events = Event.EventModel.find_all_by_item_id(item.id)
+        if not item:
+            return item
+        item.usages = UsageModel.find_all_by_item_id(item.id)
         item.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(item.id)
         return item
 
     @classmethod
     def find_by_id_without_groups(cls, item_id):
         item = cls.query.filter_by(id=item_id).first()
-        item.events = Event.EventModel.find_all_by_item_id(item_id)
+        item.usages = UsageModel.find_all_by_item_id(item_id)
         return item
 
     def is_in_module(self):

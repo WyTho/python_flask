@@ -5,12 +5,10 @@ from controllers.EventsResource import EventsResource, EventResource
 from controllers.GroupsResource import GroupsResource, GroupResource
 from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
-from models.Group import GroupModel
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  # 'mysql://username:password@ip:port/databasename'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/WySmart'  # 'mysql://username:password@ip:port/databasename'
 api = Api(app)
 
 

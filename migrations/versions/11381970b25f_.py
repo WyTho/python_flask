@@ -21,8 +21,8 @@ def upgrade():
     op.create_table('event',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('item_id', sa.Integer(), nullable=True),
-    sa.Column('data_type', sa.String(), nullable=False),
-    sa.Column('data', sa.String(), nullable=False),
+    sa.Column('data_type', sa.String(50), nullable=False),
+    sa.Column('data', sa.String(255), nullable=False),
     sa.Column('timestamp', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['item_id'], ['item.id'], ),
     sa.PrimaryKeyConstraint('id')

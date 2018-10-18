@@ -16,9 +16,10 @@ class GraphModel(db.Model):
     def __init__(self, title, data_type_enum, **kwargs):
         self.title = title
         self.data_type = data_type_enum
-        if kwargs['starting_date']:
+
+        if 'starting_date' in kwargs:
             self.set_starting_date(kwargs['starting_date'])
-        if kwargs['ending_date']:
+        if 'ending_date' in kwargs:
             self.set_ending_date(kwargs['ending_date'])
 
     def to_json(self):
@@ -96,6 +97,10 @@ class GraphModel(db.Model):
 
     def set_ending_date(self, ending_date):
         self.ending_date = ending_date
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return "<Graph id:'{}'>".format(self.id)
