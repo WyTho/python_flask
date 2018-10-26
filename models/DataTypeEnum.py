@@ -14,6 +14,7 @@ class DataTypeEnum(enum.Enum):
     def is_temperature(self):
         return self.value == self.TEMPERATURE
 
+
 t = db.Table(
     'data_type_enum', db.MetaData(),
     db.Column('value', db.Enum(DataTypeEnum))

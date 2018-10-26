@@ -10,6 +10,7 @@ from models.UsageTypeEnum import UsageTypeEnum
 from models.DataTypeEnum import DataTypeEnum
 from models.Event import EventModel
 from models.Graph import GraphModel
+from datetime import datetime
 import random
 
 migrate = Migrate(app, db)
@@ -26,6 +27,7 @@ def seed():
         items = []
 
         # START CREATING ITEMS
+        print('Creating items...')
         items.append(ItemModel('Heating', '127.0.0.1:5000/item/1', 'comment'))
         items.append(UsageModel(1, UsageTypeEnum(UsageTypeEnum.KILOWATT), 5))
 
@@ -60,12 +62,14 @@ def seed():
         items.append(UsageModel(11, UsageTypeEnum(UsageTypeEnum.KILOWATT), 1))
 
         # START CREATING GROUPS
+        print('Creating groups...')
         items.append(GroupModel('Huiskamer', True))
         items.append(GroupModel('Slaapkamer', True))
         items.append(GroupModel('Badkamer', True))
         items.append(GroupModel('Verlichting', False))
 
         # START ADDING ITEMS TO GROUPS
+        print('Assigning items to groups...')
         items.append(ItemGroupModel(2, 1))
         items.append(ItemGroupModel(3, 1))
         items.append(ItemGroupModel(8, 1))
@@ -83,10 +87,19 @@ def seed():
         items.append(ItemGroupModel(11, 4))
 
         # START CREATING EVENTS
-        timestamp = 1535760000
-        while timestamp < 1539907200:
+        print('Creating events')
+        till_date = datetime.now().timestamp()
+        from_date = 1535760000
+
+        keep_going = True
+        while keep_going:
             for i in range(0, 24):
+                if not keep_going:
+                    break
                 for y in range(0, 10):
+                    if from_date > till_date:
+                        keep_going = False
+                        break
                     temp = 0
                     if i in [1, 2, 3, 4, 5, 15]:
                         temp = 15
@@ -101,13 +114,75 @@ def seed():
                     elif i in [11, 16]:
                         temp = 19
 
-                    items.append(EventModel(1, DataTypeEnum(DataTypeEnum.TEMPERATURE), temp * random.uniform(0.9, 1.1), timestamp))
-                    timestamp += 6 * 60
+                    items.append(EventModel(1, DataTypeEnum(DataTypeEnum.TEMPERATURE), temp * random.uniform(0.9, 1.1), from_date))
+                    from_date += 6 * 60
 
         items.append(GraphModel('AVERAGE_TEMPERATURE', DataTypeEnum(DataTypeEnum.TEMPERATURE)))
 
+        print('inserting data into db, this may take a while...')
+        current = 1
+        total = len(items)
         for item in items:
+            print('{} out of {}'.format(current, total))
+            current += 1
             item.save_to_db()
+
+
+@manager.command
+def update_seed():
+    db.init_app(app)
+    items = []
+    till_date = datetime.now().timestamp()
+
+    # getting highest timestamp value in Event's table. Add 6 minutes to that and use that as the first timestamp.
+    from_date = (db.session.query(db.func.max(EventModel.timestamp)).first()[0]) + (6 * 60)
+
+    keep_going = True
+    first_time = True
+    while keep_going:
+        # 24 hours per day
+        for i in range(0, 24):
+            y = 0
+            if first_time:
+                i = datetime.fromtimestamp(from_date).hour
+                print(i)
+                y = (datetime.fromtimestamp(from_date).minute / 6) - 1
+                first_time = False
+            if not keep_going:
+                break
+
+            # 10 values per hour
+            while y < 10:
+                if from_date > till_date:
+                    keep_going = False
+                    break
+                temp = 0
+                if i in [1, 2, 3, 4, 5, 15]:
+                    temp = 15
+                elif i in [0, 14]:
+                    temp = 16
+                elif i in [6, 12, 24, 13]:
+                    temp = 18
+                elif i in [7, 8, 9, 17, 18, 19, 20, 21, 22]:
+                    temp = 21
+                elif i in [10, 23]:
+                    temp = 20
+                elif i in [11, 16]:
+                    temp = 19
+
+                items.append(
+                    EventModel(1, DataTypeEnum(DataTypeEnum.TEMPERATURE), temp * random.uniform(0.9, 1.1), from_date))
+                from_date += 6 * 60
+                y += 1
+
+    print('inserting data into db, this may take a while...')
+    current = 1
+    total = len(items)
+    for item in items:
+        print('{} out of {}'.format(current, total))
+        current += 1
+        item.save_to_db()
+
 
 if __name__ == '__main__':
     manager.run()
