@@ -6,7 +6,7 @@ class HourModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'), nullable=False)
     hour = db.Column(db.Integer, nullable=False)
-    value = db.Column(db.Float, nullable=False)
+    value = db.Column(db.Float, nullable=True)
     is_final_value = db.Column(db.Boolean, default=False)
 
     def __init__(self, day_id, hour, value, is_final_value):

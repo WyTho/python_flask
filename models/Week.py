@@ -2,7 +2,8 @@ from datetime import timedelta, datetime
 from models.Day import DayModel
 from operator import itemgetter
 
-class WeekModel():
+
+class WeekModel:
     starting_date_timestamp = None
     graph_id = -1
     days = []

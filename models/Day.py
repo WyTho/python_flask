@@ -2,6 +2,7 @@ from db import db
 from models import Hour
 from operator import itemgetter
 
+
 class DayModel(db.Model):
     __tablename__ = 'day'
     id = db.Column(db.Integer, primary_key=True)

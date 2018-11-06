@@ -7,11 +7,13 @@ from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
 
 app = Flask(__name__)
+# Database configuration
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/WySmart'  # 'mysql://username:password@ip:port/databasename'
 api = Api(app)
 
 
+# Here the Resources will be bound to endpoints
 api.add_resource(ItemsResource, '/api/item')
 api.add_resource(ItemResource, '/api/item/<int:item_id>')
 

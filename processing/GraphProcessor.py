@@ -12,14 +12,18 @@ class GraphProcessor:
         self.graph = graph
 
     def process(self):
-        print('in processor')
+        # Complete graph checks if there are any days and hours not yet in the database and creates those that are
+        # missing
         self.complete_graph()
 
+        # Find the right processor. Each Graph type has its own processor
         processor = None
-        # @todo add graph type (might be on real_PC)
         if self.graph.title == 'AVERAGE_TEMPERATURE':
             processor = AverageTemperatureProcessor()
 
+        # For each value in this graph, check if the value is final. If not, recalculate it.
+        # the value will be set as final if the date of the value has passed completely and its value has been
+        # calculated
         for week in self.graph.weeks:
             for day in week.days:
                 for hour in day.hours:
@@ -39,9 +43,7 @@ class GraphProcessor:
                 missing_hours.append(i)
 
         for missing_hour in missing_hours:
-            # @todo remove hour not null constraint when both versions are pushed. Hours that lie into the
-            # future have to value after all
-            hour = HourModel(day.id, missing_hour, 0.0, False)
+            hour = HourModel(day.id, missing_hour, None, False)
             hour.save_to_db()
             day.add_hour(hour)
 
