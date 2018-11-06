@@ -18,7 +18,7 @@ class AverageTemperatureProcessor:
         for event in events:
             temperature_sum += float(event.data)
         if temperature_sum == 0:
-            value = 0
+            value = None
         else:
             value = temperature_sum / len(events)
 
