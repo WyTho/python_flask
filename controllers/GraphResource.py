@@ -15,13 +15,12 @@ class GraphResource(Resource):
 
     def get(self, title):
         # Starting_date and ending_date are optional parameters. if neither is given then todays date will be used
-
         starting_date_timestamp = None
         ending_date_timestamp = None
-        if 'starting_date_timestamp' in request.form.keys():
-            starting_date_timestamp = request.form['starting_date_timestamp']
-        elif 'ending_date_timestamp' in request.form.keys():
-            ending_date_timestamp = request.form['ending_date_timestamp']
+        if 'starting_date_timestamp' in request.args.keys():
+            starting_date_timestamp = int(request.args['starting_date_timestamp'])
+        if 'ending_date_timestamp' in request.args.keys():
+            ending_date_timestamp = int(request.args['ending_date_timestamp'])
 
         graph = GraphModel.find_by_title(title,
                                          starting_date_timestamp=starting_date_timestamp,

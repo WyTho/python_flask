@@ -68,7 +68,10 @@ class GraphModel(db.Model):
             ending_date_timestamp = kwargs['ending_date_timestamp']
 
         # @todo test while using params
-        if starting_date_timestamp is not None:
+        if starting_date_timestamp is not None and ending_date_timestamp is not None:
+            graph.set_starting_date(datetime.fromtimestamp(starting_date_timestamp))
+            graph.set_ending_date(datetime.fromtimestamp(ending_date_timestamp))
+        elif starting_date_timestamp is not None:
             graph.set_starting_date(datetime.fromtimestamp(starting_date_timestamp))
             graph.set_ending_date(graph.starting_date + timedelta(weeks=6))
         elif ending_date_timestamp is not None:
@@ -82,7 +85,8 @@ class GraphModel(db.Model):
         i = 0
         weeks = []
         date_ = graph.starting_date
-        while i < 6:
+        amount_of_weeks = graph.ending_date.isocalendar()[1] - graph.starting_date.isocalendar()[1]
+        while i < amount_of_weeks:
             weeks.append(Week.WeekModel(date_.timestamp(), graph.id))
             date_ = date_ + timedelta(weeks=1)
             i += 1
