@@ -15,6 +15,12 @@ class DayModel(db.Model):
         self.date_timestamp = date_timestamp
 
     def to_json(self):
+        if self.hours is None:
+            return {
+                'id': self.id,
+                'timestamp': self.date_timestamp,
+                'values': [None for i in range(24)]
+            }
         return {
             'id': self.id,
             'timestamp': self.date_timestamp,

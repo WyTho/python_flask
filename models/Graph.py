@@ -85,7 +85,8 @@ class GraphModel(db.Model):
         i = 0
         weeks = []
         date_ = graph.starting_date
-        amount_of_weeks = graph.ending_date.isocalendar()[1] - graph.starting_date.isocalendar()[1]
+        amount_of_weeks = ((graph.ending_date - graph.starting_date).days/7)
+        print(amount_of_weeks)
         while i < amount_of_weeks:
             weeks.append(Week.WeekModel(date_.timestamp(), graph.id))
             date_ = date_ + timedelta(weeks=1)
