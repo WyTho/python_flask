@@ -14,7 +14,7 @@ class GraphsResource(Resource):
 class GraphResource(Resource):
 
     def get(self, title):
-        print(title)
+        # Starting_date and ending_date are optional parameters. if neither is given then todays date will be used
 
         starting_date_timestamp = None
         ending_date_timestamp = None
