@@ -60,22 +60,37 @@ class GraphModel(db.Model):
     def find_by_title(cls, title, **kwargs):
         graph = cls.query.filter_by(title=title).first()
 
-        starting_date_timestamp = None
-        ending_date_timestamp = None
+        starting_date = None
+        ending_date = None
         if 'starting_date_timestamp' in kwargs:
-            starting_date_timestamp = kwargs['starting_date_timestamp']
+            starting_date = datetime.fromtimestamp(kwargs['starting_date_timestamp'])
+            starting_date = starting_date - timedelta(
+                days=(starting_date.weekday() - 1),
+                hours=starting_date.hour,
+                minutes=starting_date.minute,
+                seconds=starting_date.second,
+                microseconds=starting_date.microsecond
+            )
+
         if 'ending_date_timestamp' in kwargs:
-            ending_date_timestamp = kwargs['ending_date_timestamp']
+            ending_date = datetime.fromtimestamp(kwargs['ending_date_timestamp'])
+            ending_date = ending_date - timedelta(
+                hours=starting_date.hour,
+                minutes=starting_date.minute,
+                seconds=starting_date.second,
+                microseconds=starting_date.microsecond
+            )
+            ending_date = ending_date + timedelta(days=(7 + ending_date.today().weekday()))
 
         # @todo test while using params
-        if starting_date_timestamp is not None and ending_date_timestamp is not None:
-            graph.set_starting_date(datetime.fromtimestamp(starting_date_timestamp))
-            graph.set_ending_date(datetime.fromtimestamp(ending_date_timestamp))
-        elif starting_date_timestamp is not None:
-            graph.set_starting_date(datetime.fromtimestamp(starting_date_timestamp))
+        if starting_date is not None and ending_date is not None:
+            graph.set_starting_date(starting_date)
+            graph.set_ending_date(ending_date)
+        elif starting_date is not None:
+            graph.set_starting_date(starting_date)
             graph.set_ending_date(graph.starting_date + timedelta(weeks=6))
-        elif ending_date_timestamp is not None:
-            graph.set_ending_date(datetime.fromtimestamp(ending_date_timestamp))
+        elif ending_date is not None:
+            graph.set_ending_date(ending_date)
             graph.set_starting_date(graph.ending_date - timedelta(weeks=6))
         else:
             last_day_of_current_week = date.today() + timedelta(days=(7 - date.today().weekday()))
@@ -86,7 +101,6 @@ class GraphModel(db.Model):
         weeks = []
         date_ = graph.starting_date
         amount_of_weeks = ((graph.ending_date - graph.starting_date).days/7)
-        print(amount_of_weeks)
         while i < amount_of_weeks:
             weeks.append(Week.WeekModel(date_.timestamp(), graph.id))
             date_ = date_ + timedelta(weeks=1)
