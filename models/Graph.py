@@ -63,24 +63,26 @@ class GraphModel(db.Model):
         starting_date = None
         ending_date = None
         if 'starting_date_timestamp' in kwargs:
-            starting_date = datetime.fromtimestamp(kwargs['starting_date_timestamp'])
-            starting_date = starting_date - timedelta(
-                days=(starting_date.weekday() - 1),
-                hours=starting_date.hour,
-                minutes=starting_date.minute,
-                seconds=starting_date.second,
-                microseconds=starting_date.microsecond
-            )
+            if kwargs['starting_date_timestamp'] is not None:
+                starting_date = datetime.fromtimestamp(kwargs['starting_date_timestamp'])
+                starting_date = starting_date - timedelta(
+                    days=(starting_date.weekday() - 1),
+                    hours=starting_date.hour,
+                    minutes=starting_date.minute,
+                    seconds=starting_date.second,
+                    microseconds=starting_date.microsecond
+                )
 
         if 'ending_date_timestamp' in kwargs:
-            ending_date = datetime.fromtimestamp(kwargs['ending_date_timestamp'])
-            ending_date = ending_date - timedelta(
-                hours=starting_date.hour,
-                minutes=starting_date.minute,
-                seconds=starting_date.second,
-                microseconds=starting_date.microsecond
-            )
-            ending_date = ending_date + timedelta(days=(7 + ending_date.today().weekday()))
+            if kwargs['ending_date_timestamp'] is not None:
+                ending_date = datetime.fromtimestamp(kwargs['ending_date_timestamp'])
+                ending_date = ending_date - timedelta(
+                    hours=starting_date.hour,
+                    minutes=starting_date.minute,
+                    seconds=starting_date.second,
+                    microseconds=starting_date.microsecond
+                )
+                ending_date = ending_date + timedelta(days=(7 + ending_date.today().weekday()))
 
         if starting_date is not None and ending_date is not None:
             graph.set_starting_date(starting_date)
