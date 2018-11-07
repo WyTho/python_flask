@@ -7,6 +7,11 @@ class DataTypeEnum(enum.Enum):
 
     value = None
 
+    def to_json(self):
+        return {
+            'value': self.value
+        }
+
     def temperature(self):
         self.value = self.TEMPERATURE
         return self

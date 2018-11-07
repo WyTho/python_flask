@@ -1,5 +1,6 @@
 from db import db
 from models.Usage import UsageModel
+from models.Event import EventModel
 from . import ItemGroup
 
 
@@ -9,6 +10,8 @@ class ItemModel(db.Model):
     name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     comment = db.Column(db.String, nullable=False)
+    last_used = 00000000000
+    last_use = ''
     usages = []
     groups = []
 
@@ -16,7 +19,8 @@ class ItemModel(db.Model):
         self.name = name
         self.address = address
         self.comment = comment
-        self.events = UsageModel.find_all_by_item_id(self.id)
+        self.usages = UsageModel.find_all_by_item_id(self.id)
+        self.fill_status()
         self.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(self.id)
 
     def to_json(self):
@@ -25,6 +29,7 @@ class ItemModel(db.Model):
             'name': self.name,
             'address': self.address,
             'comment': self.comment,
+            'last_use': {'last_used': self.last_used, 'last_use': self.last_use},
             'usages': [usage.to_json() for usage in self.usages],
             'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
         }
@@ -35,6 +40,7 @@ class ItemModel(db.Model):
         for item in items:
             item.usages = UsageModel.find_all_by_item_id(item.id)
             item.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(item.id)
+            item.fill_status()
         return items
 
     @classmethod
@@ -44,13 +50,30 @@ class ItemModel(db.Model):
             return item
         item.usages = UsageModel.find_all_by_item_id(item.id)
         item.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(item.id)
+        item.fill_status()
         return item
 
     @classmethod
     def find_by_id_without_groups(cls, item_id):
         item = cls.query.filter_by(id=item_id).first()
         item.usages = UsageModel.find_all_by_item_id(item_id)
+        item.fill_status()
         return item
+
+    def fill_status(self):
+        last_event = None
+        for usage in self.usages:
+            event = EventModel.find_latest_by_usage_id(usage.id)
+            if last_event is None:
+                last_event = event
+            elif event is None:
+                pass
+            elif last_event.timestamp > event:
+                last_event = event
+
+        if last_event is not None:
+            self.last_used = last_event.timestamp
+            self.last_use = {'datatype': last_event.data_type.value, 'data': last_event.data}
 
     def is_in_module(self):
         for group in self.groups:

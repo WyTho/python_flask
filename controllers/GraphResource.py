@@ -31,10 +31,10 @@ class GraphResource(Resource):
     def put(self, title):
         starting_date_timestamp = None
         ending_date_timestamp = None
-        if 'starting_date_timestamp' in request.form.keys():
-            starting_date_timestamp = request.form['starting_date_timestamp']
-        elif 'ending_date_timestamp' in request.form.keys():
-            ending_date_timestamp = request.form['ending_date_timestamp']
+        if 'starting_date_timestamp' in request.args.keys():
+            starting_date_timestamp = request.args['starting_date_timestamp']
+        elif 'ending_date_timestamp' in request.args.keys():
+            ending_date_timestamp = request.args['ending_date_timestamp']
 
         graph = GraphModel.find_by_title(title,
                                          starting_date_timestamp=starting_date_timestamp,

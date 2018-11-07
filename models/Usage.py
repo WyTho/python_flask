@@ -1,5 +1,6 @@
 from db import db
 from models.UsageTypeEnum import UsageTypeEnum
+from models.Event import EventModel
 
 
 class UsageModel(db.Model):
@@ -36,7 +37,6 @@ class UsageModel(db.Model):
 
     @classmethod
     def filter(cls, **kwargs):
-
         results = cls.query
         if 'item_id' in kwargs:
             results = results.filter_by(item_id=kwargs['item_id'])

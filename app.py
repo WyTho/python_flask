@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from controllers.ItemsResource import ItemsResource, ItemResource
+from controllers.ItemsResource import ItemsResource, ItemResource, CommandResource
 from controllers.EventsResource import EventsResource, EventResource
 from controllers.GroupsResource import GroupsResource, GroupResource
 from controllers.EventCallResource import EventCallsResource, EventCallResource
@@ -10,12 +10,14 @@ app = Flask(__name__)
 # Database configuration
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/WySmart'  # 'mysql://username:password@ip:port/databasename'
+app.config['HOMELYNK_URI'] = 'http://remote:remote@192.168.0.10/cgi-bin/scada-remote/request.cgi?m=json&r=grp&fn=write&'
 api = Api(app)
 
 
 # Here the Resources will be bound to endpoints
 api.add_resource(ItemsResource, '/api/item')
 api.add_resource(ItemResource, '/api/item/<int:item_id>')
+api.add_resource(CommandResource, '/api/item/<int:item_id>/command/<string:new_value>')
 
 api.add_resource(EventsResource, '/api/event')
 api.add_resource(EventResource, '/api/event/<int:event_id>')

@@ -82,7 +82,6 @@ class GraphModel(db.Model):
             )
             ending_date = ending_date + timedelta(days=(7 + ending_date.today().weekday()))
 
-        # @todo test while using params
         if starting_date is not None and ending_date is not None:
             graph.set_starting_date(starting_date)
             graph.set_ending_date(ending_date)

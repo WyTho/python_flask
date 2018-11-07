@@ -42,7 +42,7 @@ class EventModel(db.Model):
 
         results = cls.query
         if 'usage_id' in kwargs:
-            results = results.filter_by(usage_Id=kwargs['usage_id'])
+            results = results.filter_by(usage_id=kwargs['usage_id'])
         if 'data_type' in kwargs:
             results = results.filter_by(data_type=kwargs['data_type'])
         if 'after_timestamp' in kwargs:
@@ -51,6 +51,10 @@ class EventModel(db.Model):
             results = results.filter(EventModel.timestamp < kwargs['before_timestamp'])
 
         return results.all()
+
+    @classmethod
+    def find_latest_by_usage_id(cls, usage_id):
+        return cls.query.filter_by(usage_id=usage_id).order_by(EventModel.timestamp.desc()).first()
 
     def save_to_db(self):
         db.session.add(self)
