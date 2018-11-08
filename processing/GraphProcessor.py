@@ -3,6 +3,7 @@ from models.Day import DayModel
 from models.Graph import GraphModel
 from datetime import timedelta, datetime
 from processing.ProcessAverageTemperature import AverageTemperatureProcessor
+from processing.ProcessAverageWaterUsage import AverageWaterUsageProcessor
 
 
 class GraphProcessor:
@@ -20,6 +21,13 @@ class GraphProcessor:
         processor = None
         if self.graph.title == 'AVERAGE_TEMPERATURE':
             processor = AverageTemperatureProcessor()
+            print('AVERAGE_TEMPERATURE')
+        elif self.graph.title == 'AVERAGE_WATER_USAGE':
+            print('AVERAGE_WATER_USAGE')
+            processor = AverageWaterUsageProcessor()
+
+        if processor is None:
+            return 'Error'
 
         # For each value in this graph, check if the value is final. If not, recalculate it.
         # the value will be set as final if the date of the value has passed completely and its value has been
@@ -29,8 +37,9 @@ class GraphProcessor:
                 for hour in day.hours:
                     if not hour.is_final_value:
                         processor.process_hour_value(hour)
-
-        return GraphModel.find_by_title(self.graph.title)
+        return GraphModel.find_by_title(self.graph.title,
+                                         starting_date_timestamp=self.graph.starting_date.timestamp(),
+                                         ending_date_timestamp=self.graph.ending_date.timestamp())
 
     def create_hours(self, day):
         missing_hours = []

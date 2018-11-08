@@ -43,7 +43,6 @@ class HourModel(db.Model):
         db.session.commit()
 
     def save_to_db(self):
-        print(self)
         db.session.add(self)
         db.session.commit()
 

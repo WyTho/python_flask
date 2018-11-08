@@ -64,9 +64,9 @@ class GraphModel(db.Model):
         ending_date = None
         if 'starting_date_timestamp' in kwargs:
             if kwargs['starting_date_timestamp'] is not None:
-                starting_date = datetime.fromtimestamp(kwargs['starting_date_timestamp'])
+                starting_date = datetime.fromtimestamp(int(kwargs['starting_date_timestamp']))
                 starting_date = starting_date - timedelta(
-                    days=(starting_date.weekday() - 1),
+                    days=(starting_date.weekday()),
                     hours=starting_date.hour,
                     minutes=starting_date.minute,
                     seconds=starting_date.second,
@@ -75,14 +75,17 @@ class GraphModel(db.Model):
 
         if 'ending_date_timestamp' in kwargs:
             if kwargs['ending_date_timestamp'] is not None:
-                ending_date = datetime.fromtimestamp(kwargs['ending_date_timestamp'])
+                ending_date = datetime.fromtimestamp(int(kwargs['ending_date_timestamp']))
                 ending_date = ending_date - timedelta(
-                    hours=starting_date.hour,
-                    minutes=starting_date.minute,
-                    seconds=starting_date.second,
-                    microseconds=starting_date.microsecond
+                    days=(ending_date.weekday()),
+                    hours=ending_date.hour,
+                    minutes=ending_date.minute,
+                    seconds=ending_date.second,
+                    microseconds=ending_date.microsecond
                 )
-                ending_date = ending_date + timedelta(days=(7 + ending_date.today().weekday()))
+                ending_date = ending_date + timedelta(
+                    days=6
+                )
 
         if starting_date is not None and ending_date is not None:
             graph.set_starting_date(starting_date)
@@ -102,6 +105,7 @@ class GraphModel(db.Model):
         weeks = []
         date_ = graph.starting_date
         amount_of_weeks = ((graph.ending_date - graph.starting_date).days/7)
+
         while i < amount_of_weeks:
             weeks.append(Week.WeekModel(date_.timestamp(), graph.id))
             date_ = date_ + timedelta(weeks=1)

@@ -56,6 +56,13 @@ class EventModel(db.Model):
     def find_latest_by_usage_id(cls, usage_id):
         return cls.query.filter_by(usage_id=usage_id).order_by(EventModel.timestamp.desc()).first()
 
+    @classmethod
+    def find_next_false(cls, event):
+        return cls.query\
+            .filter(EventModel.timestamp > event.timestamp)\
+            .filter(EventModel.usage_id == event.usage_id)\
+            .filter_by(data='False').first()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

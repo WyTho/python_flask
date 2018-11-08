@@ -13,7 +13,6 @@ class AverageTemperatureProcessor:
         events = EventModel.filter(data_type=DataTypeEnum.TEMPERATURE.value,
                                    after_timestamp=after_datetime.timestamp(),
                                    before_timestamp=before_datetime.timestamp())
-
         temperature_sum = 0
         for event in events:
             temperature_sum += float(event.data)
@@ -24,5 +23,5 @@ class AverageTemperatureProcessor:
 
         is_final_value = before_datetime.timestamp() < datetime.now().timestamp()
         hour.update(value, is_final_value)
-        print('updated hour: ')
-        print(hour)
+        # print('updated hour: ')
+        # print(hour)

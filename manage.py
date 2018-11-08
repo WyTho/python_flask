@@ -10,7 +10,7 @@ from models.UsageTypeEnum import UsageTypeEnum
 from models.DataTypeEnum import DataTypeEnum
 from models.Event import EventModel
 from models.Graph import GraphModel
-from datetime import datetime
+from datetime import datetime, timedelta
 import random
 
 migrate = Migrate(app, db)
@@ -89,13 +89,34 @@ def seed():
         # START CREATING EVENTS
         print('Creating events')
         till_date = datetime.now().timestamp()
-        from_date = 1535760000
+        from_date = 1538352000
 
         keep_going = True
         while keep_going:
+            for i in range(0, random.randint(1, 4)):
+                toilet_break_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
+                    hours=random.randint(5, 12),
+                    minutes=random.randint(0, 60),
+                    seconds=random.randint(0, 60)
+                )).timestamp()
+                items.append(EventModel(6, DataTypeEnum(DataTypeEnum.WATER_USAGE), 'True', toilet_break_timestamp))
+
+            for i in range(0, 4):
+                daily_shower_start_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
+                    hours=random.randint(5, 12),
+                    minutes=random.randint(0, 60),
+                    seconds=random.randint(0, 60)
+                )).timestamp()
+                items.append(EventModel(7, DataTypeEnum(DataTypeEnum.WATER_USAGE), 'True', daily_shower_start_timestamp))
+                daily_shower_end_timestamp = (datetime.fromtimestamp(daily_shower_start_timestamp) + timedelta(
+                    minutes=random.randint(5, 15),
+                    seconds=random.randint(0, 60)
+                )).timestamp()
+                items.append(EventModel(7, DataTypeEnum(DataTypeEnum.WATER_USAGE), 'False', daily_shower_end_timestamp))
             for i in range(0, 24):
                 if not keep_going:
                     break
+
                 for y in range(0, 10):
                     if from_date > till_date:
                         keep_going = False
@@ -118,6 +139,7 @@ def seed():
                     from_date += 6 * 60
 
         items.append(GraphModel('AVERAGE_TEMPERATURE', DataTypeEnum(DataTypeEnum.TEMPERATURE)))
+        items.append(GraphModel('AVERAGE_WATER_USAGE', DataTypeEnum(DataTypeEnum.WATER_USAGE)))
 
         print('inserting data into db, this may take a while...')
         current = 1
@@ -140,6 +162,26 @@ def update_seed():
     keep_going = True
     first_time = True
     while keep_going:
+        for i in range(0, random.randint(1, 4)):
+            toilet_break_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
+                hours=random.randint(5, 12),
+                minutes=random.randint(0, 60),
+                seconds=random.randint(0, 60)
+            )).timestamp()
+            items.append(EventModel(6, DataTypeEnum(DataTypeEnum.WATER_USAGE), 'True', toilet_break_timestamp))
+
+        for i in range(0, 4):
+            daily_shower_start_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
+                hours=random.randint(5, 12),
+                minutes=random.randint(0, 60),
+                seconds=random.randint(0, 60)
+            )).timestamp()
+            items.append(EventModel(7, DataTypeEnum(DataTypeEnum.WATER_USAGE), 'True', daily_shower_start_timestamp))
+            daily_shower_end_timestamp = (datetime.fromtimestamp(daily_shower_start_timestamp) + timedelta(
+                minutes=random.randint(5, 15),
+                seconds=random.randint(0, 60)
+            )).timestamp()
+            items.append(EventModel(7, DataTypeEnum(DataTypeEnum.WATER_USAGE), 'False', daily_shower_end_timestamp))
         # 24 hours per day
         for i in range(0, 24):
             y = 0
