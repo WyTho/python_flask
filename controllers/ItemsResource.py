@@ -44,5 +44,8 @@ class CommandResource(Resource):
 
     def post(self, item_id, new_value):
         item = ItemModel.find_by_id(item_id)
+        url = "{}alias={}&value={}".format(app.config['HOMELYNK_URI'], item.address, new_value)
+        print(url)
         response = requests.get(url="{}alias={}&value={}".format(app.config['HOMELYNK_URI'], item.address, new_value))
+        print(response)
         return response.json()
