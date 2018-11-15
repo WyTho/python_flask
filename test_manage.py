@@ -3,6 +3,7 @@ from db import db
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from tests.test_item_resource import test_item_resource
+from tests.test_group_resource import test_group_resource
 
 migrate = Migrate(app, db)
 
@@ -14,6 +15,7 @@ manager.add_command('db', MigrateCommand)
 def run_tests():
     db.init_app(app)
     test_item_resource()
+    test_group_resource()
 
 
 if __name__ == '__main__':

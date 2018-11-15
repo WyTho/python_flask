@@ -34,27 +34,34 @@ class ItemResource(Resource):
 
     def get(self, item_id):
         item = ItemModel.find_by_id(item_id)
+        if item is None:
+            return None
         return item.to_json()
 
     def post(self, item_id):
         item = ItemModel.find_by_id(item_id)
+        if 'name' in request.form.keys():
+            name = request.form['name']
+            address = request.form['address']
+            comment = request.form['comment']
+        else:
+            request_data = json.loads(request.data)
+            name = request_data['name']
+            address = request_data['address']
+            comment = request_data['comment']
 
-        name = request.form['name']
-        address = request.form['address']
-        comment = request.form['comment']
-        usage_type = request.form['usage_type']
-        usage = request.form['usage']
-
-        item = item.update(name=name, address=address, comment=comment, usage_type=usage_type, usage=usage)
+        item = item.update(name=name, address=address, comment=comment)
         return item.to_json()
 
 
 class CommandResource(Resource):
 
+    def get(self, item_id, new_value):
+        if new_value == 'tea':
+            return "I'm a teapot", 418
+        return 404, 404
+
     def post(self, item_id, new_value):
         item = ItemModel.find_by_id(item_id)
-        url = "{}alias={}&value={}".format(app.config['HOMELYNK_URI'], item.address, new_value)
-        print(url)
         response = requests.get(url="{}alias={}&value={}".format(app.config['HOMELYNK_URI'], item.address, new_value))
-        print(response)
         return response.json()

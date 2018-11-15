@@ -25,9 +25,6 @@ class GroupModel(db.Model):
                     'name': item.name,
                     'address': item.address,
                     'comment': item.comment,
-                    'usage_type': item.usage_type.value,
-                    'usage': item.usage
-                    # 'events': [event.to_json() for event in item.events]
                 } for item in self.items],
         }
 
@@ -41,6 +38,8 @@ class GroupModel(db.Model):
     @classmethod
     def find_by_id(cls, group_id):
         group = cls.query.filter_by(id=group_id).first()
+        if group is None:
+            return None
         group.items = ItemGroup.ItemGroupModel.find_items_by_group_id(group.id)
         return group
 
