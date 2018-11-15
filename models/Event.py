@@ -3,9 +3,9 @@ from models.DataTypeEnum import DataTypeEnum
 
 
 class EventModel(db.Model):
-    __tablename__ = 'event'
+    __tablename__ = '_event'
     id = db.Column(db.Integer, primary_key=True)
-    usage_id = db.Column(db.Integer, db.ForeignKey('usage.id'))
+    usage_id = db.Column(db.Integer, db.ForeignKey('_usage.id'))
     data_type = db.Column(db.Enum(DataTypeEnum), nullable=False)
     data = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.Integer, nullable=False, default=0)

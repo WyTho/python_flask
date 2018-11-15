@@ -4,9 +4,9 @@ from models.Event import EventModel
 
 
 class UsageModel(db.Model):
-    __tablename__ = 'usage'
+    __tablename__ = '_usage'
     id = db.Column(db.Integer, primary_key=True)
-    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
+    item_id = db.Column(db.Integer, db.ForeignKey('_item.id'))
     usage_type = db.Column(db.Enum(UsageTypeEnum), nullable=False)
     usage = db.Column(db.String, nullable=False)
 

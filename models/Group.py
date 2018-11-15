@@ -3,7 +3,7 @@ from . import ItemGroup
 
 
 class GroupModel(db.Model):
-    __tablename__ = 'group'
+    __tablename__ = '_group'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     is_module = db.Column(db.Boolean, default=False)

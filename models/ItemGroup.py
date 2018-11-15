@@ -4,10 +4,10 @@ from . import Item
 
 
 class ItemGroupModel(db.Model):
-    __tablename__ = 'item_group'
+    __tablename__ = '_item_group'
     id = db.Column(db.Integer, primary_key=True)
-    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
-    group_id = db.Column(db.Integer, db.ForeignKey('item.id'))
+    item_id = db.Column(db.Integer, db.ForeignKey('_item.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('_group.id'))
 
     def __init__(self, item_id, group_id):
         self.item_id = item_id

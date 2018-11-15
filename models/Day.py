@@ -4,9 +4,9 @@ from operator import itemgetter
 
 
 class DayModel(db.Model):
-    __tablename__ = 'day'
+    __tablename__ = '_day'
     id = db.Column(db.Integer, primary_key=True)
-    graph_id = db.Column(db.Integer, db.ForeignKey('graph.id'), nullable=False)
+    graph_id = db.Column(db.Integer, db.ForeignKey('_graph.id'), nullable=False)
     date_timestamp = db.Column(db.Integer, nullable=False)
     hours = []
 

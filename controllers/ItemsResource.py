@@ -2,8 +2,7 @@ from flask_restful import Resource, request
 import requests
 from flask import current_app as app
 from models.Item import ItemModel
-from models.UsageTypeEnum import UsageTypeEnum
-
+import json
 
 class ItemsResource(Resource):
 
@@ -13,9 +12,19 @@ class ItemsResource(Resource):
         return {"items": all_in_json}, 200
 
     def post(self):
-        name = request.form['name']
-        address = request.form['address']
-        comment = request.form['comment']
+        if 'name' in request.form.keys():
+            name = request.form['name']
+            address = request.form['address']
+            comment = request.form['comment']
+        else:
+            request_data = json.loads(request.data)
+            name = request_data['name']
+            address = request_data['address']
+            comment = request_data['comment']
+        # request_data = json.loads(request.data)
+        # name = request.form['name']
+        # address = request.form['address']
+        # comment = request.form['comment']
         item = ItemModel(name, address, comment)
         item.save_to_db()
         return item.to_json(), 201

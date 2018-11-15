@@ -5,7 +5,7 @@ from . import ItemGroup
 
 
 class ItemModel(db.Model):
-    __tablename__ = 'item'
+    __tablename__ = '_item'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)

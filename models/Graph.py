@@ -5,7 +5,7 @@ from models.DataTypeEnum import DataTypeEnum
 
 
 class GraphModel(db.Model):
-    __tablename__ = 'graph'
+    __tablename__ = '_graph'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False, unique=True)
     data_type = db.Column(db.Enum(DataTypeEnum))

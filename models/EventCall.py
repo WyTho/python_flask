@@ -3,7 +3,7 @@ import time
 
 
 class EventCallModel(db.Model):
-    __tablename__ = 'event_call'
+    __tablename__ = '_event_call'
     id = db.Column(db.Integer, primary_key=True)
     json = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.Integer, nullable=False)
