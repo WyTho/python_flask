@@ -145,7 +145,6 @@ def seed():
         current = 1
         total = len(items)
         for item in items:
-            print('{} out of {}'.format(current, total))
             current += 1
             item.save_to_db()
 
