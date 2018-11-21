@@ -1,6 +1,7 @@
 from db import db
 from models.Usage import UsageModel
 from models.Event import EventModel
+from models.Control import ControlModel
 from . import ItemGroup
 
 
@@ -10,6 +11,7 @@ class ItemModel(db.Model):
     name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     comment = db.Column(db.String, nullable=False)
+    control_id = db.Column(db.Integer, db.ForeignKey("control.id"), nullable=False)
     last_used = 00000000000
     last_use = ''
     usages = []
@@ -20,6 +22,7 @@ class ItemModel(db.Model):
         self.address = address
         self.comment = comment
         self.usages = UsageModel.find_all_by_item_id(self.id)
+        self.control = ControlModel.find_by_id(self.control_id)
         self.fill_status()
         self.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(self.id)
 
@@ -30,6 +33,7 @@ class ItemModel(db.Model):
             'address': self.address,
             'comment': self.comment,
             'last_use': {'last_used': self.last_used, 'last_use': self.last_use},
+            'control': self.control.to_json(),
             'usages': [usage.to_json() for usage in self.usages],
             'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
         }
@@ -40,6 +44,7 @@ class ItemModel(db.Model):
         for item in items:
             item.usages = UsageModel.find_all_by_item_id(item.id)
             item.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(item.id)
+            item.control = ControlModel.find_by_id(item.control_id)
             item.fill_status()
         return items
 
@@ -50,12 +55,14 @@ class ItemModel(db.Model):
             return item
         item.usages = UsageModel.find_all_by_item_id(item.id)
         item.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(item.id)
+        item.control = ControlModel.find_by_id(item.control_id)
         item.fill_status()
         return item
 
     @classmethod
     def find_by_id_without_groups(cls, item_id):
         item = cls.query.filter_by(id=item_id).first()
+        item.control = ControlModel.find_by_id(item.control_id)
         item.usages = UsageModel.find_all_by_item_id(item_id)
         item.fill_status()
         return item
