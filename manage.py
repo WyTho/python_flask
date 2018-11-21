@@ -230,8 +230,6 @@ def update_seed():
         current += 1
         item.save_to_db()
 
-    db.Query('UPDATE item SET control_id = 1')
-
 
 if __name__ == '__main__':
     manager.run()
