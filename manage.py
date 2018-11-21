@@ -10,6 +10,7 @@ from models.UsageTypeEnum import UsageTypeEnum
 from models.DataTypeEnum import DataTypeEnum
 from models.Event import EventModel
 from models.Graph import GraphModel
+from models.Control import ControlModel
 from datetime import datetime, timedelta
 import random
 
@@ -60,6 +61,9 @@ def seed():
 
         items.append(ItemModel('badkamer verlichting', '127.0.0.1:5000/item/11', ''))
         items.append(UsageModel(11, UsageTypeEnum(UsageTypeEnum.KILOWATT), 1))
+
+        # START CREATING CONTROL
+        items.append(ControlModel("BOOLEAN", None, None, None))
 
         # START CREATING GROUPS
         print('Creating groups...')
@@ -149,6 +153,7 @@ def seed():
             current += 1
             item.save_to_db()
 
+        db.engine.execute('UPDATE item SET control_id=1')
 
 @manager.command
 def update_seed():
@@ -224,6 +229,8 @@ def update_seed():
         print('{} out of {}'.format(current, total))
         current += 1
         item.save_to_db()
+
+    db.Query('UPDATE item SET control_id = 1')
 
 
 if __name__ == '__main__':
