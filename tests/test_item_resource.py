@@ -1,25 +1,6 @@
 from models.Item import ItemModel
 from tests.test_calls import test_get, test_post
 
-'''
-    TEMPLATE FOR CALLS
-    h = httplib2.Http()
-    h.add_credentials(myname, mypasswd)
-    h.follow_all_redirects = True
-    headers = {'Content-Type': 'application/atom+xml'}
-    body    = """<?xml version="1.0" ?>
-        <entry xmlns="http://www.w3.org/2005/Atom">
-          <title>Atom-Powered Robots Run Amok</title>
-          <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-          <updated>2003-12-13T18:30:02Z</updated>
-          <author><name>John Doe</name></author>
-          <content>Some text.</content>
-    </entry>
-    """
-    uri     = "http://www.example.com/collection/"
-    resp, content = h.request(uri, "POST", body=body, headers=headers)
-'''
-
 
 def test_item_resource():
     print("####################   TESTING ITEM RESOURCE   ####################")
@@ -87,6 +68,69 @@ def test_item_resource():
     expected_result = item_1_json
     expected_status = 200
     test_get(uri, expected_result, expected_status)
+
+    # POSTING ONE ITEM
+    print("TEST_7 --- POSTING ONE ITEM - BAD REQUEST")
+    item_1_name = 'Z04 Gang lamp (SW)_______________________________________________________________' \
+                  '_________________________________________________________________________________' \
+                  '_________________________________________________________________________________' \
+                  '_________________________________________________________________________________'
+    item_1_address = '0/0/6'
+    item_1_comment = 'ETS import'
+    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
+    body = {
+        "name": item_1_name,
+        "address": item_1_address,
+        "comment": item_1_comment
+    }
+    item_1_json = item_1.to_json()
+    item_1_json['id'] = 2
+    expected_result = "Name cannot be longer than 255 characters."
+    expected_status = 400
+    uri = "http://127.0.0.1:5000/api/item"
+    test_post(uri, body, expected_result, expected_status)
+
+    # POSTING ONE ITEM
+    print("TEST_8 --- POSTING ONE ITEM - BAD REQUEST")
+    item_1_name = 'Z04 Gang lamp (SW)'
+    item_1_address = '0/0/6_______________________________________________________________' \
+                     '_________________________________________________________________________________' \
+                     '_________________________________________________________________________________' \
+                     '_________________________________________________________________________________'
+    item_1_comment = 'ETS import'
+    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
+    body = {
+        "name": item_1_name,
+        "address": item_1_address,
+        "comment": item_1_comment
+    }
+    item_1_json = item_1.to_json()
+    item_1_json['id'] = 2
+    expected_result = "Address cannot be longer than 255 characters."
+    expected_status = 400
+    uri = "http://127.0.0.1:5000/api/item"
+    test_post(uri, body, expected_result, expected_status)
+
+    # POSTING ONE ITEM
+    print("TEST_9 --- POSTING ONE ITEM - BAD REQUEST")
+    item_1_name = 'Z04 Gang lamp (SW)'
+    item_1_address = '0/0/6'
+    item_1_comment = 'ETS import_______________________________________________________________' \
+                     '_________________________________________________________________________________' \
+                     '_________________________________________________________________________________' \
+                     '_________________________________________________________________________________'
+    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
+    body = {
+        "name": item_1_name,
+        "address": item_1_address,
+        "comment": item_1_comment
+    }
+    item_1_json = item_1.to_json()
+    item_1_json['id'] = 2
+    expected_result = "Comment cannot be longer than 255 characters."
+    expected_status = 400
+    uri = "http://127.0.0.1:5000/api/item"
+    test_post(uri, body, expected_result, expected_status)
 
     # COMMANDING ITEM
     # @todo test command endpoint (needs homelynk)

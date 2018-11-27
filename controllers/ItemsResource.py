@@ -21,10 +21,14 @@ class ItemsResource(Resource):
             name = request_data['name']
             address = request_data['address']
             comment = request_data['comment']
-        # request_data = json.loads(request.data)
-        # name = request.form['name']
-        # address = request.form['address']
-        # comment = request.form['comment']
+
+        if len(name) > 255:
+            return 'Name cannot be longer than 255 characters.', 400
+        if len(address) > 255:
+            return 'Address cannot be longer than 255 characters.', 400
+        if len(comment) > 255:
+            return 'Comment cannot be longer than 255 characters.', 400
+
         item = ItemModel(name, address, comment)
         item.save_to_db()
         return item.to_json(), 201
@@ -49,6 +53,17 @@ class ItemResource(Resource):
             name = request_data['name']
             address = request_data['address']
             comment = request_data['comment']
+
+        if len(name) < 3:
+            return 'Name must be at least 3 characters long.', 400
+        if len(address) < 3:
+            return 'Address must be at least 3 characters long.', 400
+        if len(name) > 255:
+            return 'Name cannot be longer than 255 characters.', 400
+        if len(address) > 255:
+            return 'Address cannot be longer than 255 characters.', 400
+        if len(comment) > 255:
+            return 'Comment cannot be longer than 255 characters.', 400
 
         item = item.update(name=name, address=address, comment=comment)
         return item.to_json()

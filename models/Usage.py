@@ -8,7 +8,7 @@ class UsageModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer, db.ForeignKey('_item.id'))
     usage_type = db.Column(db.Enum(UsageTypeEnum), nullable=False)
-    usage = db.Column(db.String, nullable=False)
+    usage = db.Column(db.Integer, nullable=False)
 
     def __init__(self, item_id, usage_type, usage):
         self.item_id = item_id

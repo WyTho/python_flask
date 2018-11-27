@@ -14,7 +14,9 @@ class AverageWaterUsageProcessor:
         events = EventModel.filter(data_type=DataTypeEnum.WATER_USAGE.value,
                                    after_timestamp=after_datetime.timestamp(),
                                    before_timestamp=before_datetime.timestamp())
-        total_water_usage = 0
+        total_water_usage = None
+        if len(events) != 0:
+            total_water_usage = 0
         for event in events:
             usage = UsageModel.find_by_id(event.usage_id)
             if usage.usage_type.is_water_per_hour():
@@ -33,4 +35,5 @@ class AverageWaterUsageProcessor:
 
         # is_final_value = before_datetime.timestamp() < datetime.now().timestamp()
         is_final_value = False
-        hour.update(total_water_usage, is_final_value)
+        if total_water_usage is not None:
+            hour.update(total_water_usage, is_final_value)

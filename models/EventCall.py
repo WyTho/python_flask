@@ -10,7 +10,7 @@ class EventCallModel(db.Model):
 
     def __init__(self, json):
         self.json = json
-        self.timestamp = time.time()
+        self.timestamp = round(time.time())
 
     def to_json(self):
         return {

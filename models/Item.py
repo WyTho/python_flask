@@ -81,6 +81,12 @@ class ItemModel(db.Model):
                 return True
         return False
 
+    def is_in_this_group(self, group_id):
+        for group in self.groups:
+            if group.id == group_id:
+                return True
+        return False
+
     def update(self, **kwargs):
         if kwargs['name']:
             self.name = kwargs['name']
