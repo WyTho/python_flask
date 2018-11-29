@@ -14,13 +14,13 @@ class EventModel(db.Model):
         self.usage_id = usage_id
         self.data_type = data_type
         self.data = data
-        self.timestamp = timestamp
+        self.timestamp = round(timestamp)
 
     def to_json(self):
         return {
             'id': self.id,
             'usage_id': self.usage_id,
-            'data_type': self.data_type,
+            'data_type': self.data_type.value,
             'data': self.data,
             'timestamp': self.timestamp
         }

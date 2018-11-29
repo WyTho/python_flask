@@ -5,6 +5,8 @@ from db import db
 class DataTypeEnum(enum.Enum):
     TEMPERATURE = 'TEMPERATURE'
     WATER_USAGE = 'WATER_USAGE'
+    KILOWATT = 'KILOWATT'
+    OTHER = 'OTHER'
 
     value = None
 
@@ -17,6 +19,12 @@ class DataTypeEnum(enum.Enum):
 
     def is_water_usage(self):
         return self.value == self.WATER_USAGE
+
+    def is_kilowatt(self):
+        return self.value == self.KILOWATT
+
+    def is_other(self):
+        return self.value == self.OTHER
 
 t = db.Table(
     'data_type_enum', db.MetaData(),
