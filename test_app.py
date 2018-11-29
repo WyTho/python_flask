@@ -35,7 +35,6 @@ api.add_resource(EventCallResource, '/api/event_call/<int:event_call_id>')
 api.add_resource(GraphsResource, '/api/graph')
 api.add_resource(GraphResource, '/api/graph/<string:title>')
 
-clear_database.clear_database()
 # seed_test_data.seed_test_data()
 
 
