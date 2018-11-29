@@ -158,7 +158,7 @@ def update_seed():
     till_date = datetime.now().timestamp()
 
     # getting highest timestamp value in Event's table. Add 6 minutes to that and use that as the first timestamp.
-    from_date = (db.session.query(db.func.max(EventModel.timestamp)).first()[0]) + (6 * 60)
+    from_date = (db.session.query(db.func.max(EventModel.timestamp)).first()[0]) #md + (6 * 60)
 
     keep_going = True
     first_time = True
