@@ -25,6 +25,9 @@ class GraphResource(Resource):
         graph = GraphModel.find_by_title(title,
                                          starting_date_timestamp=starting_date_timestamp,
                                          ending_date_timestamp=ending_date_timestamp)
+        if graph is None:
+            return 'Could not find specified graph', 404
+
         return graph.to_json()
 
     def put(self, title):
@@ -38,6 +41,9 @@ class GraphResource(Resource):
         graph = GraphModel.find_by_title(title,
                                          starting_date_timestamp=starting_date_timestamp,
                                          ending_date_timestamp=ending_date_timestamp)
+        if graph is None:
+            return 'Could not find specified graph', 404
+
         processor = GraphProcessor(graph)
         graph = processor.process()
 
