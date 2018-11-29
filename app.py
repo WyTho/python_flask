@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_restful import Api
-from controllers.ItemsResource import ItemsResource, ItemResource, CommandResource
+from controllers.ItemsResource import ItemsResource, ItemResource
 from controllers.EventsResource import EventsResource, EventResource
 from controllers.GroupsResource import GroupsResource, GroupResource
 from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
+from controllers.UsageResource import UsageResource, UsagesResource, CommandResource
 
 app = Flask(__name__)
 # Database configuration
@@ -17,7 +18,10 @@ api = Api(app)
 # Here the Resources will be bound to endpoints
 api.add_resource(ItemsResource, '/api/item')
 api.add_resource(ItemResource, '/api/item/<int:item_id>')
-api.add_resource(CommandResource, '/api/item/<int:item_id>/command/<string:new_value>')
+
+api.add_resource(UsagesResource, '/api/usage')
+api.add_resource(UsageResource, '/api/usage/<int:usage_id>')
+api.add_resource(CommandResource, '/api/usage/<int:usage_id>/command/<string:new_value>')
 
 api.add_resource(EventsResource, '/api/event')
 api.add_resource(EventResource, '/api/event/<int:event_id>')

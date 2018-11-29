@@ -8,16 +8,12 @@ class DataTypeEnum(enum.Enum):
 
     value = None
 
-    def temperature(self):
-        self.value = self.TEMPERATURE
-        return self
+    @classmethod
+    def has_value(cls, value):
+        return any(value == item.value for item in cls)
 
     def is_temperature(self):
         return self.value == self.TEMPERATURE
-
-    def water_usage(self):
-        self.value = self.WATER_USAGE
-        return self
 
     def is_water_usage(self):
         return self.value == self.WATER_USAGE

@@ -17,12 +17,10 @@ def test_item_resource():
     # POSTING ONE ITEM
     print("TEST_2 --- POSTING ONE ITEM")
     item_1_name = 'Z04 Gang lamp (SW)'
-    item_1_address = '0/0/4'
     item_1_comment = 'ETS import'
-    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
+    item_1 = ItemModel(item_1_name, item_1_comment)
     body = {
         "name": item_1_name,
-        "address": item_1_address,
         "comment": item_1_comment
     }
     item_1_json = item_1.to_json()
@@ -52,15 +50,14 @@ def test_item_resource():
     print("TEST_5 --- UPDATING ONE ITEM")
     uri = 'http://127.0.0.1:5000/api/item/1'
     expected_result = item_1_json
-    expected_result['address'] = '0/0/5'
+    expected_result['comment'] = 'new_comment'
     body = {
         'name': item_1.name,
-        'address': '0/0/5',
-        'comment': item_1.comment
+        'comment': 'new_comment'
     }
     expected_status = 200
     test_post(uri, body, expected_result, expected_status)
-    item_1_json['address'] = '0/0/5'
+    item_1_json['comment'] = 'new_comment'
 
     # GETTING ONE ITEM
     print("TEST_6 --- GETTING UPDATED ITEM")
@@ -75,12 +72,10 @@ def test_item_resource():
                   '_________________________________________________________________________________' \
                   '_________________________________________________________________________________' \
                   '_________________________________________________________________________________'
-    item_1_address = '0/0/6'
     item_1_comment = 'ETS import'
-    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
+    item_1 = ItemModel(item_1_name, item_1_comment)
     body = {
         "name": item_1_name,
-        "address": item_1_address,
         "comment": item_1_comment
     }
     item_1_json = item_1.to_json()
@@ -91,38 +86,15 @@ def test_item_resource():
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
-    print("TEST_8 --- POSTING ONE ITEM - BAD REQUEST")
-    item_1_name = 'Z04 Gang lamp (SW)'
-    item_1_address = '0/0/6_______________________________________________________________' \
-                     '_________________________________________________________________________________' \
-                     '_________________________________________________________________________________' \
-                     '_________________________________________________________________________________'
-    item_1_comment = 'ETS import'
-    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
-    body = {
-        "name": item_1_name,
-        "address": item_1_address,
-        "comment": item_1_comment
-    }
-    item_1_json = item_1.to_json()
-    item_1_json['id'] = 2
-    expected_result = "Address cannot be longer than 255 characters."
-    expected_status = 400
-    uri = "http://127.0.0.1:5000/api/item"
-    test_post(uri, body, expected_result, expected_status)
-
-    # POSTING ONE ITEM
     print("TEST_9 --- POSTING ONE ITEM - BAD REQUEST")
     item_1_name = 'Z04 Gang lamp (SW)'
-    item_1_address = '0/0/6'
     item_1_comment = 'ETS import_______________________________________________________________' \
                      '_________________________________________________________________________________' \
                      '_________________________________________________________________________________' \
                      '_________________________________________________________________________________'
-    item_1 = ItemModel(item_1_name, item_1_address, item_1_comment)
+    item_1 = ItemModel(item_1_name, item_1_comment)
     body = {
         "name": item_1_name,
-        "address": item_1_address,
         "comment": item_1_comment
     }
     item_1_json = item_1.to_json()

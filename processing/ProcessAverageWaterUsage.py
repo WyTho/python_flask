@@ -15,11 +15,11 @@ class AverageWaterUsageProcessor:
                                    after_timestamp=after_datetime.timestamp(),
                                    before_timestamp=before_datetime.timestamp())
         total_water_usage = None
-        if len(events) != 0:
+        if len(events) != 0 or datetime.now() > before_datetime:
             total_water_usage = 0
         for event in events:
             usage = UsageModel.find_by_id(event.usage_id)
-            if usage.usage_type.is_water_per_hour():
+            if usage.consumption_type.is_water_per_hour():
                 if event.data == 'True':
                     # @todo: This now ignores the fact that a usage can be spread out over multiple hours and
                     # just adds it to the hour at wich the usage was initiated
@@ -28,10 +28,10 @@ class AverageWaterUsageProcessor:
 
                     duration_in_seconds = end - start
                     duration_in_hours = duration_in_seconds / (60 * 60)
-                    total_water_usage += duration_in_hours * int(usage.usage)
+                    total_water_usage += duration_in_hours * int(usage.consumption_amount)
 
-            elif usage.usage_type.is_water_per_usage():
-                total_water_usage += int(usage.usage)
+            elif usage.consumption_type.is_water_per_usage():
+                total_water_usage += int(usage.consumption_amount)
 
         # is_final_value = before_datetime.timestamp() < datetime.now().timestamp()
         is_final_value = False

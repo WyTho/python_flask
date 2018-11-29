@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69df5673-f189-4468-9721-acef6bad6722" name="Default" comment="Created testing capabilities&#10;added multiple test scripts&#10;fixed bug with waterUsageGraph&#10;added error handling for Item, group and eventcall">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/controllers/UsageResource.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/migrations/versions/0da94044aecc_.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/migrations/versions/7f86c0a2155a_.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/UnitEnum.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/ItemsResource.py" afterPath="$PROJECT_DIR$/controllers/ItemsResource.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage.py" afterPath="$PROJECT_DIR$/manage.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/versions/b25d3cdaca76_.py" afterPath="$PROJECT_DIR$/migrations/versions/b25d3cdaca76_.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/DataTypeEnum.py" afterPath="$PROJECT_DIR$/models/DataTypeEnum.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Group.py" afterPath="$PROJECT_DIR$/models/Group.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Item.py" afterPath="$PROJECT_DIR$/models/Item.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Usage.py" afterPath="$PROJECT_DIR$/models/Usage.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/UsageTypeEnum.py" afterPath="$PROJECT_DIR$/models/UsageTypeEnum.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processing/ProcessAverageWaterUsage.py" afterPath="$PROJECT_DIR$/processing/ProcessAverageWaterUsage.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_app.py" afterPath="$PROJECT_DIR$/test_app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/seed_test_data.py" afterPath="$PROJECT_DIR$/tests/seed_test_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_calls.py" afterPath="$PROJECT_DIR$/tests/test_calls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_group_resource.py" afterPath="$PROJECT_DIR$/tests/test_group_resource.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_item_resource.py" afterPath="$PROJECT_DIR$/tests/test_item_resource.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_usage_resource.py" afterPath="$PROJECT_DIR$/tests/test_usage_resource.py" />
     </list>
     <ignored path="selficient_flask_restful_3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -18,6 +38,26 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="UsageResource.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/controllers/UsageResource.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="744">
+                    <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FUSProjectUsageTrigger">
@@ -57,11 +97,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test_group_resource.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_group_resource.py">
+      <file leaf-file-name="test_usage_resource.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_usage_resource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+            <state relative-caret-position="228">
+              <caret line="153" column="13" selection-start-line="153" selection-start-column="13" selection-end-line="153" selection-end-column="13" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -69,100 +109,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_calls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_calls.py">
+      <file leaf-file-name="UsageTypeEnum.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/UsageTypeEnum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            <state relative-caret-position="68">
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+            <state relative-caret-position="3434">
+              <caret line="216" column="58" selection-start-line="216" selection-start-column="58" selection-end-line="216" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupsResource.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/GroupsResource.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Group.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Group.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="38" column="15" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ItemsResource.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ItemsResource.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/ItemsResource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Item.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Item.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="23" column="78" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
+            <state relative-caret-position="500">
+              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_graph_resource.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_graph_resource.py">
+      <file leaf-file-name="UnitEnum.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/UnitEnum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            <state relative-caret-position="184">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="14" selection-end-column="55" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_manage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_manage.py">
+      <file leaf-file-name="DataTypeEnum.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/DataTypeEnum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
-              <folding />
+            <state relative-caret-position="136">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding>
+                <marker date="1543483530523" expanded="true" signature="62:403" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -183,64 +179,64 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Tests" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/models/GraphTypeEnum.py" />
-        <option value="$PROJECT_DIR$/migrations/versions/62a1eef270cd_.py" />
-        <option value="$PROJECT_DIR$/migrations/versions/57dc63ee82fe_.py" />
-        <option value="$PROJECT_DIR$/migrations/versions/1326b214e205_.py" />
         <option value="$PROJECT_DIR$/migrations/versions/9409f42c206a_.py" />
         <option value="$PROJECT_DIR$/migrations/versions/11381970b25f_.py" />
         <option value="$PROJECT_DIR$/migrations/versions/e51bbfefc7fb_.py" />
-        <option value="$PROJECT_DIR$/models/DataTypeEnum.py" />
         <option value="$PROJECT_DIR$/processing/ProcessAverateWaterUsage.py" />
         <option value="$PROJECT_DIR$/migrations/versions/1e1a2fd5cf65_.py" />
         <option value="$PROJECT_DIR$/models/Week.py" />
         <option value="$PROJECT_DIR$/processing/ProcessAverageTemperature.py" />
         <option value="$PROJECT_DIR$/controllers/GraphResource.py" />
         <option value="$PROJECT_DIR$/processing/GraphProcessor.py" />
-        <option value="$PROJECT_DIR$/models/UsageTypeEnum.py" />
         <option value="$PROJECT_DIR$/tests/test.py" />
         <option value="$PROJECT_DIR$/tests/test_flaskr.py" />
         <option value="$PROJECT_DIR$/test_flaskr.py" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/migrations/versions/0e7a89dfc312_.py" />
         <option value="$PROJECT_DIR$/models/Graph.py" />
         <option value="$PROJECT_DIR$/models/Day.py" />
         <option value="$PROJECT_DIR$/models/Event.py" />
         <option value="$PROJECT_DIR$/models/Hour.py" />
-        <option value="$PROJECT_DIR$/migrations/versions/b25d3cdaca76_.py" />
         <option value="$PROJECT_DIR$/migrations/versions/da78b82f2f86_.py" />
-        <option value="$PROJECT_DIR$/tests/seed_test_data.py" />
-        <option value="$PROJECT_DIR$/manage.py" />
-        <option value="$PROJECT_DIR$/test_app.py" />
         <option value="$PROJECT_DIR$/tests/clear_database.py" />
-        <option value="$PROJECT_DIR$/models/Group.py" />
-        <option value="$PROJECT_DIR$/models/Item.py" />
         <option value="$PROJECT_DIR$/models/ItemGroup.py" />
         <option value="$PROJECT_DIR$/migrations/versions/b2678252f8c7_.py" />
-        <option value="$PROJECT_DIR$/models/Usage.py" />
-        <option value="$PROJECT_DIR$/processing/ProcessAverageWaterUsage.py" />
         <option value="$PROJECT_DIR$/controllers/EventCallResource.py" />
         <option value="$PROJECT_DIR$/models/EventCall.py" />
         <option value="$PROJECT_DIR$/tests/test_event_call_resource.py" />
-        <option value="$PROJECT_DIR$/tests/test_usage_resource.py" />
         <option value="$PROJECT_DIR$/tests/test_event_resource.py" />
         <option value="$PROJECT_DIR$/tests/test_graph_resource.py" />
         <option value="$PROJECT_DIR$/test_manage.py" />
-        <option value="$PROJECT_DIR$/tests/test_item_resource.py" />
-        <option value="$PROJECT_DIR$/tests/test_group_resource.py" />
-        <option value="$PROJECT_DIR$/controllers/ItemsResource.py" />
-        <option value="$PROJECT_DIR$/tests/test_calls.py" />
         <option value="$PROJECT_DIR$/controllers/GroupsResource.py" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/tests/seed_test_data.py" />
+        <option value="$PROJECT_DIR$/migrations/versions/0da94044aecc_updating_usage.py" />
+        <option value="$PROJECT_DIR$/migrations/versions/0da94044aecc_.py" />
+        <option value="$PROJECT_DIR$/models/Item.py" />
+        <option value="$PROJECT_DIR$/tests/test_calls.py" />
+        <option value="$PROJECT_DIR$/tests/test_item_resource.py" />
+        <option value="$PROJECT_DIR$/models/Group.py" />
+        <option value="$PROJECT_DIR$/tests/test_group_resource.py" />
+        <option value="$PROJECT_DIR$/processing/ProcessAverageWaterUsage.py" />
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/migrations/versions/b25d3cdaca76_.py" />
+        <option value="$PROJECT_DIR$/test_app.py" />
+        <option value="$PROJECT_DIR$/models/Usage.py" />
+        <option value="$PROJECT_DIR$/models/UsageTypeEnum.py" />
+        <option value="$PROJECT_DIR$/models/UnitEnum.py" />
+        <option value="$PROJECT_DIR$/models/DataTypeEnum.py" />
+        <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/tests/test_usage_resource.py" />
+        <option value="$PROJECT_DIR$/controllers/UsageResource.py" />
+        <option value="$PROJECT_DIR$/controllers/ItemsResource.py" />
       </list>
     </option>
   </component>
@@ -296,9 +292,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches">
-        <subPane />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -317,12 +310,89 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="versions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python_flask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
+      </pane>
+      <pane id="Scratches">
+        <subPane />
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="Group.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Group.py&#10;Item.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Item.py&#10;ItemRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;GroupRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GroupsResource.py&#10;EventCallR&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/EventCallResource.py&#10;EventCallRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/EventCallResource.py&#10;test_manag&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/test_manage.py&#10;ItemR&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;Wa&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/processing/ProcessAverageWaterUsage.py&#10;Usage.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Usage.py&#10;ItemResource.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;Group&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GroupsResource.py&#10;test_item_&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/tests/test_item_resource.py&#10;ItemGroup&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/ItemGroup.py&#10;test&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/tests/test_calls.py&#10;itemResource&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;group&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GroupsResource.py&#10;EventRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/EventsResource.py&#10;item.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Item.py&#10;app.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/app.py&#10;ItemResour&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;graph.&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;day&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Day.py&#10;usage.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Usage.py&#10;Itemg&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/ItemGroup.py&#10;hour&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Hour.py&#10;graph&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;eventCall&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/EventCall.py&#10;event&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Event.py&#10;Day&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Day.py&#10;group.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Group.py&#10;Manage.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/manage.py&#10;Event.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Event.py&#10;Hour.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Hour.py&#10;Graph.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;Data&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/DataTypeEnum.py&#10;GraphRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GraphResource.py&#10;Manage.&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/manage.py&#10;ProcessAver&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/processing/ProcessAverateWaterUsage.py&#10;UsageModel&#9;null&#9;null&#10;graph.p&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;Enum&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/UsageTypeEnum.py&#10;Usage&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Usage.py&#10;Event.pu&#9;null&#9;null&#10;DataType&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/DataTypeEnum.py&#10;Graph.p&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;Graph&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GraphResource.py&#10;Hour&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Hour.py&#10;App&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/app.py&#10;Mana&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/manage.py" />
+    <property name="SearchEverywhereHistoryKey" value="UsageResource&#9;null&#9;null&#10;ItemResource&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;UsageTypeEnum&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/UsageTypeEnum.py&#10;Unit&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/UnitEnum.py&#10;UsageRes&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/UsageResource.py&#10;UsageRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/UsageResource.py&#10;UsageResour&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/UsageResource.py&#10;UsageTypeEn&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/UsageTypeEnum.py&#10;Usage.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Usage.py&#10;test_app.&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/test_app.py&#10;item.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Item.py&#10;UsageModel&#9;null&#9;null&#10;ProcessAverageWaterUsage&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/processing/ProcessAverageWaterUsage.py&#10;Group.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Group.py&#10;test_group&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/tests/test_group_resource.py&#10;test_calls&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/tests/test_calls.py&#10;Item.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Item.py&#10;test_app.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/test_app.py&#10;t&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/test_manage.py&#10;test_ma&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/test_manage.py&#10;ItemRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;Enum&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/UnitEnum.py&#10;manage.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/manage.py&#10;app.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/app.py&#10;Item.p&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Item.py&#10;usage.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Usage.py&#10;GroupRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GroupsResource.py&#10;EventCallR&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/EventCallResource.py&#10;EventCallRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/EventCallResource.py&#10;test_manag&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/test_manage.py&#10;ItemR&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;Wa&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/processing/ProcessAverageWaterUsage.py&#10;ItemResource.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;Group&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GroupsResource.py&#10;test_item_&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/tests/test_item_resource.py&#10;ItemGroup&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/ItemGroup.py&#10;test&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/tests/test_calls.py&#10;itemResource&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;group&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/GroupsResource.py&#10;EventRe&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/EventsResource.py&#10;ItemResour&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/controllers/ItemsResource.py&#10;graph.&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;day&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Day.py&#10;Itemg&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/ItemGroup.py&#10;hour&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Hour.py&#10;graph&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Graph.py&#10;eventCall&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/EventCall.py&#10;event&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Event.py&#10;Day&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Day.py&#10;group.py&#9;FILE&#9;file://C:/Users/Rolf/PycharmProjects/python_flask/models/Group.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/env/Scripts/python.exe" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -689,6 +759,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12065332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31509846" sideWeight="0.52350426" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.49789253" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502708" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -700,7 +771,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53846157" sideWeight="0.48524764" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.49789253" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -766,162 +836,22 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/manage.py</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/seed_test_data.py</url>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/processing/CalculateHoulyAverages.py" />
-    <entry file="file://$PROJECT_DIR$/migrations/versions/79a8a18080e1_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/versions/321e0eadf7c8_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/versions/1e1a2fd5cf65_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="85" selection-start-line="20" selection-start-column="85" selection-end-line="20" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/DataTypeEnum.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processing/ProcessAverageTemperature.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processing/GraphProcessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Week.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/UsageTypeEnum.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test.py" />
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/flask_script/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="397" column="32" selection-start-line="397" selection-start-column="32" selection-end-line="397" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_flaskr.py" />
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="961" column="0" selection-start-line="961" selection-start-column="0" selection-end-line="962" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Hour.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Day.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Event.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/script.py.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/flask_migrate/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4590">
-          <caret line="275" column="4" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/versions/0e7a89dfc312_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/migrations/versions/da78b82f2f86_.py" />
-    <entry file="file://$PROJECT_DIR$/migrations/versions/b25d3cdaca76_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="24" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/seed_test_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/EventsResource.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -929,52 +859,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#23#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/clear_database.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/GraphResource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/migrations/versions/b2678252f8c7_.py" />
-    <entry file="file://$PROJECT_DIR$/processing/ProcessAverageWaterUsage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/ItemGroup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Usage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -982,9 +871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#17#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -992,9 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="18" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1002,19 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_usage_resource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1022,19 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_item_resource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#33#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1042,7 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
           <caret line="103" column="8" selection-start-line="103" selection-start-column="8" selection-end-line="103" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="123" column="26" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,53 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="38" column="15" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="78" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/ItemsResource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_group_resource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1112,27 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_calls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1140,6 +927,304 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/alembic.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/seed_test_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="49" column="100" selection-start-line="49" selection-start-column="100" selection-end-line="49" selection-end-column="100" />
+          <folding>
+            <element signature="e#0#17#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/3a311cb361db_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-129">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/57dc63ee82fe_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/62a1eef270cd_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/79a8a18080e1_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/321e0eadf7c8_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/1326b214e205_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-350">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/41642e1dc5be_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/11381970b25f_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/9409f42c206a_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-61">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/1e1a2fd5cf65_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="117" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/0e7a89dfc312_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/0da94044aecc_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="15" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/clear_database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Group.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_group_resource.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="155" column="11" selection-start-line="155" selection-start-column="11" selection-end-line="155" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processing/ProcessAverageWaterUsage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/GraphResource.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processing/GraphProcessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/7f86c0a2155a_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/versions/b25d3cdaca76_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_calls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_item_resource.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Usage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/UnitEnum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="14" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/DataTypeEnum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <marker date="1543483530523" expanded="true" signature="62:403" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/UsageTypeEnum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_usage_resource.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="153" column="13" selection-start-line="153" selection-start-column="13" selection-end-line="153" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3434">
+          <caret line="216" column="58" selection-start-line="216" selection-start-column="58" selection-end-line="216" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/UsageResource.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/ItemsResource.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding />
         </state>
       </provider>

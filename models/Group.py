@@ -23,7 +23,6 @@ class GroupModel(db.Model):
                 {
                     'id': item.id,
                     'name': item.name,
-                    'address': item.address,
                     'comment': item.comment,
                 } for item in self.items],
         }

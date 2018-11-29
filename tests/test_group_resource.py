@@ -58,7 +58,6 @@ def test_group_resource():
     expected_result['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "address": item_1_json['address'],
         "comment": item_1_json['comment']
     }]
     expected_status = 200
@@ -66,7 +65,6 @@ def test_group_resource():
     group_1_json['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "address": item_1_json['address'],
         "comment": item_1_json['comment']
     }]
 
@@ -120,7 +118,6 @@ def test_group_resource():
     expected_result['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "address": item_1_json['address'],
         "comment": item_1_json['comment']
     }]
     expected_status = 200
@@ -128,7 +125,6 @@ def test_group_resource():
     group_2_json['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "address": item_1_json['address'],
         "comment": item_1_json['comment']
     }]
 
@@ -150,8 +146,7 @@ def test_group_resource():
         "items": [{
             "id": 1,
             "name": 'Z04 Gang lamp (SW)',
-            "address": '0/0/5',
-            "comment": 'ETS import',
+            "comment": 'new_comment',
             "last_use": {'last_used': 0, 'last_use': ""},
             "usages": [],
             "groups": [
@@ -196,7 +191,7 @@ def test_group_resource():
     group_1_json['items'] = []
 
     # POSTING ONE GROUP
-    print("TEST_8 --- POSTING ONE GROUP - BAD REQUEST")
+    print("TEST_14 --- POSTING ONE GROUP - BAD REQUEST")
     group_3_name = 'Badkamer _____________________________________________________________________' \
                    '______________________________________________________________________________' \
                    '______________________________________________________________________________' \

@@ -56,8 +56,8 @@ def upgrade():
     op.create_table('_usage',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('item_id', sa.Integer(), nullable=True),
-    sa.Column('usage_type', sa.Enum('KILOWATT', 'WATER_PER_HOUR', 'WATER_PER_USAGE', 'value', name='usagetypeenum'), nullable=False),
-    sa.Column('usage', sa.String(255), nullable=False),
+    sa.Column('consumption_type', sa.Enum('KILOWATT', 'WATER_PER_HOUR', 'WATER_PER_USAGE', 'value', name='usagetypeenum'), nullable=False),
+    sa.Column('consumption_amount', sa.Integer, nullable=False),
     sa.ForeignKeyConstraint(['item_id'], ['_item.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

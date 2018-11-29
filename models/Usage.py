@@ -1,26 +1,38 @@
 from db import db
 from models.UsageTypeEnum import UsageTypeEnum
-from models.Event import EventModel
+from models.UnitEnum import UnitEnum
 
 
 class UsageModel(db.Model):
     __tablename__ = '_usage'
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer, db.ForeignKey('_item.id'))
-    usage_type = db.Column(db.Enum(UsageTypeEnum), nullable=False)
-    usage = db.Column(db.Integer, nullable=False)
+    consumption_type = db.Column(db.Enum(UsageTypeEnum), nullable=False)
+    consumption_amount = db.Column(db.Integer, nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    unit = db.Column(db.Enum(UnitEnum), nullable=False)
+    min_value = db.Column(db.Integer, nullable=True)
+    max_value = db.Column(db.Integer, nullable=True)
 
-    def __init__(self, item_id, usage_type, usage):
+    def __init__(self, item_id, consumption_type, consumption_amount, address, unit, min_value, max_value):
         self.item_id = item_id
-        self.usage_type = usage_type
-        self.usage = usage
+        self.consumption_type = consumption_type
+        self.consumption_amount = consumption_amount
+        self.address = address
+        self.unit = unit
+        self.min_value = min_value
+        self.max_value = max_value
 
     def to_json(self):
         return {
             'id': self.id,
             'item_id': self.item_id,
-            'usage_type': self.usage_type.value,
-            'usage': self.usage
+            'consumption_type': self.consumption_type.value,
+            'consumption_amount': self.consumption_amount,
+            'address': self.address,
+            'unit': self.unit.value,
+            'min_value': self.min_value,
+            'max_value': self.max_value
         }
 
     @classmethod
@@ -44,6 +56,23 @@ class UsageModel(db.Model):
             results = results.filter_by(usage_type=kwargs['data_type'].value)
 
         return results.all()
+
+    def update(self, **kwargs):
+        if kwargs['consumption_type']:
+            self.consumption_type = kwargs['consumption_type']
+        if kwargs['consumption_amount']:
+            self.consumption_amount = kwargs['consumption_amount']
+        if kwargs['address']:
+            self.address = kwargs['address']
+        if kwargs['unit']:
+            self.unit = kwargs['unit']
+        if kwargs['min_value']:
+            self.min_value = kwargs['min_value']
+        if kwargs['max_value']:
+            self.max_value = kwargs['max_value']
+
+        db.session.commit()
+        return self
 
     def save_to_db(self):
         db.session.add(self)

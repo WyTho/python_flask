@@ -8,16 +8,14 @@ class ItemModel(db.Model):
     __tablename__ = '_item'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    address = db.Column(db.String, nullable=False)
     comment = db.Column(db.String, nullable=False)
     last_used = 00000000000
     last_use = ''
     usages = []
     groups = []
 
-    def __init__(self, name, address, comment):
+    def __init__(self, name, comment):
         self.name = name
-        self.address = address
         self.comment = comment
         self.usages = UsageModel.find_all_by_item_id(self.id)
         self.fill_status()
@@ -27,7 +25,6 @@ class ItemModel(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'address': self.address,
             'comment': self.comment,
             'last_use': {'last_used': self.last_used, 'last_use': self.last_use},
             'usages': [usage.to_json() for usage in self.usages],
@@ -90,8 +87,6 @@ class ItemModel(db.Model):
     def update(self, **kwargs):
         if kwargs['name']:
             self.name = kwargs['name']
-        if kwargs['address']:
-            self.address = kwargs['address']
         if kwargs['comment']:
             self.comment = kwargs['comment']
 

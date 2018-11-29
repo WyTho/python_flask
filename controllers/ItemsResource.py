@@ -14,22 +14,20 @@ class ItemsResource(Resource):
     def post(self):
         if 'name' in request.form.keys():
             name = request.form['name']
-            address = request.form['address']
             comment = request.form['comment']
         else:
             request_data = json.loads(request.data)
             name = request_data['name']
-            address = request_data['address']
             comment = request_data['comment']
 
+        if len(name) < 3:
+            return 'Name must be at least 3 characters long.', 400
         if len(name) > 255:
             return 'Name cannot be longer than 255 characters.', 400
-        if len(address) > 255:
-            return 'Address cannot be longer than 255 characters.', 400
         if len(comment) > 255:
             return 'Comment cannot be longer than 255 characters.', 400
 
-        item = ItemModel(name, address, comment)
+        item = ItemModel(name, comment)
         item.save_to_db()
         return item.to_json(), 201
 
@@ -46,37 +44,18 @@ class ItemResource(Resource):
         item = ItemModel.find_by_id(item_id)
         if 'name' in request.form.keys():
             name = request.form['name']
-            address = request.form['address']
             comment = request.form['comment']
         else:
             request_data = json.loads(request.data)
             name = request_data['name']
-            address = request_data['address']
             comment = request_data['comment']
 
         if len(name) < 3:
             return 'Name must be at least 3 characters long.', 400
-        if len(address) < 3:
-            return 'Address must be at least 3 characters long.', 400
         if len(name) > 255:
             return 'Name cannot be longer than 255 characters.', 400
-        if len(address) > 255:
-            return 'Address cannot be longer than 255 characters.', 400
         if len(comment) > 255:
             return 'Comment cannot be longer than 255 characters.', 400
 
-        item = item.update(name=name, address=address, comment=comment)
+        item = item.update(name=name, comment=comment)
         return item.to_json()
-
-
-class CommandResource(Resource):
-
-    def get(self, item_id, new_value):
-        if new_value == 'tea':
-            return "I'm a teapot", 418
-        return 404, 404
-
-    def post(self, item_id, new_value):
-        item = ItemModel.find_by_id(item_id)
-        response = requests.get(url="{}alias={}&value={}".format(app.config['HOMELYNK_URI'], item.address, new_value))
-        return response.json()

@@ -9,35 +9,15 @@ class UsageTypeEnum(enum.Enum):
 
     value = None
 
-    def create(self, usage_type):
-        if usage_type == self.KILOWATT:
-            self.value = self.KILOWATT
-        elif usage_type == self.WATER_PER_HOUR:
-            self.value = self.WATER_PER_HOUR
-        elif usage_type == self.WATER_PER_USAGE:
-            self.value = self.WATER_PER_USAGE
-        else:
-            raise ValueError('invalid value for UsageTypeEnum')
-
-        return self
-
-    def kilowatt(self):
-        self.value = self.KILOWATT
-        return self
+    @classmethod
+    def has_value(cls, value):
+        return any(value == item.value for item in cls)
 
     def is_kilowatt(self):
         return self.value == self.KILOWATT.value
 
-    def water_per_hour(self):
-        self.value = self.WATER_PER_HOUR
-        return self
-
     def is_water_per_hour(self):
         return self.value == self.WATER_PER_HOUR.value
-
-    def water_per_usage(self):
-        self.value = self.WATER_PER_USAGE
-        return self
 
     def is_water_per_usage(self):
         return self.value == self.WATER_PER_USAGE.value
