@@ -64,7 +64,7 @@ def upgrade():
     op.create_table('_event',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('usage_id', sa.Integer(), nullable=True),
-    sa.Column('data_type', sa.Enum('TEMPERATURE', 'WATER_USAGE', 'value', name='datatypeenum'), nullable=False),
+    sa.Column('data_type', sa.Enum('TEMPERATURE', 'WATER_USAGE', 'KILOWATT', 'OTHER', 'value', name='datatypeenum'), nullable=False),
     sa.Column('data', sa.String(255), nullable=False),
     sa.Column('timestamp', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['usage_id'], ['_usage.id'], ),

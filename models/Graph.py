@@ -60,6 +60,9 @@ class GraphModel(db.Model):
     def find_by_title(cls, title, **kwargs):
         graph = cls.query.filter_by(title=title).first()
 
+        if graph is None:
+            return None
+
         starting_date = None
         ending_date = None
         if 'starting_date_timestamp' in kwargs:
