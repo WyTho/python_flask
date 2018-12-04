@@ -1,12 +1,12 @@
 from flask_restful import Resource, request
 from models.EventCall import EventCallModel
-import json
+
 
 class EventCallsResource(Resource):
 
     def get(self):
-        all = EventCallModel.find_all() or []
-        all_in_json = [event.to_json() for event in all]
+        all_event_calls = EventCallModel.find_all() or []
+        all_in_json = [event.to_json() for event in all_event_calls]
         return {"event_calls": all_in_json}, 200
 
     def post(self):

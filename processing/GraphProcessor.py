@@ -38,8 +38,8 @@ class GraphProcessor:
                     if not hour.is_final_value:
                         processor.process_hour_value(hour)
         return GraphModel.find_by_title(self.graph.title,
-                                         starting_date_timestamp=self.graph.starting_date.timestamp(),
-                                         ending_date_timestamp=self.graph.ending_date.timestamp())
+                                        starting_date_timestamp=self.graph.starting_date.timestamp(),
+                                        ending_date_timestamp=self.graph.ending_date.timestamp())
 
     def create_hours(self, day):
         missing_hours = []
@@ -61,7 +61,8 @@ class GraphProcessor:
         date_timestamp = week.starting_date_timestamp
         for i in range(0, 7):
             for day in week.days:
-                if datetime.fromtimestamp(day.date_timestmap) == (datetime.fromtimestamp(date_timestamp) + timedelta(days=i)):
+                if datetime.fromtimestamp(day.date_timestmap) == \
+                        (datetime.fromtimestamp(date_timestamp) + timedelta(days=i)):
                     break
             missing_days.append(datetime.fromtimestamp(week.starting_date_timestamp) + timedelta(days=i))
 

@@ -43,7 +43,8 @@ def test_post(uri, body, expected_result, expected_status):
             "GOT RESPONSE: {} EXPECTED: {}".format(json_content, expected_result)
     else:
         if json_content.keys() != expected_result.keys():
-            assert json_content.keys() == expected_result.keys(), 'GOT KEYS: {}. EXPECTED KEYS: {}'.format(json_content.keys(), expected_result.keys())
+            assert json_content.keys() == expected_result.keys(), \
+                'GOT KEYS: {}. EXPECTED KEYS: {}'.format(json_content.keys(), expected_result.keys())
         for key in expected_result.keys():
             assert json_content[key] == expected_result[key], \
                 'Key: {}; response: {} expected: {}'.format(key, json_content[key], expected_result[key])

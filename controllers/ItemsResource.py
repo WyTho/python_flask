@@ -1,14 +1,13 @@
 from flask_restful import Resource, request
-import requests
-from flask import current_app as app
 from models.Item import ItemModel
 import json
+
 
 class ItemsResource(Resource):
 
     def get(self):
-        all = ItemModel.find_all() or []
-        all_in_json = [item.to_json() for item in all]
+        all_items = ItemModel.find_all() or []
+        all_in_json = [item.to_json() for item in all_items]
         return {"items": all_in_json}, 200
 
     def post(self):

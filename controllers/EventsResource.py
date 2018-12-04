@@ -9,8 +9,8 @@ import json
 class EventsResource(Resource):
 
     def get(self):
-        all = EventModel.find_all() or []
-        all_in_json = [event.to_json() for event in all]
+        all_events = EventModel.find_all() or []
+        all_in_json = [event.to_json() for event in all_events]
         return {"events": all_in_json}, 200
 
     def post(self):

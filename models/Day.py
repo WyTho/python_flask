@@ -1,6 +1,5 @@
 from db import db
 from models import Hour
-from operator import itemgetter
 
 
 class DayModel(db.Model):

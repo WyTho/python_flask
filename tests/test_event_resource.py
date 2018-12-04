@@ -1,7 +1,6 @@
 from models.Event import EventModel
 from models.DataTypeEnum import DataTypeEnum
-from tests.test_calls import test_get, test_post, test_put, send_get
-import json
+from tests.test_calls import test_get, test_post, send_get
 from datetime import datetime
 
 
@@ -41,8 +40,7 @@ def test_event_resource():
     expected_status = 200
     test_get(uri, expected_result, expected_status)
 
-
-    #GETTING ALL EVENTS
+    # GETTING ALL EVENTS
     print("TEST_4 --- GETTING ALL EVENTS")
     uri = "http://127.0.0.1:5000/api/event"
     expected_result = {

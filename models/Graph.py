@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta, time
+from datetime import date, datetime, timedelta
 from db import db
 from models import Week
 from models.DataTypeEnum import DataTypeEnum

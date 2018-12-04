@@ -8,7 +8,6 @@ from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
 
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/test_env'
@@ -21,7 +20,7 @@ api.add_resource(ItemResource, '/api/item/<int:item_id>')
 
 api.add_resource(UsagesResource, '/api/usage')
 api.add_resource(UsageResource, '/api/usage/<int:usage_id>')
-api.add_resource(CommandResource, '/api/item/<int:item_id>/command/<string:new_value>')
+api.add_resource(CommandResource, '/api/usage/<int:usage_id>/command/<string:new_value>')
 
 api.add_resource(EventsResource, '/api/event')
 api.add_resource(EventResource, '/api/event/<int:event_id>')
@@ -34,9 +33,6 @@ api.add_resource(EventCallResource, '/api/event_call/<int:event_call_id>')
 
 api.add_resource(GraphsResource, '/api/graph')
 api.add_resource(GraphResource, '/api/graph/<string:title>')
-
-# seed_test_data.seed_test_data()
-
 
 if __name__ == "__main__":
     from db import db

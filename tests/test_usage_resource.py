@@ -2,7 +2,6 @@ from models.Usage import UsageModel
 from models.UnitEnum import UnitEnum
 from tests.test_calls import test_get, test_post, send_get
 from models.UsageTypeEnum import UsageTypeEnum
-import json
 
 
 def test_usage_resource():

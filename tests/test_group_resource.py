@@ -1,5 +1,4 @@
 from models.Group import GroupModel
-from models.Item import ItemModel
 from tests.test_calls import test_get, test_post, test_put, send_get
 
 
@@ -129,7 +128,7 @@ def test_group_resource():
     }]
 
     # ADDING ONE ITEM TO GROUP
-    print("TEST_9 --- ADDING ONE ITEM TO SECOND MODULE")
+    print("TEST_10 --- ADDING ONE ITEM TO SECOND MODULE")
     uri = "http://127.0.0.1:5000/api/group/3"
     item_1_json = send_get('http://127.0.0.1:5000/api/item/1')
     body = {
@@ -140,7 +139,7 @@ def test_group_resource():
     test_put(uri, body, expected_result, expected_status)
 
     # GETTING ALL ITEMS
-    print("TEST_10 --- GETTING ALL ITEMS")
+    print("TEST_11 --- GETTING ALL ITEMS")
     uri = "http://127.0.0.1:5000/api/item"
     expected_result = {
         "items": [{
@@ -159,7 +158,7 @@ def test_group_resource():
     test_get(uri, expected_result, expected_status)
 
     # ADDING ONE ITEM TO GROUP
-    print("TEST_11 --- REMOVING ONE ITEM FROM GROUP")
+    print("TEST_12 --- REMOVING ONE ITEM FROM GROUP")
     uri = "http://127.0.0.1:5000/api/group/1"
     item_1_json = send_get('http://127.0.0.1:5000/api/item/1')
     body = {
@@ -172,14 +171,14 @@ def test_group_resource():
     group_1_json['items'] = []
 
     # GETTING ONE GROUP
-    print("TEST_12 --- GETTING ONE GROUP")
+    print("TEST_13 --- GETTING ONE GROUP")
     uri = "http://127.0.0.1:5000/api/group/1"
     expected_result = group_1_json
     expected_status = 200
     test_get(uri, expected_result, expected_status)
 
     # ADDING ONE ITEM TO NON EXISTING GROUP
-    print("TEST_13 --- ADDING ITEM TO NON EXISTING GROUP")
+    print("TEST_14 --- ADDING ITEM TO NON EXISTING GROUP")
     uri = "http://127.0.0.1:5000/api/group/5"
     item_1_json = send_get('http://127.0.0.1:5000/api/item/1')
     body = {
@@ -191,7 +190,7 @@ def test_group_resource():
     group_1_json['items'] = []
 
     # POSTING ONE GROUP
-    print("TEST_14 --- POSTING ONE GROUP - BAD REQUEST")
+    print("TEST_15 --- POSTING ONE GROUP - BAD REQUEST")
     group_3_name = 'Badkamer _____________________________________________________________________' \
                    '______________________________________________________________________________' \
                    '______________________________________________________________________________' \

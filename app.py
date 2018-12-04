@@ -7,15 +7,14 @@ from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
 from controllers.UsageResource import UsageResource, UsagesResource, CommandResource
 
+
 app = Flask(__name__)
-# Database configuration
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/WySmart'  # 'mysql://username:password@ip:port/databasename'
 app.config['HOMELYNK_URI'] = 'http://remote:Selficient@10.1.1.10/scada-remote/request.cgi?m=json&r=grp&fn=write&'
 api = Api(app)
 
 
-# Here the Resources will be bound to endpoints
 api.add_resource(ItemsResource, '/api/item')
 api.add_resource(ItemResource, '/api/item/<int:item_id>')
 

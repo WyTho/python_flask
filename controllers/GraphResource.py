@@ -6,15 +6,15 @@ from processing.GraphProcessor import GraphProcessor
 class GraphsResource(Resource):
 
     def get(self):
-        all = GraphModel.find_all() or []
-        all_in_json = [graph.to_json() for graph in all]
+        all_graphs = GraphModel.find_all() or []
+        all_in_json = [graph.to_json() for graph in all_graphs]
         return {"graphs": all_in_json}, 200
 
 
 class GraphResource(Resource):
 
     def get(self, title):
-        # Starting_date and ending_date are optional parameters. if neither is given then todays date will be used
+        # Starting_date and ending_date are optional parameters. if neither is given then today's date will be used
         starting_date_timestamp = None
         ending_date_timestamp = None
         if 'starting_date_timestamp' in request.args.keys():

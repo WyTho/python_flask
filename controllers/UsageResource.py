@@ -11,8 +11,8 @@ import json
 class UsagesResource(Resource):
 
     def get(self):
-        all = UsageModel.find_all() or []
-        all_in_json = [usage.to_json() for usage in all]
+        all_usages = UsageModel.find_all() or []
+        all_in_json = [usage.to_json() for usage in all_usages]
         return {"usages": all_in_json}, 200
 
     def post(self):

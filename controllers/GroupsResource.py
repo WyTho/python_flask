@@ -8,8 +8,8 @@ import json
 class GroupsResource(Resource):
 
     def get(self):
-        all = GroupModel.find_all() or []
-        all_in_json = [group.to_json() for group in all]
+        all_grousp = GroupModel.find_all() or []
+        all_in_json = [group.to_json() for group in all_grousp]
         return {"groups": all_in_json}, 200
 
     def post(self):
