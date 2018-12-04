@@ -146,7 +146,7 @@ def test_group_resource():
             "id": 1,
             "name": 'Z04 Gang lamp (SW)',
             "comment": 'new_comment',
-            "last_use": {'last_used': 0, 'last_use': ""},
+            "last_use": None,
             "usages": [],
             "groups": [
                 {"id": 1, "name": 'Huiskamer'},

@@ -9,8 +9,7 @@ class ItemModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     comment = db.Column(db.String, nullable=False)
-    last_used = 00000000000
-    last_use = ''
+    last_use = None
     usages = []
     groups = []
 
@@ -26,7 +25,7 @@ class ItemModel(db.Model):
             'id': self.id,
             'name': self.name,
             'comment': self.comment,
-            'last_use': {'last_used': self.last_used, 'last_use': self.last_use},
+            'last_use': self.last_use,
             'usages': [usage.to_json() for usage in self.usages],
             'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
         }
@@ -69,8 +68,10 @@ class ItemModel(db.Model):
                 last_event = event
 
         if last_event is not None:
-            self.last_used = last_event.timestamp
-            self.last_use = {'datatype': last_event.data_type.value, 'data': last_event.data}
+            self.last_use = {
+                'last_use_timestamp': last_event.timestamp,
+                'data_type': last_event.data_type.value,
+                'data': last_event.data}
 
     def is_in_module(self):
         for group in self.groups:
