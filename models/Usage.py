@@ -7,6 +7,7 @@ class UsageModel(db.Model):
     __tablename__ = '_usage'
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer, db.ForeignKey('_item.id'))
+    
     consumption_type = db.Column(db.Enum(UsageTypeEnum), nullable=False)
     consumption_amount = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(255), nullable=False)
