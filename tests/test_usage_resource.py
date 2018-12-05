@@ -20,6 +20,7 @@ def test_usage_resource():
     print("TEST_2 --- POSTING ONE USAGE")
     item_1 = send_get('http://127.0.0.1:5000/api/item/1')
     usage_1_item_id = item_1['id']
+    usage_1_external_item_id = 1
     usage_1_consumption_type = UsageTypeEnum.KILOWATT
     usage_1_consumption_amount = 5
     usage_1_address = "http://127.0.0.1:5000/usage/1"
@@ -28,6 +29,7 @@ def test_usage_resource():
     usage_1_max_value = 1
 
     usage_1 = UsageModel(usage_1_item_id,
+                         usage_1_external_item_id,
                          usage_1_consumption_type,
                          usage_1_consumption_amount,
                          usage_1_address,
@@ -36,6 +38,7 @@ def test_usage_resource():
                          usage_1_max_value)
     body = {
         "item_id": usage_1_item_id,
+        "external_item_id": usage_1_external_item_id,
         "consumption_type": usage_1_consumption_type.value,
         "consumption_amount": usage_1_consumption_amount,
         "address": usage_1_address,
@@ -87,6 +90,7 @@ def test_usage_resource():
     print("TEST_7 --- POSTING ONE USAGE - BAD REQUEST")
     item_1 = send_get('http://127.0.0.1:5000/api/item/1')
     usage_1_item_id = item_1['id']
+    usage_1_external_item_id = item_1['id']
     usage_1_consumption_type = UsageTypeEnum.KILOWATT
     usage_1_consumption_amount = 5
     usage_1_address = "http://127.0.0.1:5000/usage/1"
@@ -95,6 +99,7 @@ def test_usage_resource():
 
     body = {
         "item_id": usage_1_item_id,
+        "external_item_id": usage_1_external_item_id,
         "consumption_type": usage_1_consumption_type.value,
         "consumption_amount": usage_1_consumption_amount,
         "address": usage_1_address,

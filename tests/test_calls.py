@@ -32,8 +32,8 @@ def test_post(uri, body, expected_result, expected_status):
     h.follow_all_redirects = True
     resp, content = h.request(uri, "POST", json.dumps(body))
     if resp.status != expected_status:
-        assertion = 'GOT STATUS TYPE {} INSTEAD. SERVER RESPONDED WITH {}. REASON BEING: '\
-            .format(resp.status, resp.reason, json.loads(content))
+        assertion = 'GOT STATUS TYPE {} INSTEAD OF {}. SERVER RESPONDED WITH {}. REASON BEING: {}'\
+            .format(resp.status, expected_status, resp.reason, json.loads(content))
         assert resp.status == expected_status, assertion
 
     json_content = json.loads(content)
