@@ -1,18 +1,15 @@
 from db import db
-from models.DataTypeEnum import DataTypeEnum
 
 
 class EventModel(db.Model):
     __tablename__ = '_event'
     id = db.Column(db.Integer, primary_key=True)
     usage_id = db.Column(db.Integer, db.ForeignKey('_usage.id'))
-    data_type = db.Column(db.Enum(DataTypeEnum), nullable=False)
     data = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.Integer, nullable=False, default=0)
 
-    def __init__(self, usage_id, data_type, data, timestamp):
+    def __init__(self, usage_id, data, timestamp):
         self.usage_id = usage_id
-        self.data_type = data_type
         self.data = data
         self.timestamp = round(timestamp)
 
@@ -20,7 +17,6 @@ class EventModel(db.Model):
         return {
             'id': self.id,
             'usage_id': self.usage_id,
-            'data_type': self.data_type.value,
             'data': self.data,
             'timestamp': self.timestamp
         }
@@ -43,8 +39,6 @@ class EventModel(db.Model):
         results = cls.query
         if 'usage_id' in kwargs:
             results = results.filter_by(usage_id=kwargs['usage_id'])
-        if 'data_type' in kwargs:
-            results = results.filter_by(data_type=kwargs['data_type'])
         if 'after_timestamp' in kwargs:
             results = results.filter(EventModel.timestamp > kwargs['after_timestamp'])
         if 'before_timestamp' in kwargs:
@@ -68,5 +62,5 @@ class EventModel(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Event id:'{}', usage_id:'{}', data_type:'{}', data:'{}', timestamp:'{}'>"\
-            .format(self.id, self.usage_id, self.data_type, self.data, self.timestamp)
+        return "<Event id:'{}', usage_id:'{}', data:'{}', timestamp:'{}'>"\
+            .format(self.id, self.usage_id, self.data, self.timestamp)

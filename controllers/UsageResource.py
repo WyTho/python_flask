@@ -20,6 +20,7 @@ class UsagesResource(Resource):
         max_value = None
         if 'item_id' in request.form.keys():
             item_id = request.form['item_id']
+            external_item_id = request.form['external_item_id']
             consumption_type = request.form['consumption_type']
             consumption_amount = int(request.form['consumption_amount'])
             address = request.form['address']
@@ -32,6 +33,7 @@ class UsagesResource(Resource):
             request_data = json.loads(request.data)
 
             item_id = request_data['item_id']
+            external_item_id = request_data['external_item_id']
             consumption_type = request_data['consumption_type']
             consumption_amount = int(request_data['consumption_amount'])
             address = request_data['address']
@@ -60,7 +62,7 @@ class UsagesResource(Resource):
         if (min_value is None and max_value is not None) or (min_value is not None and max_value is None):
             return 'If either min or max value is given, both should be given.', 400
 
-        usage = UsageModel(item_id, consumption_type, consumption_amount, address, unit, min_value, max_value)
+        usage = UsageModel(item_id, external_item_id, consumption_type, consumption_amount, address, unit, min_value, max_value)
         usage.save_to_db()
         return usage.to_json(), 201
 
@@ -78,6 +80,7 @@ class UsageResource(Resource):
         min_value = None
         max_value = None
         if 'consumption_type' in request.form.keys():
+            external_item_id = request.form['external_item_id']
             consumption_type = request.form['consumption_type']
             consumption_amount = int(request.form['consumption_amount'])
             address = request.form['address']
@@ -88,11 +91,12 @@ class UsageResource(Resource):
                 max_value = request.form['max_value']
         else:
             request_data = json.loads(request.data)
-
+            print(request_data['external_item_id'])
             consumption_type = request_data['consumption_type']
             consumption_amount = int(request_data['consumption_amount'])
             address = request_data['address']
             unit = request_data['unit']
+            external_item_id = int(request_data['external_item_id'])
             if 'min_value' in request_data.keys():
                 min_value = request_data['min_value']
             if 'max_value' in request_data.keys():
@@ -115,7 +119,8 @@ class UsageResource(Resource):
         if (min_value is None and max_value is not None) or (min_value is not None and max_value is None):
             return 'If either min or max value is given, both should be given.', 400
 
-        usage = usage.update(consumption_type=consumption_type,
+        usage = usage.update(external_item_id=external_item_id,
+                             consumption_type=consumption_type,
                              consumption_amount=consumption_amount,
                              address=address,
                              unit=unit,

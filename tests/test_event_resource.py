@@ -1,7 +1,6 @@
 from models.Event import EventModel
-from models.DataTypeEnum import DataTypeEnum
-from tests.test_calls import test_get, test_post, test_put, send_get
-import json
+from models.UnitEnum import UnitEnum
+from tests.test_calls import test_get, test_post, send_get
 from datetime import datetime
 
 
@@ -21,12 +20,12 @@ def test_event_resource():
     print("TEST_2 --- POSTING ONE EVENT")
     uri = "http://127.0.0.1:5000/api/event"
     usage_1 = send_get('http://127.0.0.1:5000/api/usage/1')
-    event_1 = EventModel(usage_1['id'], DataTypeEnum.KILOWATT, 'True', round(datetime.now().timestamp()))
+    event_1 = EventModel(usage_1['id'], 'True', round(datetime.now().timestamp()))
     event_1_json = event_1.to_json()
     event_1_json['id'] = 1
     body = {
         "usage_id": usage_1['id'],
-        "data_type": DataTypeEnum.KILOWATT.value,
+        "data_type": UnitEnum.TOGGLE.value,
         "data": 'True'
     }
 
@@ -56,7 +55,7 @@ def test_event_resource():
     uri = "http://127.0.0.1:5000/api/event"
     body = {
         "usage_id": 17,
-        "data_type": DataTypeEnum.KILOWATT.value,
+        "data_type": UnitEnum.TOGGLE.value,
         "data": 'True'
     }
 
@@ -73,6 +72,6 @@ def test_event_resource():
         "data": 'True'
     }
 
-    expected_result = '"KILO WHAT?" is not a valid data type.'
+    expected_result = '"KILO WHAT?" is not a valid unit type.'
     expected_status = 400
     test_post(uri, body, expected_result, expected_status)

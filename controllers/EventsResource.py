@@ -1,7 +1,7 @@
 from flask_restful import Resource, request
 from models.Event import EventModel
 from models.Usage import UsageModel
-from models.DataTypeEnum import DataTypeEnum
+from models.UnitEnum import UnitEnum
 from datetime import datetime
 import json
 
@@ -24,14 +24,18 @@ class EventsResource(Resource):
             data_type = request_data['data_type']
             data = request_data['data']
 
-        if UsageModel.find_by_id(usage_id) is None:
+        usage = UsageModel.find_by_id(usage_id)
+        if usage is None:
             return 'Could not find usage with id: {}'.format(usage_id), 404
-        if DataTypeEnum.has_value(data_type):
-            data_type = DataTypeEnum(data_type)
+        if UnitEnum.has_value(data_type):
+            data_type = UnitEnum(data_type)
         else:
-            return '"{}" is not a valid data type.'.format(data_type), 400
+            return '"{}" is not a valid unit type.'.format(data_type), 400
 
-        event = EventModel(usage_id, data_type, data, round(datetime.now().timestamp()))
+        if usage.unit != data_type:
+            return 'The unit type of the usage with id "{}" does not match given "{}"'.format(usage_id, data_type.value)
+
+        event = EventModel(usage_id, data, round(datetime.now().timestamp()))
         event.save_to_db()
         return event.to_json(), 201
 

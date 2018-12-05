@@ -7,7 +7,7 @@ class UsageModel(db.Model):
     __tablename__ = '_usage'
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer, db.ForeignKey('_item.id'))
-
+    external_item_id = db.Column(db.Integer, nullable=False)
     consumption_type = db.Column(db.Enum(UsageTypeEnum), nullable=False)
     consumption_amount = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(255), nullable=False)
@@ -15,8 +15,9 @@ class UsageModel(db.Model):
     min_value = db.Column(db.Integer, nullable=True)
     max_value = db.Column(db.Integer, nullable=True)
 
-    def __init__(self, item_id, consumption_type, consumption_amount, address, unit, min_value, max_value):
+    def __init__(self, item_id, external_item_id, consumption_type, consumption_amount, address, unit, min_value, max_value):
         self.item_id = item_id
+        self.external_item_id = external_item_id
         self.consumption_type = consumption_type
         self.consumption_amount = consumption_amount
         self.address = address
@@ -28,6 +29,7 @@ class UsageModel(db.Model):
         return {
             'id': self.id,
             'item_id': self.item_id,
+            'external_item_id': self.external_item_id,
             'consumption_type': self.consumption_type.value,
             'consumption_amount': self.consumption_amount,
             'address': self.address,
@@ -61,6 +63,8 @@ class UsageModel(db.Model):
     def update(self, **kwargs):
         if kwargs['consumption_type']:
             self.consumption_type = kwargs['consumption_type']
+        if kwargs['external_item_id']:
+            self.external_item_id = kwargs['external_item_id']
         if kwargs['consumption_amount']:
             self.consumption_amount = kwargs['consumption_amount']
         if kwargs['address']:
