@@ -138,5 +138,8 @@ class CommandResource(Resource):
 
     def post(self, usage_id, new_value):
         usage = UsageModel.find_by_id(usage_id)
+        new_value = int(new_value)
+        if usage.min_value > new_value or usage.max_value < new_value:
+            return "New value does not fall within the expected range. ({} - {})".format(usage.min_value, usage.max_value), 400
         response = requests.get(url="{}alias={}&value={}".format(app.config['HOMELYNK_URI'], usage.address, new_value))
         return response.json()

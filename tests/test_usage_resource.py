@@ -170,3 +170,11 @@ def test_usage_resource():
     expected_status = 400
     uri = "http://127.0.0.1:5000/api/usage"
     test_post(uri, body, expected_result, expected_status)
+
+    # EXECUTING COMMAND - BAD REQUEST
+    print("TEST 14 --- POSTING COMMAND - BAD REQUEST")
+    body = {}
+    uri = "http://127.0.0.1:5000/api/usage/1/command/2"
+    expected_result = "New value does not fall within the expected range. (0 - 1)"
+    expected_status = 400
+    test_post(uri, body, expected_result, expected_status)
