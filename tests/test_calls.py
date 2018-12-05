@@ -66,3 +66,15 @@ def test_put(uri, body, expected_result, expected_status):
             assert json_content[key] == expected_result[key], \
                 'GOT: {}={} EXPECTED: {}={}'.format(key, json_content[key], key, expected_result[key])
         assert json.loads(content) == expected_result
+
+
+def test_delete(uri, body, expected_result, expected_status):
+    h = httplib2.Http()
+    h.follow_all_redirects = True
+    resp, content = h.request(uri, "DELETE", json.dumps(body))
+    assert resp.status == expected_status, "GOT STATUS TYPE {} INSTEAD OF EXPECTED {}. SERVER RESPONDED WITH {}"\
+        .format(resp.status, expected_status, content)
+
+    json_content = json.loads(content)
+    if json_content != expected_result:
+        assert content == expected_result, 'GOT RESPONSE: {} EXPECTED: {}'.format(json_content, expected_result)

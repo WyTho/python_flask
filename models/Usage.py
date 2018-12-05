@@ -43,8 +43,8 @@ class UsageModel(db.Model):
         return cls.query.all()
 
     @classmethod
-    def find_by_id(cls, event_id):
-        return cls.query.filter_by(id=event_id).first()
+    def find_by_id(cls, usage_id):
+        return cls.query.filter_by(id=usage_id).first()
 
     @classmethod
     def find_all_by_item_id(cls, item_id):

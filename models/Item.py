@@ -68,9 +68,10 @@ class ItemModel(db.Model):
                 last_event = event
 
         if last_event is not None:
+            usage = UsageModel.find_by_id(last_event.usage_id)
             self.last_use = {
                 'last_use_timestamp': last_event.timestamp,
-                'data_type': last_event.data_type.value,
+                'data_type': usage.unit.value,
                 'data': last_event.data}
 
     def is_in_module(self):

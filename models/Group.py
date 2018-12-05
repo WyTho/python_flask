@@ -50,5 +50,13 @@ class GroupModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def delete_from_db(self):
+        item_groups = ItemGroup.ItemGroupModel.find_by_group_id(self.id)
+        for item_group in item_groups:
+            item_group.delete_from_db()
+
+        db.session.delete(self)
+        db.session.commit()
+
     def __repr__(self):
         return "<Group name:'{}'>".format(self.name)

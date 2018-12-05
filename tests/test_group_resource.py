@@ -1,5 +1,5 @@
 from models.Group import GroupModel
-from tests.test_calls import test_get, test_post, test_put, send_get
+from tests.test_calls import test_get, test_post, test_put, send_get, test_delete
 
 
 def test_group_resource():
@@ -205,4 +205,21 @@ def test_group_resource():
     uri = "http://127.0.0.1:5000/api/group"
     test_post(uri, body, expected_result, expected_status)
 
+    # DELETING ONE GROUP
+    print("TEST_16 --- DELETING ONE GROUP")
+    uri = "http://127.0.0.1:5000/api/group/3"
+    body = {}
+    expected_result = "Group with id: {} was successfully deleted.".format(3)
+    expected_status = 200
+    test_delete(uri, body, expected_result, expected_status)
 
+    # CHECKING IF GROUP WAS DELETED
+    print("TEST_17 --- GETTING ALL GROUPS")
+    uri = "http://127.0.0.1:5000/api/group"
+    expected_result = {
+        "groups": [
+            group_1_json, group_2_json
+        ]
+    }
+    expected_status = 200
+    test_get(uri, expected_result, expected_status)

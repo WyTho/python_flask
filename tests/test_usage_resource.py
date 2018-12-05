@@ -178,4 +178,3 @@ def test_usage_resource():
     expected_result = "New value does not fall within the expected range. (0 - 1)"
     expected_status = 400
     test_post(uri, body, expected_result, expected_status)
-    

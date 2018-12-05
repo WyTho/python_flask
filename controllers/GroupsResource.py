@@ -68,3 +68,8 @@ class GroupResource(Resource):
             item_group.save_to_db()
             group = GroupModel.find_by_id(group_id)
             return group.to_json()
+
+    def delete(self, group_id):
+        group = GroupModel.find_by_id(group_id)
+        group.delete_from_db()
+        return "Group with id: {} was successfully deleted.".format(group_id), 200
