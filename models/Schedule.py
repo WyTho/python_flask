@@ -39,6 +39,12 @@ class ScheduleModel(db.Model):
         schedule.scheduled_usages = ScheduledUsageModel.find_by_schedule_id(schedule_id)
         return schedule
 
+    def find_scheduled_usage_by_id(self, scheduled_usage_id):
+        for scheduled_usage in self.scheduled_usages:
+            if scheduled_usage.id == scheduled_usage_id:
+                return scheduled_usage
+        return None
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

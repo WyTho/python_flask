@@ -1,4 +1,5 @@
 from db import db
+from models.Usage import UsageModel
 
 
 class ScheduledUsageModel(db.Model):
@@ -20,6 +21,15 @@ class ScheduledUsageModel(db.Model):
             'usage_id': self.usage_id,
             'value': self.value
         }
+
+    def set_value(self, value):
+        usage = UsageModel.find_by_id(self.usage_id)
+        if value < usage.min_value or value > usage.max_value:
+            return 'Given usage value does not fall without range ({} - {}). ({} given.)' \
+                    .format(usage.min_value, usage.max_value, value), 500
+        else:
+            self.value = value
+            return self.to_json(), 200
 
     @classmethod
     def find_all(cls):
