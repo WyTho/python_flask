@@ -11,7 +11,6 @@ from models.DataTypeEnum import DataTypeEnum
 from models.Event import EventModel
 from models.Graph import GraphModel
 from datetime import datetime, timedelta
-from models.UnitEnum import UnitEnum
 import random
 
 migrate = Migrate(app, db)

@@ -36,7 +36,7 @@ class ItemResource(Resource):
     def get(self, item_id):
         item = ItemModel.find_by_id(item_id)
         if item is None:
-            return None
+            return None, 404
         return item.to_json()
 
     def post(self, item_id):

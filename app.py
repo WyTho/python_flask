@@ -6,7 +6,7 @@ from controllers.GroupsResource import GroupsResource, GroupResource
 from controllers.EventCallResource import EventCallsResource, EventCallResource
 from controllers.GraphResource import GraphsResource, GraphResource
 from controllers.UsageResource import UsageResource, UsagesResource, CommandResource
-
+from controllers.ScheduleController import ScheduleResource, SchedulesResource
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -33,6 +33,9 @@ api.add_resource(EventCallResource, '/api/event_call/<int:event_call_id>')
 
 api.add_resource(GraphsResource, '/api/graph')
 api.add_resource(GraphResource, '/api/graph/<string:title>')
+
+api.add_resource(SchedulesResource, '/api/schedule')
+api.add_resource(ScheduleResource, '/api/schedule/<int:schedule_id>')
 
 if __name__ == "__main__":
     from db import db
