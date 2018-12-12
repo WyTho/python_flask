@@ -8,6 +8,7 @@ from controllers.GraphResource import GraphsResource, GraphResource
 from controllers.UsageResource import UsageResource, UsagesResource, CommandResource
 from controllers.ScheduleResource import ScheduleResource, SchedulesResource
 from controllers.ScheduledUsageResource import ScheduledUsageResource, ScheduledUsagesResource
+from controllers.ScheduleDaysResource import ScheduleDaysResource, ScheduleDayResource
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -39,6 +40,8 @@ api.add_resource(SchedulesResource, '/api/schedules')
 api.add_resource(ScheduleResource, '/api/schedules/<int:schedule_id>')
 api.add_resource(ScheduledUsagesResource, '/api/schedules/<int:schedule_id>/scheduled_usages')
 api.add_resource(ScheduledUsageResource, '/api/schedules/<int:schedule_id>/scheduled_usages/<int:scheduled_usage_id>')
+api.add_resource(ScheduleDayResource, '/api/schedules/<int:schedule_id>/schedule_days/<int:schedule_day_id>')
+api.add_resource(ScheduleDaysResource, '/api/schedules/<int:schedule_id>/schedule_days')
 
 if __name__ == "__main__":
     from db import db

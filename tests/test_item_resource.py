@@ -7,7 +7,7 @@ def test_item_resource():
 
     # GETTING ALL ITEMS
     print("TEST_1 --- GETTING ALL ITEMS")
-    uri = "http://127.0.0.1:5000/api/item"
+    uri = "http://127.0.0.1:5000/api/items"
     expected_result = {
         "items": []
     }
@@ -27,12 +27,12 @@ def test_item_resource():
     item_1_json['id'] = 1
     expected_result = item_1_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/item"
+    uri = "http://127.0.0.1:5000/api/items"
     test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL ITEMS
     print("TEST_3 --- GETTING ALL ITEMS")
-    uri = "http://127.0.0.1:5000/api/item"
+    uri = "http://127.0.0.1:5000/api/items"
     expected_result = {
         "items": [item_1_json]
     }
@@ -41,14 +41,14 @@ def test_item_resource():
 
     # GETTING ONE ITEM
     print("TEST_4 --- GETTING ONE ITEM")
-    uri = "http://127.0.0.1:5000/api/item/1"
+    uri = "http://127.0.0.1:5000/api/items/1"
     expected_result = item_1_json
     expected_status = 200
     test_get(uri, expected_result, expected_status)
 
     # UPDATING ONE ITEM
     print("TEST_5 --- UPDATING ONE ITEM")
-    uri = 'http://127.0.0.1:5000/api/item/1'
+    uri = 'http://127.0.0.1:5000/api/items/1'
     expected_result = item_1_json
     expected_result['comment'] = 'new_comment'
     body = {
@@ -61,7 +61,7 @@ def test_item_resource():
 
     # GETTING ONE ITEM
     print("TEST_6 --- GETTING UPDATED ITEM")
-    uri = 'http://127.0.0.1:5000/api/item/1'
+    uri = 'http://127.0.0.1:5000/api/items/1'
     expected_result = item_1_json
     expected_status = 200
     test_get(uri, expected_result, expected_status)
@@ -82,7 +82,7 @@ def test_item_resource():
     item_1_json['id'] = 2
     expected_result = "Name cannot be longer than 255 characters."
     expected_status = 400
-    uri = "http://127.0.0.1:5000/api/item"
+    uri = "http://127.0.0.1:5000/api/items"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -101,8 +101,25 @@ def test_item_resource():
     item_1_json['id'] = 2
     expected_result = "Comment cannot be longer than 255 characters."
     expected_status = 400
-    uri = "http://127.0.0.1:5000/api/item"
+    uri = "http://127.0.0.1:5000/api/items"
     test_post(uri, body, expected_result, expected_status)
+
+    # POSTING ONE ITEM
+    print("TEST_10 --- POSTING ONE ITEM")
+    item_2_name = 'Z04 Eetkamer lamp (SW)'
+    item_2_comment = 'ETS import'
+    item_2 = ItemModel(item_2_name, item_2_comment)
+    body = {
+        "name": item_2_name,
+        "comment": item_2_comment
+    }
+    item_2_json = item_2.to_json()
+    item_2_json['id'] = 2
+    expected_result = item_2_json
+    expected_status = 201
+    uri = "http://127.0.0.1:5000/api/items"
+    test_post(uri, body, expected_result, expected_status)
+
 
     # COMMANDING ITEM
     # @todo test command endpoint (needs homelynk)

@@ -9,7 +9,7 @@ def test_event_resource():
 
     # GETTING ALL USAGES
     print("TEST_1 --- GETTING ALL EVENTS")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "http://127.0.0.1:5000/api/events"
     expected_result = {
         "events": []
     }
@@ -18,8 +18,8 @@ def test_event_resource():
 
     # POST ONE EVENT
     print("TEST_2 --- POSTING ONE EVENT")
-    uri = "http://127.0.0.1:5000/api/event"
-    usage_1 = send_get('http://127.0.0.1:5000/api/usage/1')
+    uri = "http://127.0.0.1:5000/api/events"
+    usage_1 = send_get('http://127.0.0.1:5000/api/usages/1')
     event_1 = EventModel(usage_1['id'], 'True', round(datetime.now().timestamp()))
     event_1_json = event_1.to_json()
     event_1_json['id'] = 1
@@ -36,13 +36,13 @@ def test_event_resource():
 
     # GETTING ONE EVENT
     print("TEST_3 --- GETTING ONE EVENT")
-    uri = "http://127.0.0.1:5000/api/event/1"
+    uri = "http://127.0.0.1:5000/api/events/1"
     expected_status = 200
     test_get(uri, expected_result, expected_status)
 
     # GETTING ALL EVENTS
     print("TEST_4 --- GETTING ALL EVENTS")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "http://127.0.0.1:5000/api/events"
     expected_result = {
         "events": [event_1_json]
     }
@@ -51,7 +51,7 @@ def test_event_resource():
 
     # POST ONE EVENT
     print("TEST_5 --- POSTING ONE EVENT - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "http://127.0.0.1:5000/api/events"
     body = {
         "usage_id": 17,
         "data_type": UnitEnum.TOGGLE.value,
@@ -64,7 +64,7 @@ def test_event_resource():
 
     # POST ONE EVENT
     print("TEST_6 --- POSTING ONE EVENT - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "http://127.0.0.1:5000/api/events"
     body = {
         "usage_id": 1,
         "data_type": "KILO WHAT?",

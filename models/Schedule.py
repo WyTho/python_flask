@@ -11,13 +11,13 @@ class ScheduleModel(db.Model):
     schedule_days = []
     scheduled_usages = []
 
-    def __init__(self, time):
-        self.time = time
+    def __init__(self, _time):
+        self.time = _time
 
     def to_json(self):
         return {
             'id': self.id,
-            'time': self.time.strftime("%H:%M:%S"),
+            'time': self.time.strftime('%H/%M/%S'),
             'schedule_days': [schedule_day.to_json() for schedule_day in self.schedule_days],
             'scheduled_usages': [scheduled_usage.to_json() for scheduled_usage in self.scheduled_usages],
         }
@@ -49,19 +49,8 @@ class ScheduleModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def update(self, time, list_with_day_numbers, list_with_scheduled_usages):
+    def update(self, time):
         self.time = time
-
-        for schedule_day in self.schedule_days:
-            if schedule_day.value not in list_with_day_numbers:
-                schedule_day.delete_from_db()
-        for day_number in list_with_day_numbers:
-            if not self.has_day(day_number):
-                ScheduleDayModel(self.id, day_number)
-
-        for scheduled_usage in self.scheduled_usages:
-            for new_scheduled_usage in list_with_scheduled_usages:
-                pass
 
     def delete_from_db(self):
         schedule_days = ScheduleDayModel.find_by_schedule_id(self.id)

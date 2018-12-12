@@ -1,10 +1,8 @@
 from flask_restful import Resource, request
 from models.Schedule import ScheduleModel
-from models.ScheduleDay import ScheduleDayModel
 from models.ScheduledUsage import ScheduledUsageModel
 from models.Usage import UsageModel
 import json
-import time
 
 
 class ScheduledUsagesResource(Resource):
@@ -35,7 +33,7 @@ class ScheduledUsagesResource(Resource):
         for scheduled_usage in schedule.scheduled_usages:
             if scheduled_usage.usage_id == usage_id:
                 return 'Given usage id is already being used by scheduled usage with id: {}.'\
-                           .format(scheduled_usage.id), 500
+                           .format(scheduled_usage.id), 400
 
         if value < usage.min_value or value > usage.max_value:
             return 'Given usage value does not fall without range ({} - {}). ({} given.)' \
@@ -74,10 +72,14 @@ class ScheduledUsageResource(Resource):
         if scheduled_usage is None:
             return "Could not find scheduled usage with id {} on schedule with id {}."\
                    .format(scheduled_usage_id, schedule_id), 404
-
         return scheduled_usage.set_value(value)
 
-    def delete(self, schedule_id):
+    def delete(self, schedule_id, scheduled_usage_id):
         schedule = ScheduleModel.find_by_id(schedule_id)
-        schedule.delete_from_db()
-        return "Schedule with id: {} was successfully deleted.".format(schedule_id), 200
+        scheduled_usage = ScheduledUsageModel.find_by_id(scheduled_usage_id)
+        if schedule.id == scheduled_usage.schedule_id:
+            scheduled_usage.delete_from_db()
+            return "Schedule Usage with id: {} was successfully deleted.".format(scheduled_usage_id), 200
+        else:
+            return "The given schedule id does not match the schedule id of scheduled usage with id {}."\
+                .format(scheduled_usage_id)

@@ -8,6 +8,7 @@ from tests.test_event_call_resource import test_event_call_resource
 from tests.test_usage_resource import test_usage_resource
 from tests.test_event_resource import test_event_resource
 from tests.test_graph_resource import test_graph_resource
+from tests.test_schedule_resource import test_schedule_resource
 from tests import clear_database
 
 migrate = Migrate(app, db)
@@ -26,6 +27,7 @@ def run_tests():
     test_usage_resource()
     test_event_resource()
     test_graph_resource()
+    test_schedule_resource()
 
 
 if __name__ == '__main__':
