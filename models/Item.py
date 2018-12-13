@@ -72,7 +72,9 @@ class ItemModel(db.Model):
             self.last_use = {
                 'last_use_timestamp': last_event.timestamp,
                 'data_type': usage.unit.value,
-                'data': last_event.data}
+                'data': last_event.data,
+                'usage_id': last_event.usage_id
+            }
 
     def is_in_module(self):
         for group in self.groups:
