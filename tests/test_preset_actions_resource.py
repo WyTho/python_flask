@@ -1,5 +1,5 @@
 from models.PresetAction import PresetActionModel
-from tests.test_calls import test_get, test_post, send_get, test_put
+from tests.test_calls import test_get, test_post, send_get, test_put, test_delete
 
 
 def test_preset_actions_resource():
@@ -190,3 +190,25 @@ def test_preset_actions_resource():
     }
     expected_status = 200
     test_get(uri, expected_result, expected_status)
+
+    # DELETING ONE PRESET_ACTION
+    print("TEST_17 --- GETTING ALL PRESET_ACTIONS - BAD REQUEST")
+    uri = "http://127.0.0.1:5000/api/groups/1/presets/1/preset_actions/12"
+    expected_result = "Cannot find preset action with id: 12"
+    expected_status = 404
+    test_delete(uri, {}, expected_result, expected_status)
+
+    # DELETING ONE PRESET_ACTION
+    print("TEST_18 --- GETTING ALL PRESET_ACTIONS - BAD REQUEST")
+    uri = "http://127.0.0.1:5000/api/groups/1/presets/2/preset_actions/2"
+    expected_result = "The preset id of the preset action with id: 2 did not match the given preset id. " \
+                      "Perhaps you are looking for a different preset action?"
+    expected_status = 400
+    test_delete(uri, {}, expected_result, expected_status)
+
+    # DELETING ONE PRESET_ACTION
+    print("TEST_19 --- GETTING ALL PRESET_ACTIONS - BAD REQUEST")
+    uri = "http://127.0.0.1:5000/api/groups/1/presets/1/preset_actions/2"
+    expected_result = "Preset action with id: 2 was successfully deleted."
+    expected_status = 200
+    test_delete(uri, {}, expected_result, expected_status)

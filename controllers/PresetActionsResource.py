@@ -78,7 +78,7 @@ class PresetActionResource(Resource):
     def delete(self, group_id, preset_id, preset_action_id):
         preset_action = PresetActionModel.find_by_id(preset_action_id)
         if preset_action is None:
-            return "Cannot find preset with id: {}".format(preset_id), 404
+            return "Cannot find preset action with id: {}".format(preset_action_id), 404
         if preset_action.preset_id != preset_id:
             return "The preset id of the preset action with id: {} did not match the given preset id. " \
                    "Perhaps you are looking for a different preset action?".format(preset_action_id), 400
