@@ -221,3 +221,24 @@ def test_group_resource():
     }
     expected_status = 200
     test_get(uri, expected_result, expected_status)
+
+    # ADDING ONE ITEM TO GROUP
+    print("TEST_18 --- ADDING ONE ITEM TO GROUP")
+    uri = "http://127.0.0.1:5000/api/groups/1"
+    item_2_json = send_get('http://127.0.0.1:5000/api/items/2')
+    body = {
+        "item_id": 2
+    }
+    expected_result = group_1_json
+    expected_result['items'] = [{
+        "id": item_2_json['id'],
+        "name": item_2_json['name'],
+        "comment": item_2_json['comment']
+    }]
+    expected_status = 200
+    test_put(uri, body, expected_result, expected_status)
+    group_1_json['items'] = [{
+        "id": item_2_json['id'],
+        "name": item_2_json['name'],
+        "comment": item_2_json['comment']
+    }]

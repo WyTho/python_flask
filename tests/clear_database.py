@@ -5,6 +5,14 @@ def clear_database():
     mariadb_connection = mariadb.connect(user='dev', password='secret', database='test_env')
     cursor = mariadb_connection.cursor()
 
+    cursor.execute("DELETE FROM _preset_action;")
+    cursor.execute("ALTER TABLE _preset_action AUTO_INCREMENT = 1")
+    mariadb_connection.commit()
+
+    cursor.execute("DELETE FROM _preset;")
+    cursor.execute("ALTER TABLE _preset AUTO_INCREMENT = 1")
+    mariadb_connection.commit()
+
     cursor.execute("DELETE FROM _schedule_day;")
     cursor.execute("ALTER TABLE _schedule_day AUTO_INCREMENT = 1")
     mariadb_connection.commit()

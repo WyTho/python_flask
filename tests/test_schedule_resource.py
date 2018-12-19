@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 def test_schedule_resource():
-    print("####################   TESTING EVENT CALL RESOURCE   ####################")
+    print("####################   TESTING SCHEDULE RESOURCE   ####################")
 
     # GETTING ALL EVENT_CALLS
     print("TEST_1 --- GETTING ALL SCHEDULES")

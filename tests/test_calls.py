@@ -17,13 +17,17 @@ def test_get(uri, expected_result, expected_status):
         assertion = "GOT STATUS TYPE {} INSTEAD. SERVERS RESPONDED WITH {}".format(resp.status, resp.reason)
         assert resp.status == expected_status, assertion
     json_content = json.loads(content)
-    if json_content.keys() != expected_result.keys():
-        assertion = "Keys did not match. Got: {}, Expected: {}".format(json_content.keys(), expected_result.keys())
-        assert json_content.keys() == expected_result.keys(), assertion
-    for key in expected_result.keys():
-        if json_content[key] != expected_result[key]:
-            assertion = 'Key: {}; response: {} expected: {}'.format(key, json_content[key], expected_result[key])
-            assert json_content[key] == expected_result[key], assertion
+    if resp.status == 400 or resp.status == 404:
+        assertion = "Response did not match the expected response GOT: {}. EXPECTED: {}".format(json_content, expected_result)
+        assert json_content == expected_result, assertion
+    else:
+        if json_content.keys() != expected_result.keys():
+            assertion = "Keys did not match. Got: {}, Expected: {}".format(json_content.keys(), expected_result.keys())
+            assert json_content.keys() == expected_result.keys(), assertion
+        for key in expected_result.keys():
+            if json_content[key] != expected_result[key]:
+                assertion = 'Key: {}; response: {} expected: {}'.format(key, json_content[key], expected_result[key])
+                assert json_content[key] == expected_result[key], assertion
     assert json.loads(content) == expected_result
 
 
@@ -61,7 +65,9 @@ def test_put(uri, body, expected_result, expected_status):
     if resp.status == 400 or resp.status == 404:
         assert json_content == expected_result, 'GOT: {} EXPECTED: {}'.format(json_content, expected_result)
     else:
-        assert json_content.keys() == expected_result.keys()
+        if json_content.keys() != expected_result.keys():
+            assertion = "Keys did not match. GOT: {}. EXPECTED: {}".format(json_content.keys(), expected_result.keys())
+        assert json_content.keys() == expected_result.keys(), assertion
         for key in expected_result.keys():
             assert json_content[key] == expected_result[key], \
                 'GOT: {}={} EXPECTED: {}={}'.format(key, json_content[key], key, expected_result[key])
