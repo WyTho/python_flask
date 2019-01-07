@@ -80,11 +80,13 @@ class PresetResource(Resource):
             responses = []
             for preset_action in preset.preset_actions:
                 usage = UsageModel.find_by_id(preset_action.usage_id)
-                response = requests.get(url="{}alias={}&value={}".format(app.config['HOMELYNK_URI'],
-                                                                         usage.address, preset_action.value))
-                responses.append(response)
+                url = "{}alis={}&value={}".format(app.config['HOMELYNK_URI'], usage.address, preset_action.value)
+                # response = requests.get(url)
+                # responses.append(response)
+                responses.append(url)
             print(responses)
-            return "Request has been accepted.", 202
+            result = {'urls': [responses], 'message': "Request has been accepted"}
+            return result, 202
 
     def delete(self, group_id, preset_id):
         preset = PresetModel.find_by_id(preset_id)

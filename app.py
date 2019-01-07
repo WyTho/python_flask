@@ -18,7 +18,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/WySma
 app.config['HOMELYNK_URI'] = 'http://remote:Selficient@10.1.1.10/scada-remote/request.cgi?m=json&r=grp&fn=write&'
 api = Api(app)
 
-
 api.add_resource(ItemsResource, '/api/items')
 api.add_resource(ItemResource, '/api/items/<int:item_id>')
 
