@@ -11,6 +11,8 @@ from controllers.UsageResource import UsageResource, UsagesResource, CommandReso
 from controllers.ScheduleResource import ScheduleResource, SchedulesResource
 from controllers.ScheduledUsageResource import ScheduledUsageResource, ScheduledUsagesResource
 from controllers.ScheduleDaysResource import ScheduleDaysResource, ScheduleDayResource
+from threading import Thread
+import scheduler
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -53,5 +55,8 @@ if __name__ == "__main__":
     from db import db
     db.init_app(app)
 
+    # thread = Thread(target=scheduler.scheduler())
+    # thread.start()
     app.run(debug=True, host='0.0.0.0')
+
 
