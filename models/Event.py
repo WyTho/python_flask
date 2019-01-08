@@ -1,4 +1,5 @@
 from db import db
+from models.Usage import UsageModel
 
 
 class EventModel(db.Model):
@@ -9,15 +10,23 @@ class EventModel(db.Model):
     timestamp = db.Column(db.Integer, nullable=False, default=0)
 
     def __init__(self, usage_id, data, timestamp):
+        usage = UsageModel.find_by_id(usage_id)
+        if usage is None:
+            raise ValueError('Invalid UsageId.')
         self.usage_id = usage_id
         self.data = data
         self.timestamp = round(timestamp)
 
     def to_json(self):
+        data = self.data
+        if data == 'True':
+            data = True
+        elif data == 'False':
+            data = False
         return {
             'id': self.id,
             'usage_id': self.usage_id,
-            'data': self.data,
+            'data': data,
             'timestamp': self.timestamp
         }
 
