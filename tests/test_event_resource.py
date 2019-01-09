@@ -1,5 +1,6 @@
 from models.Event import EventModel
 from models.UnitEnum import UnitEnum
+from models.Error import Error
 from tests.test_calls import test_get, test_post, send_get
 from datetime import datetime
 
@@ -57,9 +58,13 @@ def test_event_resource():
         "data_type": UnitEnum.TOGGLE.value,
         "data": 'True'
     }
-
-    expected_result = "Could not find usage with id: 17"
-    expected_status = 404
+    error = Error(
+                "Cannot find usage with id: {}".format(17),
+                "UsageModel.find_by_id({}) returns None".format(17),
+                404,
+                "https://en.wikipedia.org/wiki/HTTP_404")
+    expected_result = {"errors": [error.to_json()]}
+    expected_status = 422
     test_post(uri, body, expected_result, expected_status)
 
     # POST ONE EVENT
@@ -70,7 +75,11 @@ def test_event_resource():
         "data_type": "KILO WHAT?",
         "data": 'True'
     }
-
-    expected_result = '"KILO WHAT?" is not a valid unit type.'
-    expected_status = 400
+    error = Error(
+                '"{}" is not a valid unit type.'.format("KILO WHAT?"),
+                "UnitEnum.has_value({}) returned False".format("KILO WHAT?"), 400,
+                "https://en.wikipedia.org/wiki/HTTP_400"
+            )
+    expected_result = {"errors": [error.to_json()]}
+    expected_status = 422
     test_post(uri, body, expected_result, expected_status)
