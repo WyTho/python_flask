@@ -16,6 +16,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dev:secret@127.0.0.1:3306/WySmart'  # 'mysql://username:password@ip:port/databasename'
 app.config['HOMELYNK_URI'] = 'http://remote:Selficient@10.1.1.10/scada-remote/request.cgi?m=json&r=grp&fn=write&'
+app.config['API_URI'] = '127.0.0.1:5000/api/'
 api = Api(app)
 
 

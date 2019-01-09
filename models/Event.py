@@ -1,5 +1,4 @@
 from db import db
-from models.Usage import UsageModel
 
 
 class EventModel(db.Model):
@@ -10,9 +9,6 @@ class EventModel(db.Model):
     timestamp = db.Column(db.Integer, nullable=False, default=0)
 
     def __init__(self, usage_id, data, timestamp):
-        usage = UsageModel.find_by_id(usage_id)
-        if usage is None:
-            raise ValueError('Invalid UsageId.')
         self.usage_id = usage_id
         self.data = data
         self.timestamp = round(timestamp)

@@ -1,4 +1,5 @@
 from models.Group import GroupModel
+from models.Error import Error
 from tests.test_calls import test_get, test_post, test_put, send_get, test_delete
 
 
@@ -25,6 +26,7 @@ def test_group_resource():
     }
     group_1_json = group_1.to_json()
     group_1_json['id'] = 1
+    group_1_json['url'] = "127.0.0.1:5000/api/groups/1"
     expected_result = group_1_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/groups"
@@ -48,7 +50,7 @@ def test_group_resource():
 
     # ADDING ONE ITEM TO GROUP
     print("TEST_5 --- ADDING ONE ITEM TO GROUP")
-    uri = "http://127.0.0.1:5000/api/groups/1"
+    uri = "http://127.0.0.1:5000/api/groups/1/items"
     item_1_json = send_get('http://127.0.0.1:5000/api/items/1')
     body = {
         "item_id": item_1_json['id']
@@ -60,7 +62,7 @@ def test_group_resource():
         "comment": item_1_json['comment']
     }]
     expected_status = 200
-    test_put(uri, body, expected_result, expected_status)
+    test_post(uri, body, expected_result, expected_status)
     group_1_json['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
@@ -85,6 +87,7 @@ def test_group_resource():
     }
     group_2_json = group_2.to_json()
     group_2_json['id'] = 2
+    group_2_json['url'] = "127.0.0.1:5000/api/groups/2"
     expected_result = group_2_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/groups"
@@ -101,6 +104,7 @@ def test_group_resource():
     }
     group_3_json = group_3.to_json()
     group_3_json['id'] = 3
+    group_3_json['url'] = "127.0.0.1:5000/api/groups/3"
     expected_result = group_3_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/groups"
@@ -108,7 +112,7 @@ def test_group_resource():
 
     # ADDING ONE ITEM TO GROUP
     print("TEST_9 --- ADDING ONE ITEM TO GROUP")
-    uri = "http://127.0.0.1:5000/api/groups/2"
+    uri = "http://127.0.0.1:5000/api/groups/2/items"
     item_1_json = send_get('http://127.0.0.1:5000/api/items/1')
     body = {
         "item_id": item_1_json['id']
@@ -120,7 +124,7 @@ def test_group_resource():
         "comment": item_1_json['comment']
     }]
     expected_status = 200
-    test_put(uri, body, expected_result, expected_status)
+    test_post(uri, body, expected_result, expected_status)
     group_2_json['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
@@ -129,14 +133,20 @@ def test_group_resource():
 
     # ADDING ONE ITEM TO GROUP
     print("TEST_10 --- ADDING ONE ITEM TO SECOND MODULE")
-    uri = "http://127.0.0.1:5000/api/groups/3"
+    uri = "http://127.0.0.1:5000/api/groups/3/items"
     item_1_json = send_get('http://127.0.0.1:5000/api/items/1')
     body = {
         "item_id": item_1_json['id']
     }
-    expected_result = "Item cannot be in two different modules"
-    expected_status = 400
-    test_put(uri, body, expected_result, expected_status)
+    error = Error(
+        "Item cannot be in two different modules",
+        "item.is_in_module() returned True",
+        422,
+        "https://en.wikipedia.org/wiki/HTTP_422"
+    )
+    expected_result = {"errors": [error.to_json()]}
+    expected_status = 422
+    test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL ITEMS
     print("TEST_11 --- GETTING ONE ITEM")
@@ -157,7 +167,7 @@ def test_group_resource():
 
     # ADDING ONE ITEM TO GROUP
     print("TEST_12 --- REMOVING ONE ITEM FROM GROUP")
-    uri = "http://127.0.0.1:5000/api/groups/1"
+    uri = "http://127.0.0.1:5000/api/groups/1/items/1"
     item_1_json = send_get('http://127.0.0.1:5000/api/items/1')
     body = {
         "item_id": item_1_json['id']
@@ -165,7 +175,7 @@ def test_group_resource():
     expected_result = group_1_json
     expected_result['items'] = []
     expected_status = 200
-    test_put(uri, body, expected_result, expected_status)
+    test_delete(uri, body, expected_result, expected_status)
     group_1_json['items'] = []
 
     # GETTING ONE GROUP
@@ -177,14 +187,19 @@ def test_group_resource():
 
     # ADDING ONE ITEM TO NON EXISTING GROUP
     print("TEST_14 --- ADDING ITEM TO NON EXISTING GROUP")
-    uri = "http://127.0.0.1:5000/api/groups/5"
+    uri = "http://127.0.0.1:5000/api/groups/5/items"
     item_1_json = send_get('http://127.0.0.1:5000/api/items/1')
     body = {
         "item_id": item_1_json['id']
     }
-    expected_result = "Cannot find group with id: 5"
+    error = Error(
+        "Cannot find group with id: {}".format(5),
+        "GroupModel.find_by_id({}) returns None".format(5),
+        404,
+        "https://en.wikipedia.org/wiki/HTTP_404")
+    expected_result = {"errors": [error.to_json()]}
     expected_status = 404
-    test_put(uri, body, expected_result, expected_status)
+    test_post(uri, body, expected_result, expected_status)
     group_1_json['items'] = []
 
     # POSTING ONE GROUP
@@ -198,7 +213,13 @@ def test_group_resource():
         "name": group_3_name,
         "is_module": group_3_is_module,
     }
-    expected_result = "Name cannot be longer than 255 characters."
+    error = Error(
+        "Name cannot be longer than 255 characters.",
+        "Name parameter cannot be longer than 255 characters.",
+        400,
+        "https://en.wikipedia.org/wiki/HTTP_400"
+    )
+    expected_result = {"errors": [error.to_json()]}
     expected_status = 400
     uri = "http://127.0.0.1:5000/api/groups"
     test_post(uri, body, expected_result, expected_status)
@@ -224,7 +245,7 @@ def test_group_resource():
 
     # ADDING ONE ITEM TO GROUP
     print("TEST_18 --- ADDING ONE ITEM TO GROUP")
-    uri = "http://127.0.0.1:5000/api/groups/1"
+    uri = "http://127.0.0.1:5000/api/groups/1/items"
     item_2_json = send_get('http://127.0.0.1:5000/api/items/2')
     body = {
         "item_id": 2
@@ -236,7 +257,7 @@ def test_group_resource():
         "comment": item_2_json['comment']
     }]
     expected_status = 200
-    test_put(uri, body, expected_result, expected_status)
+    test_post(uri, body, expected_result, expected_status)
     group_1_json['items'] = [{
         "id": item_2_json['id'],
         "name": item_2_json['name'],

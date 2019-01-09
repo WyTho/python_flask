@@ -56,10 +56,6 @@ class ItemModel(db.Model):
         item.fill_status()
         return item
 
-    @classmethod
-    def find_by_group_id(cls, group_id):
-        items = cls.query.filter_by(group_id)
-
     def fill_status(self):
         last_event = None
         for usage in self.usages:

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from controllers.ItemsResource import ItemsResource, ItemResource
 from controllers.EventsResource import EventsResource, EventResource
-from controllers.GroupsResource import GroupsResource, GroupResource
+from controllers.GroupsResource import GroupsResource, GroupResource, GroupItemsResource, GroupItemResource
 from controllers.PresetsResource import PresetResource, PresetsResource
 from controllers.PresetActionsResource import PresetActionResource, PresetActionsResource
 from controllers.EventCallResource import EventCallsResource, EventCallResource
@@ -31,6 +31,8 @@ api.add_resource(EventResource, '/api/events/<int:event_id>')
 
 api.add_resource(GroupsResource, '/api/groups')
 api.add_resource(GroupResource, '/api/groups/<int:group_id>')
+api.add_resource(GroupItemsResource, '/api/groups/<int:group_id>/items')
+api.add_resource(GroupItemResource, '/api/groups/<int:group_id>/items/<int:item_id>')
 api.add_resource(PresetsResource, '/api/groups/<int:group_id>/presets')
 api.add_resource(PresetResource, '/api/groups/<int:group_id>/presets/<int:preset_id>')
 api.add_resource(PresetActionsResource, '/api/groups/<int:group_id>/presets/<int:preset_id>/preset_actions')
