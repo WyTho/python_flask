@@ -76,6 +76,12 @@ class ItemModel(db.Model):
                 'usage_id': last_event.usage_id
             }
 
+    def has_usage(self, usage_id):
+        for usage in self.usages:
+            if usage.id == usage_id:
+                return True
+        return False
+
     def is_in_module(self):
         for group in self.groups:
             if group.is_module:

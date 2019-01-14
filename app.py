@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from controllers.ItemsResource import ItemsResource, ItemResource
+from controllers.ItemsResource import ItemsResource, ItemResource, ItemUsageResource, ItemUsagesResource
 from controllers.EventsResource import EventsResource, EventResource
 from controllers.GroupsResource import GroupsResource, GroupResource, GroupItemResource, GroupItemsResource
 from controllers.PresetsResource import PresetResource, PresetsResource
@@ -22,6 +22,8 @@ api = Api(app)
 
 api.add_resource(ItemsResource, '/api/items')
 api.add_resource(ItemResource, '/api/items/<int:item_id>')
+api.add_resource(ItemUsageResource, '/api/items/<int:item_id>/usages')
+api.add_resource(ItemUsagesResource, '/api/items/<int:item_id>/usages/<int:usage_id>')
 
 api.add_resource(UsagesResource, '/api/usages')
 api.add_resource(UsageResource, '/api/usages/<int:usage_id>')
