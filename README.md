@@ -5,7 +5,10 @@ Steps to installing this program
 Setting up the project itself
 1. Clone the project
 2. Open the project in your IDE (we're using JetBrains' Pycharm)
-3. Setup the /env folder in the project as your current interpeter
+3. Setup your interperter (I recommend using a virtual envirement). Python version 3.6.5 was used during development.
+4. Satisfy the requirements of the requirements.txt ("pip install requirements.txt" generally works)
+   There is a knows issue with mysqlclient. If this can't be installed try "pip install mysqlclient==1.3.12"
+
 
 Setting up the database
 1. Download and install MariaDB (https://mariadb.com/downloads/)
