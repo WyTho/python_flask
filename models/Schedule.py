@@ -68,6 +68,9 @@ class ScheduleModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def execute(self):
+        print("executing schedule...")
+
     def has_day(self, day_number):
         for schedule_day in self.schedule_days:
             if schedule_day.day == day_number:

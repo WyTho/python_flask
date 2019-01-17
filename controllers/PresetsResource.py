@@ -64,6 +64,7 @@ class PresetResource(Resource):
             return {"errors": [error.to_json for error in errors]}, 404
 
         preset = PresetModel.find_by_id(preset_id)
+<<<<<<< HEAD
         responses = []
         for preset_action in preset.preset_actions:
             usage = UsageModel.find_by_id(preset_action.usage_id)
@@ -72,6 +73,33 @@ class PresetResource(Resource):
             responses.append(response)
         print(responses)
         return "Request has been accepted.", 202
+=======
+        if preset is None:
+            return "Cannot find preset with id: {}.".format(preset_id), 404
+        if preset.group_id != group_id:
+            return "The group id of the preset with id: {} did not match the given group id. " \
+                   "Perhaps you are looking for a different preset?".format(preset_id), 400
+
+        request_data = json.loads(request.data)
+        if "name" in request_data:
+            name = request_data['name']
+            result = preset.set_name(name)
+            if type(result) is PresetModel:
+                return result.to_json(), 200
+            else:
+                return result, 400
+        if "status" in request_data:
+            responses = []
+            for preset_action in preset.preset_actions:
+                usage = UsageModel.find_by_id(preset_action.usage_id)
+                url = "{}alis={}&value={}".format(app.config['HOMELYNK_URI'], usage.address, preset_action.value)
+                # response = requests.get(url)
+                # responses.append(response)
+                responses.append(url)
+            print(responses)
+            result = {'urls': [responses], 'message': "Request has been accepted"}
+            return result, 202
+>>>>>>> development
 
     def delete(self, group_id, preset_id):
         errors = validate(group_id=group_id, preset_id=preset_id)

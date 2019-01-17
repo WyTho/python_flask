@@ -23,7 +23,6 @@ class GroupModel(db.Model):
             url = "127.0.0.1:5000/api/groups/-1"
         return {
             'id': self.id,
-            'name': self.name,
             'is_module': self.is_module,
             'items': [
                 {
@@ -51,6 +50,7 @@ class GroupModel(db.Model):
             return None
         group.items = ItemGroup.ItemGroupModel.find_items_by_group_id(group.id)
         return group
+
 
     @classmethod
     def find_by_id_without_items(cls, group_id):
