@@ -122,24 +122,7 @@ class UsageResource(Resource):
         return usage.to_json(), 200
 
 
-<<<<<<< HEAD
 class CommandResource(Resource):
-=======
-    def get(self, usage_id, new_value):
-
-        def hello():
-            print("hello, world")
-            h = httplib2.Http()
-            h.follow_all_redirects = True
-            resp, content = h.request("http://localhost:5000/api/items", "GET")
-
-        t = threading.Timer(2.0, hello)
-        t.start()  # after 30 seconds, "hello, world" will be printed
-
-        if new_value == 'tea':
-            return "I'm a teapot", 418
-        return 404, 404
->>>>>>> development
 
     # @todo should this be patch?
     def patch(self, usage_id, new_value):
