@@ -21,13 +21,18 @@ class ItemModel(db.Model):
         self.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(self.id)
 
     def to_json(self):
+        if self.id is None:
+            url = "127.0.0.1:5000/api/items/-1"
+        else:
+            url = "127.0.0.1:5000/api/items/{}".format(self.id)
         return {
             'id': self.id,
             'name': self.name,
             'comment': self.comment,
             'last_use': self.last_use,
             'usages': [usage.to_json() for usage in self.usages],
-            'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
+            'groups': [{'id': group.id, 'name': group.name} for group in self.groups],
+            'url': url
         }
 
     @classmethod
@@ -108,4 +113,4 @@ class ItemModel(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Item name:'{}', address:'{}', comment:'{}'>".format(self.name, self.address, self.comment)
+        return "<Item id:'{}'>".format(self.id)

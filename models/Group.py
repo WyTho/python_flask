@@ -17,6 +17,10 @@ class GroupModel(db.Model):
         self.items = ItemGroup.ItemGroupModel.find_items_by_group_id(self.id)
 
     def to_json(self):
+        if id is not None:
+            url = "127.0.0.1:5000/api/groups/{}".format(self.id)
+        else:
+            url = "127.0.0.1:5000/api/groups/-1"
         return {
             'id': self.id,
             'name': self.name,
@@ -26,10 +30,11 @@ class GroupModel(db.Model):
                     'id': item.id,
                     'name': item.name,
                     'comment': item.comment,
+                    'url': '127.0.0.1:5000/api/items/{}'.format(item.id)
                 } for item in self.items],
             # @todo during testing I cannot reach into app.config
             # 'url': app.config['API_URI'] + "groups/{}".format(self.id)
-            'url': "127.0.0.1:5000/api/groups/{}".format(self.id)
+            'url': url
         }
 
     @classmethod

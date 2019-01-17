@@ -1,5 +1,6 @@
 from models.Item import ItemModel
-from tests.test_calls import test_get, test_post
+from models.Error import Error
+from tests.test_calls import test_get, test_post, test_put
 
 
 def test_item_resource():
@@ -25,6 +26,7 @@ def test_item_resource():
     }
     item_1_json = item_1.to_json()
     item_1_json['id'] = 1
+    item_1_json['url'] = "127.0.0.1:5000/api/items/1"
     expected_result = item_1_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/items"
@@ -56,7 +58,7 @@ def test_item_resource():
         'comment': 'new_comment'
     }
     expected_status = 200
-    test_post(uri, body, expected_result, expected_status)
+    test_put(uri, body, expected_result, expected_status)
     item_1_json['comment'] = 'new_comment'
 
     # GETTING ONE ITEM
@@ -80,13 +82,19 @@ def test_item_resource():
     }
     item_1_json = item_1.to_json()
     item_1_json['id'] = 2
-    expected_result = "Name cannot be longer than 255 characters."
-    expected_status = 400
+    expected_result = {"errors": [
+        Error(
+            "Name cannot be longer than 255 characters.",
+            "Name parameter cannot be longer than 255 characters.",
+            400,
+            "https://en.wikipedia.org/wiki/HTTP_400").to_json()
+    ]}
+    expected_status = 422
     uri = "http://127.0.0.1:5000/api/items"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
-    print("TEST_9 --- POSTING ONE ITEM - BAD REQUEST")
+    print("TEST_8 --- POSTING ONE ITEM - BAD REQUEST")
     item_1_name = 'Z04 Gang lamp (SW)'
     item_1_comment = 'ETS import_______________________________________________________________' \
                      '_________________________________________________________________________________' \
@@ -99,13 +107,19 @@ def test_item_resource():
     }
     item_1_json = item_1.to_json()
     item_1_json['id'] = 2
-    expected_result = "Comment cannot be longer than 255 characters."
-    expected_status = 400
+    expected_result = {"errors": [
+        Error(
+            "Comment cannot be longer than 255 characters.",
+            "Name parameter cannot be longer than 255 characters.",
+            400,
+            "https://en.wikipedia.org/wiki/HTTP_400").to_json()
+    ]}
+    expected_status = 422
     uri = "http://127.0.0.1:5000/api/items"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
-    print("TEST_10 --- POSTING ONE ITEM")
+    print("TEST_9 --- POSTING ONE ITEM")
     item_2_name = 'Z04 Eetkamer lamp (SW)'
     item_2_comment = 'ETS import'
     item_2 = ItemModel(item_2_name, item_2_comment)
@@ -115,13 +129,9 @@ def test_item_resource():
     }
     item_2_json = item_2.to_json()
     item_2_json['id'] = 2
+    item_2_json['url'] = "127.0.0.1:5000/api/items/2"
     expected_result = item_2_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/items"
     test_post(uri, body, expected_result, expected_status)
-
-
-    # COMMANDING ITEM
-    # @todo test command endpoint (needs homelynk)
-
 

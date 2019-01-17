@@ -15,12 +15,17 @@ class PresetModel(db.Model):
         self.preset_actions = PresetActionModel.find_preset_actions_by_preset_id(self.id)
 
     def to_json(self):
+        if self.id is not None:
+            url = "127.0.0.1:5000/api/groups/{}/presets/{}".format(self.group_id, self.id)
+        else:
+            url = "127.0.0.1:5000/api/groups/{}/presets/-1".format(self.group_id)
         return {
             'id': self.id,
             'group_id': self.group_id,
             'name': self.name,
             'preset_actions': [
                 preset_action.to_json() for preset_action in self.preset_actions],
+            'url': url
         }
 
     @classmethod

@@ -41,7 +41,8 @@ class ItemResource(Resource):
 
         return ItemModel.find_by_id(item_id).to_json()
 
-    def post(self, item_id):
+    # @todo should this be removed?
+    def put(self, item_id):
         item = ItemModel.find_by_id(item_id)
         if 'name' in request.form.keys():
             name = request.form['name']
@@ -52,7 +53,6 @@ class ItemResource(Resource):
             comment = request_data['comment']
 
         errors = validate(item_id=item_id, item_name=name, item_comment=comment)
-
         if len(errors) > 0:
             return {"errors": [error.to_json() for error in errors]}, 422
 
@@ -98,6 +98,7 @@ class ItemUsagesResource(Resource):
                 max_value = request_data['max_value']
 
         errors = validate(
+            item_id=item_id,
             usage_consumption_type=consumption_type,
             usage_consumption_amount=consumption_amount,
             usage_address=address,
@@ -106,7 +107,7 @@ class ItemUsagesResource(Resource):
             usage_max_value=max_value
         )
         if len(errors) > 0:
-            return {errors: [error.to_json() for error in errors]}, 422
+            return {"errors": [error.to_json() for error in errors]}, 422
 
         consumption_type = UsageTypeEnum(consumption_type)
         unit = UnitEnum(unit)
@@ -163,7 +164,7 @@ class ItemUsageResource(Resource):
         )
 
         if len(errors) > 0:
-            return {errors: [error.to_json() for error in errors]}, 404
+            return {"errors": [error.to_json() for error in errors]}, 404
 
         usage = UsageModel.find_by_id(usage_id)
         usage = usage.update(external_item_id=external_item_id,
@@ -174,3 +175,10 @@ class ItemUsageResource(Resource):
                              min_value=min_value,
                              max_value=max_value)
         return usage.to_json(), 202
+
+    def delete(self, item_id, usage_id):
+        errors = validate(item_id=item_id, usage_id=usage_id)
+        if len(errors) > 0:
+            return {"errors": [error.to_json() for error in errors]}, 422
+        usage = UsageModel.find_by_id(usage_id)
+        usage.delete_from_db()

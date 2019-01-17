@@ -1,7 +1,6 @@
 from db import db
 from .ScheduleDay import ScheduleDayModel
 from .ScheduledUsage import ScheduledUsageModel
-from datetime import time
 
 
 class ScheduleModel(db.Model):
@@ -15,11 +14,16 @@ class ScheduleModel(db.Model):
         self.time = _time
 
     def to_json(self):
+        if self.id is None:
+            url = "127.0.0.1:5000/api/schedules/-1"
+        else:
+            url = "127.0.0.1:5000/api/schedules/{}".format(self.id)
         return {
             'id': self.id,
             'time': self.time.strftime('%H/%M/%S'),
             'schedule_days': [schedule_day.to_json() for schedule_day in self.schedule_days],
             'scheduled_usages': [scheduled_usage.to_json() for scheduled_usage in self.scheduled_usages],
+            'url': url
         }
 
     @classmethod

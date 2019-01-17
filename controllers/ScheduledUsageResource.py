@@ -1,7 +1,6 @@
 from flask_restful import Resource, request
-from models.Schedule import ScheduleModel
 from models.ScheduledUsage import ScheduledUsageModel
-from models.Usage import UsageModel
+from controllers.Validator import validate
 import json
 
 
@@ -13,9 +12,6 @@ class ScheduledUsagesResource(Resource):
         return {"scheduled_usages": all_in_json}, 200
 
     def post(self, schedule_id):
-        schedule = ScheduleModel.find_by_id(schedule_id)
-        if schedule is None:
-            return 'Could not find schedule with id {}.'.format(schedule_id), 404
 
         if 'usage_id' in request.form.keys():
             usage_id = request.form['usage_id']
@@ -25,61 +21,44 @@ class ScheduledUsagesResource(Resource):
 
             usage_id = request_data['usage_id']
             value = request_data['value']
+        validate(
+            schedule_id=schedule_id,
+            usage_id=usage_id,
+            usage_value=value,
+            method="ScheduledUsagesResource.post"
+        )
 
-        usage = UsageModel.find_by_id(usage_id)
-        if usage is None:
-            return 'Could not find usage with id {}.'.format(usage_id), 404
-
-        for scheduled_usage in schedule.scheduled_usages:
-            if scheduled_usage.usage_id == usage_id:
-                return 'Given usage id is already being used by scheduled usage with id: {}.'\
-                           .format(scheduled_usage.id), 400
-
-        if value < usage.min_value or value > usage.max_value:
-            return 'Given usage value does not fall without range ({} - {}). ({} given.)' \
-                .format(usage.min_value, usage.max_value, value)
-
-        scheduled_usage = ScheduledUsageModel(schedule.id, usage_id, value)
-
+        scheduled_usage = ScheduledUsageModel(schedule_id, usage_id, value)
         return scheduled_usage.to_json(), 201
 
 
 class ScheduledUsageResource(Resource):
 
     def get(self, schedule_id, scheduled_usage_id):
-        schedule = ScheduleModel.find_by_id(schedule_id)
-        if schedule is None:
-            return "Could not find schedule with id {}.".format(schedule_id)
-
-        scheduled_usage = schedule.find_scheduled_usage_by_id(scheduled_usage_id)
-        if scheduled_usage is None:
-            return "Could not find scheduled usage with id {} on schedule with id {}."\
-                   .format(scheduled_usage_id, schedule_id), 404
+        errors = validate(schedule_id=schedule_id, scheduled_usage_id=scheduled_usage_id)
+        if len(errors) > 0:
+            return {"errors": [error.to_json() for error in errors]}, 404
+        scheduled_usage = ScheduledUsageModel.find_by_id(scheduled_usage_id)
         return scheduled_usage.to_json(), 200
 
-    def post(self, schedule_id, scheduled_usage_id):
-        schedule = ScheduleModel.find_by_id(schedule_id)
+    def put(self, schedule_id, scheduled_usage_id):
         if 'value' in request.form.keys():
             value = request.form['value']
         else:
             request_data = json.loads(request.data)
             value = request_data['value']
+        errors = validate(schedule_id=schedule_id, scheduled_usage_id=scheduled_usage_id, scheduled_usage_value=value)
+        if len(errors) > 0:
+            return {"errors": [error.to_json() for error in errors]}
 
-        if schedule is None:
-            return "Could not find schedule with id {}.".format(schedule_id)
-
-        scheduled_usage = schedule.find_scheduled_usage_by_id(scheduled_usage_id)
-        if scheduled_usage is None:
-            return "Could not find scheduled usage with id {} on schedule with id {}."\
-                   .format(scheduled_usage_id, schedule_id), 404
-        return scheduled_usage.set_value(value)
+        scheduled_usage = ScheduledUsageModel.find_by_id(scheduled_usage_id)
+        return scheduled_usage.set_value(value).to_json(), 200
 
     def delete(self, schedule_id, scheduled_usage_id):
-        schedule = ScheduleModel.find_by_id(schedule_id)
+        errors = validate(schedule_id=schedule_id, scheduled_usage_id=scheduled_usage_id)
+        if len(errors) > 0:
+            return {"errors": [error.to_json() for error in errors]}
+
         scheduled_usage = ScheduledUsageModel.find_by_id(scheduled_usage_id)
-        if schedule.id == scheduled_usage.schedule_id:
-            scheduled_usage.delete_from_db()
-            return "Schedule Usage with id: {} was successfully deleted.".format(scheduled_usage_id), 200
-        else:
-            return "The given schedule id does not match the schedule id of scheduled usage with id {}."\
-                .format(scheduled_usage_id)
+        scheduled_usage.delete_from_db()
+        return "Schedule Usage with id: {} was successfully deleted.".format(scheduled_usage_id), 200

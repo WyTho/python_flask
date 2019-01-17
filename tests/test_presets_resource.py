@@ -1,5 +1,6 @@
 from models.Preset import PresetModel
-from tests.test_calls import test_get, test_post, test_delete
+from models.Error import Error
+from tests.test_calls import test_get, test_post, test_delete, test_put
 import json
 
 
@@ -25,6 +26,7 @@ def test_presets_resource():
     preset_1 = PresetModel(preset_1_group_id, preset_1_name)
     preset_1_json = preset_1.to_json()
     preset_1_json['id'] = 1
+    preset_1_json['url'] = "127.0.0.1:5000/api/groups/1/presets/1"
     expected_result = preset_1_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/groups/{}/presets".format(preset_1_group_id)
@@ -35,8 +37,14 @@ def test_presets_resource():
     body = {
         "name": "na",
     }
-    expected_result = 'Name must be at least 3 characters long.'
-    expected_status = 400
+    expected_result = {"errors": [
+        Error(
+                "Name must be at least 3 characters long.",
+                "len(preset_name) < 3 returned True",
+                422,
+                "https://en.wikipedia.org/wiki/HTTP_422").to_json()
+    ]}
+    expected_status = 422
     uri = "http://127.0.0.1:5000/api/groups/{}/presets".format(preset_1_group_id)
     test_post(uri, body, expected_result, expected_status)
 
@@ -45,8 +53,14 @@ def test_presets_resource():
     body = {
         "name": "namenamenamenamenamenamenamenamenamename",
     }
-    expected_result = 'Name cannot be longer than 30 characters.'
-    expected_status = 400
+    expected_result = {"errors": [
+        Error(
+                "Name cannot be longer than 30 characters.",
+                "len(preset_name) > 30 returned True",
+                422,
+                "https://en.wikipedia.org/wiki/HTTP_422").to_json()
+    ]}
+    expected_status = 422
     uri = "http://127.0.0.1:5000/api/groups/{}/presets".format(preset_1_group_id)
     test_post(uri, body, expected_result, expected_status)
 
@@ -69,6 +83,7 @@ def test_presets_resource():
     preset_2 = PresetModel(preset_2_group_id, preset_2_name)
     preset_2_json = preset_2.to_json()
     preset_2_json['id'] = 2
+    preset_2_json['url'] = "127.0.0.1:5000/api/groups/1/presets/2"
     expected_result = preset_2_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/groups/{}/presets".format(preset_2_group_id)
@@ -107,7 +122,7 @@ def test_presets_resource():
     }
     preset_1_json['name'] = "preset_1"
     expected_status = 200
-    test_post(uri, body, preset_1_json, expected_status)
+    test_put(uri, body, preset_1_json, expected_status)
 
     # GETTING ALL PRESETS
     print("TEST_11 --- GETTING ALL PRESETS")
@@ -128,6 +143,7 @@ def test_presets_resource():
     preset_3 = PresetModel(preset_3_group_id, preset_3_name)
     preset_3_json = preset_3.to_json()
     preset_3_json['id'] = 3
+    preset_3_json['url'] = "127.0.0.1:5000/api/groups/2/presets/3"
     expected_result = preset_3_json
     expected_status = 201
     uri = "http://127.0.0.1:5000/api/groups/{}/presets".format(preset_3_group_id)

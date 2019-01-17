@@ -18,7 +18,7 @@ class PresetActionModel(db.Model):
             'id': self.id,
             'preset_id': self.preset_id,
             'usage_id': self.usage_id,
-            'value': self.value
+            'value': self.value,
         }
 
     @classmethod

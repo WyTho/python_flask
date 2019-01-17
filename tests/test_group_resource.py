@@ -59,14 +59,16 @@ def test_group_resource():
     expected_result['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "comment": item_1_json['comment']
+        "comment": item_1_json['comment'],
+        "url": item_1_json['url']
     }]
     expected_status = 200
     test_post(uri, body, expected_result, expected_status)
     group_1_json['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "comment": item_1_json['comment']
+        "comment": item_1_json['comment'],
+        "url": item_1_json['url']
     }]
 
     # GETTING ONE GROUP
@@ -121,14 +123,16 @@ def test_group_resource():
     expected_result['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "comment": item_1_json['comment']
+        "comment": item_1_json['comment'],
+        "url": item_1_json['url']
     }]
     expected_status = 200
     test_post(uri, body, expected_result, expected_status)
     group_2_json['items'] = [{
         "id": item_1_json['id'],
         "name": item_1_json['name'],
-        "comment": item_1_json['comment']
+        "comment": item_1_json['comment'],
+        "url": item_1_json['url']
     }]
 
     # ADDING ONE ITEM TO GROUP
@@ -148,7 +152,7 @@ def test_group_resource():
     expected_status = 422
     test_post(uri, body, expected_result, expected_status)
 
-    # GETTING ALL ITEMS
+    # GETTING ONE ITEM
     print("TEST_11 --- GETTING ONE ITEM")
     uri = "http://127.0.0.1:5000/api/items/1"
     expected_result = {
@@ -157,6 +161,7 @@ def test_group_resource():
         "comment": 'new_comment',
         "last_use": None,
         "usages": [],
+        "url": "127.0.0.1:5000/api/items/1",
         "groups": [
             {"id": 1, "name": 'Huiskamer'},
             {"id": 2, "name": 'Verlichting'}
@@ -193,12 +198,12 @@ def test_group_resource():
         "item_id": item_1_json['id']
     }
     error = Error(
-        "Cannot find group with id: {}".format(5),
-        "GroupModel.find_by_id({}) returns None".format(5),
+        "Could not find group with id: {}".format(5),
+        "GroupModel.find_by_id({}) returned None".format(5),
         404,
         "https://en.wikipedia.org/wiki/HTTP_404")
     expected_result = {"errors": [error.to_json()]}
-    expected_status = 404
+    expected_status = 422
     test_post(uri, body, expected_result, expected_status)
     group_1_json['items'] = []
 
@@ -254,12 +259,14 @@ def test_group_resource():
     expected_result['items'] = [{
         "id": item_2_json['id'],
         "name": item_2_json['name'],
-        "comment": item_2_json['comment']
+        "comment": item_2_json['comment'],
+        "url": item_2_json['url']
     }]
     expected_status = 200
     test_post(uri, body, expected_result, expected_status)
     group_1_json['items'] = [{
         "id": item_2_json['id'],
         "name": item_2_json['name'],
-        "comment": item_2_json['comment']
+        "comment": item_2_json['comment'],
+        "url": item_2_json['url']
     }]
