@@ -12,7 +12,8 @@ class AverageTemperatureProcessor:
         before_datetime = (datetime.fromtimestamp(day.date_timestamp) + timedelta(hours=hour.hour + 1))
         events = EventModel.filter(data_type=DataTypeEnum.TEMPERATURE.value,
                                    after_timestamp=after_datetime.timestamp(),
-                                   before_timestamp=before_datetime.timestamp())
+                                   before_timestamp=before_datetime.timestamp(),
+                                   graph_id=1)
         temperature_sum = 0
         for event in events:
             temperature_sum += float(event.data)

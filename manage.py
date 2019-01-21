@@ -86,6 +86,10 @@ def seed():
         items.append(ItemGroupModel(5, 4))
         items.append(ItemGroupModel(11, 4))
 
+        # START CREATING GRAPHS
+        items.append(GraphModel('AVERAGE_TEMPERATURE', DataTypeEnum.TEMPERATURE))
+        items.append(GraphModel('AVERAGE_WATER_USAGE', DataTypeEnum.WATER_USAGE))
+
         # START CREATING EVENTS
         print('Creating events')
         till_date = datetime.now().timestamp()
@@ -99,7 +103,7 @@ def seed():
                     minutes=random.randint(0, 60),
                     seconds=random.randint(0, 60)
                 )).timestamp()
-                items.append(EventModel(6, 'True', toilet_break_timestamp))
+                items.append(EventModel(6, 'True', toilet_break_timestamp, 2))
 
             for i in range(0, 4):
                 daily_shower_start_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
@@ -107,12 +111,12 @@ def seed():
                     minutes=random.randint(0, 60),
                     seconds=random.randint(0, 60)
                 )).timestamp()
-                items.append(EventModel(7, 'True', daily_shower_start_timestamp))
+                items.append(EventModel(7, 'True', daily_shower_start_timestamp, 2))
                 daily_shower_end_timestamp = (datetime.fromtimestamp(daily_shower_start_timestamp) + timedelta(
                     minutes=random.randint(5, 15),
                     seconds=random.randint(0, 60)
                 )).timestamp()
-                items.append(EventModel(7, 'False', daily_shower_end_timestamp))
+                items.append(EventModel(7, 'False', daily_shower_end_timestamp, 2))
             for i in range(0, 24):
                 if not keep_going:
                     break
@@ -135,11 +139,8 @@ def seed():
                     elif i in [11, 16]:
                         temp = 19
 
-                    items.append(EventModel(1, temp * random.uniform(0.9, 1.1), from_date))
+                    items.append(EventModel(1, temp * random.uniform(0.9, 1.1), from_date, 1))
                     from_date += 6 * 60
-
-        items.append(GraphModel('AVERAGE_TEMPERATURE', DataTypeEnum.TEMPERATURE))
-        items.append(GraphModel('AVERAGE_WATER_USAGE', DataTypeEnum.WATER_USAGE))
 
         print('inserting data into db, this may take a while...')
         current = 1

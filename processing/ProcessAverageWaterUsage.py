@@ -13,7 +13,8 @@ class AverageWaterUsageProcessor:
         before_datetime = (datetime.fromtimestamp(day.date_timestamp) + timedelta(hours=hour.hour + 1))
         events = EventModel.filter(data_type=DataTypeEnum.WATER_USAGE.value,
                                    after_timestamp=after_datetime.timestamp(),
-                                   before_timestamp=before_datetime.timestamp())
+                                   before_timestamp=before_datetime.timestamp(),
+                                   graph_id=2)
         total_water_usage = None
         if len(events) != 0 or datetime.now() > before_datetime:
             total_water_usage = 0
