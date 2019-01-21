@@ -15,9 +15,9 @@ class ScheduleModel(db.Model):
 
     def to_json(self):
         if self.id is None:
-            url = "127.0.0.1:5000/api/schedules/-1"
+            url = "127.0.0.1:5000/api/v1/schedules/-1"
         else:
-            url = "127.0.0.1:5000/api/schedules/{}".format(self.id)
+            url = "127.0.0.1:5000/api/v1/schedules/{}".format(self.id)
         return {
             'id': self.id,
             'time': self.time.strftime('%H/%M/%S'),

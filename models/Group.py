@@ -1,6 +1,5 @@
 from db import db
 from . import ItemGroup
-from flask import current_app as app
 from models.Error import Error
 
 
@@ -18,9 +17,9 @@ class GroupModel(db.Model):
 
     def to_json(self):
         if id is not None:
-            url = "127.0.0.1:5000/api/groups/{}".format(self.id)
+            url = "127.0.0.1:5000/api/v1/groups/{}".format(self.id)
         else:
-            url = "127.0.0.1:5000/api/groups/-1"
+            url = "127.0.0.1:5000/api/v1/groups/-1"
         return {
             'id': self.id,
             'name': self.name,
@@ -30,7 +29,7 @@ class GroupModel(db.Model):
                     'id': item.id,
                     'name': item.name,
                     'comment': item.comment,
-                    'url': '127.0.0.1:5000/api/items/{}'.format(item.id)
+                    'url': '127.0.0.1:5000/api/v1/items/{}'.format(item.id)
                 } for item in self.items],
             # @todo during testing I cannot reach into app.config
             # 'url': app.config['API_URI'] + "groups/{}".format(self.id)

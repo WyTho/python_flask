@@ -1,18 +1,20 @@
 import httplib2
 import json
 
+baseurl = "http://127.0.0.1:5000/api/v1/"
+
 
 def send_get(uri):
     h = httplib2.Http()
     h.follow_all_redirects = True
-    resp, content = h.request(uri, "GET")
+    resp, content = h.request(baseurl+uri, "GET")
     return json.loads(content)
 
 
 def test_get(uri, expected_result, expected_status):
     h = httplib2.Http()
     h.follow_all_redirects = True
-    resp, content = h.request(uri, "GET")
+    resp, content = h.request(baseurl+uri, "GET")
     if resp.status != expected_status:
         assertion = "GOT STATUS TYPE {} INSTEAD. SERVERS RESPONDED WITH {}".format(resp.status, resp.reason)
         assert resp.status == expected_status, assertion
@@ -34,7 +36,7 @@ def test_get(uri, expected_result, expected_status):
 def test_post(uri, body, expected_result, expected_status):
     h = httplib2.Http()
     h.follow_all_redirects = True
-    resp, content = h.request(uri, "POST", json.dumps(body))
+    resp, content = h.request(baseurl+uri, "POST", json.dumps(body))
     if resp.status != expected_status:
         assertion = 'GOT STATUS TYPE {} INSTEAD OF {}. SERVER RESPONDED WITH {}. REASON BEING: {}'\
             .format(resp.status, expected_status, resp.reason, json.loads(content))
@@ -58,7 +60,7 @@ def test_post(uri, body, expected_result, expected_status):
 def test_patch(uri, body, expected_result, expected_status):
     h = httplib2.Http()
     h.follow_all_redirects = True
-    resp, content = h.request(uri, "PATCH", json.dumps(body))
+    resp, content = h.request(baseurl+uri, "PATCH", json.dumps(body))
     if resp.status != expected_status:
         assertion = 'GOT STATUS TYPE {} INSTEAD OF {}. SERVER RESPONDED WITH {}. REASON BEING: {}'\
             .format(resp.status, expected_status, resp.reason, json.loads(content))
@@ -82,7 +84,7 @@ def test_patch(uri, body, expected_result, expected_status):
 def test_put(uri, body, expected_result, expected_status):
     h = httplib2.Http()
     h.follow_all_redirects = True
-    resp, content = h.request(uri, "PUT", json.dumps(body))
+    resp, content = h.request(baseurl+uri, "PUT", json.dumps(body))
     assert resp.status == expected_status, \
         'GOT STATUS TYPE {} INSTEAD. SERVER RESPONDED WITH {}'.format(resp.status, resp.reason)
     json_content = json.loads(content)
@@ -99,7 +101,7 @@ def test_put(uri, body, expected_result, expected_status):
 def test_delete(uri, body, expected_result, expected_status):
     h = httplib2.Http()
     h.follow_all_redirects = True
-    resp, content = h.request(uri, "DELETE", json.dumps(body))
+    resp, content = h.request(baseurl+uri, "DELETE", json.dumps(body))
     assert resp.status == expected_status, "GOT STATUS TYPE {} INSTEAD OF EXPECTED {}. SERVER RESPONDED WITH {}"\
         .format(resp.status, expected_status, content)
 

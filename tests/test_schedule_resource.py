@@ -12,7 +12,7 @@ def test_schedule_resource():
 
     # GETTING ALL EVENT_CALLS
     print("TEST_1 --- GETTING ALL SCHEDULES")
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     expected_result = {
         "schedules": []
     }
@@ -32,7 +32,7 @@ def test_schedule_resource():
     schedule_1 = ScheduleModel(datetime.strptime("18:00:00", "%H:%M:%S"))
     schedule_1_json = schedule_1.to_json()
     schedule_1_json['id'] = 1
-    schedule_1_json['url'] = "127.0.0.1:5000/api/schedules/1"
+    schedule_1_json['url'] = "127.0.0.1:5000/api/v1/schedules/1"
 
     schedule_days_1 = ScheduleDayModel(schedule_1_json['id'], 1)
     schedule_days_1_json = schedule_days_1.to_json()
@@ -55,12 +55,12 @@ def test_schedule_resource():
 
     expected_result = schedule_1_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL SCHEDULES
     print("TEST_3 --- GETTING ALL SCHEDULES")
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     expected_result = {
         "schedules": [schedule_1_json]
     }
@@ -83,7 +83,7 @@ def test_schedule_resource():
             422,
             "https://en.wikipedia.org/wiki/HTTP_422").to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -103,7 +103,7 @@ def test_schedule_resource():
                 "https://en.wikipedia.org/wiki/HTTP_422"
             ).to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -116,7 +116,7 @@ def test_schedule_resource():
         ]
     }
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -135,7 +135,7 @@ def test_schedule_resource():
                 "https://en.wikipedia.org/wiki/HTTP_422"
             ).to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -151,7 +151,7 @@ def test_schedule_resource():
                 "https://en.wikipedia.org/wiki/HTTP_422"
             ).to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -178,7 +178,7 @@ def test_schedule_resource():
             "https://en.wikipedia.org/wiki/HTTP_422"
         ).to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -198,5 +198,5 @@ def test_schedule_resource():
                             "https://en.wikipedia.org/wiki/HTTP_422"
                         ).to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/schedules"
+    uri = "schedules"
     test_post(uri, body, expected_result, expected_status)

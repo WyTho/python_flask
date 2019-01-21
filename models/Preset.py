@@ -16,9 +16,9 @@ class PresetModel(db.Model):
 
     def to_json(self):
         if self.id is not None:
-            url = "127.0.0.1:5000/api/groups/{}/presets/{}".format(self.group_id, self.id)
+            url = "127.0.0.1:5000/api/v1/groups/{}/presets/{}".format(self.group_id, self.id)
         else:
-            url = "127.0.0.1:5000/api/groups/{}/presets/-1".format(self.group_id)
+            url = "127.0.0.1:5000/api/v1/groups/{}/presets/-1".format(self.group_id)
         return {
             'id': self.id,
             'group_id': self.group_id,

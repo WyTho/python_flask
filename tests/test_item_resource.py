@@ -8,7 +8,7 @@ def test_item_resource():
 
     # GETTING ALL ITEMS
     print("TEST_1 --- GETTING ALL ITEMS")
-    uri = "http://127.0.0.1:5000/api/items"
+    uri = "items"
     expected_result = {
         "items": []
     }
@@ -26,15 +26,15 @@ def test_item_resource():
     }
     item_1_json = item_1.to_json()
     item_1_json['id'] = 1
-    item_1_json['url'] = "127.0.0.1:5000/api/items/1"
+    item_1_json['url'] = "127.0.0.1:5000/api/v1/items/1"
     expected_result = item_1_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/items"
+    uri = "items"
     test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL ITEMS
     print("TEST_3 --- GETTING ALL ITEMS")
-    uri = "http://127.0.0.1:5000/api/items"
+    uri = "items"
     expected_result = {
         "items": [item_1_json]
     }
@@ -43,14 +43,14 @@ def test_item_resource():
 
     # GETTING ONE ITEM
     print("TEST_4 --- GETTING ONE ITEM")
-    uri = "http://127.0.0.1:5000/api/items/1"
+    uri = "items/1"
     expected_result = item_1_json
     expected_status = 200
     test_get(uri, expected_result, expected_status)
 
     # UPDATING ONE ITEM
     print("TEST_5 --- UPDATING ONE ITEM")
-    uri = 'http://127.0.0.1:5000/api/items/1'
+    uri = 'items/1'
     expected_result = item_1_json
     expected_result['comment'] = 'new_comment'
     body = {
@@ -63,7 +63,7 @@ def test_item_resource():
 
     # GETTING ONE ITEM
     print("TEST_6 --- GETTING UPDATED ITEM")
-    uri = 'http://127.0.0.1:5000/api/items/1'
+    uri = 'items/1'
     expected_result = item_1_json
     expected_status = 200
     test_get(uri, expected_result, expected_status)
@@ -90,7 +90,7 @@ def test_item_resource():
             "https://en.wikipedia.org/wiki/HTTP_400").to_json()
     ]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/items"
+    uri = "items"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -115,7 +115,7 @@ def test_item_resource():
             "https://en.wikipedia.org/wiki/HTTP_400").to_json()
     ]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/items"
+    uri = "items"
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE ITEM
@@ -129,9 +129,9 @@ def test_item_resource():
     }
     item_2_json = item_2.to_json()
     item_2_json['id'] = 2
-    item_2_json['url'] = "127.0.0.1:5000/api/items/2"
+    item_2_json['url'] = "127.0.0.1:5000/api/v1/items/2"
     expected_result = item_2_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/items"
+    uri = "items"
     test_post(uri, body, expected_result, expected_status)
 

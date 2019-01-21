@@ -5,12 +5,12 @@ from tests.test_calls import test_get, test_post, send_get, test_put, test_delet
 
 def test_preset_actions_resource():
     print("####################   TESTING PRESET_ACTIONS RESOURCE   ####################")
-    uri = "http://127.0.0.1:5000/api/groups/2/presets/3"
+    uri = "groups/2/presets/3"
     preset_3 = send_get(uri)
 
     # GETTING ALL PRESET_ACTIONS
     print("TEST_1 --- GETTING ALL PRESETS_ACTIONS")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
+    uri = "groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
     expected_result = {
         "preset_actions": []
     }
@@ -30,7 +30,7 @@ def test_preset_actions_resource():
     preset_action_1_json['id'] = 1
     expected_result = preset_action_1_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
+    uri = "groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE PRESET_ACTION
@@ -48,7 +48,7 @@ def test_preset_actions_resource():
             "https://en.wikipedia.org/wiki/HTTP_422"
         ).to_json()]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
+    uri = "groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
     test_post(uri, body, expected_result, expected_status)
 
     # POSTING ONE PRESET_ACTION
@@ -66,12 +66,12 @@ def test_preset_actions_resource():
         ).to_json()
     ]}
     expected_status = 422
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
+    uri = "groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
     test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL PRESET_ACTIONS
     print("TEST_5 --- GETTING ALL PRESETS_ACTIONS")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
+    uri = "groups/{}/presets/{}/preset_actions".format(preset_3['group_id'], preset_3['id'])
     expected_result = {
         "preset_actions": [preset_action_1_json]
     }
@@ -80,7 +80,7 @@ def test_preset_actions_resource():
 
     # GETTING ONE PRESET_ACTION
     print("TEST_6 --- GETTING ONE PRESETS_ACTION")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], preset_3['id'], preset_action_1_json['id'])
     expected_result = preset_action_1_json
 
@@ -89,7 +89,7 @@ def test_preset_actions_resource():
 
     # GETTING ONE PRESET_ACTION
     print("TEST_7 --- GETTING ONE PRESETS_ACTION - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], preset_3['id'], 2)
     expected_result = {"errors": [Error(
                 "Could not find preset action with id: {}".format(2),
@@ -102,7 +102,7 @@ def test_preset_actions_resource():
 
     # PUTTING ONE PRESET_ACTION
     print("TEST_8 --- PUTTING ONE PRESET_ACTION - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], preset_3['id'], 2)
     expected_result = {"errors": [Error(
                 "Could not find preset action with id: {}".format(2),
@@ -118,7 +118,7 @@ def test_preset_actions_resource():
 
     # PUTTING ONE PRESET_ACTION
     print("TEST_9 --- PUTTING ONE PRESET_ACTION - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], 2, 1)
     expected_result = {"errors": [Error(
                 "Could not find preset with id: {}".format(2),
@@ -134,7 +134,7 @@ def test_preset_actions_resource():
 
     # PUTTING ONE PRESET_ACTION
     print("TEST_10 --- PUTTING ONE PRESET_ACTION - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], preset_3['id'], 1)
     expected_result = {"errors": [Error(
                 "Could not find usage with id: {}".format(15),
@@ -150,7 +150,7 @@ def test_preset_actions_resource():
 
     # PUTTING ONE PRESET_ACTION
     print("TEST_11 --- PUTTING ONE PRESET_ACTION - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], preset_3['id'], 1)
     expected_result = {"errors": [Error(
                 "Given value is not in range of Usage values. ({} - {}) ({} given)".format(
@@ -169,7 +169,7 @@ def test_preset_actions_resource():
 
     # PUTTING ONE PRESET_ACTION
     print("TEST_12 --- PUTTING ONE PRESET_ACTION")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions/{}"\
+    uri = "groups/{}/presets/{}/preset_actions/{}"\
         .format(preset_3['group_id'], preset_3['id'], 1)
     preset_action_1_json['value'] = 0
     expected_result = preset_action_1_json
@@ -182,7 +182,7 @@ def test_preset_actions_resource():
 
     # GETTING ALL PRESET_ACTIONS
     print("TEST_13 --- GETTING ALL PRESET_ACTIONS")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions"\
+    uri = "groups/{}/presets/{}/preset_actions"\
         .format(preset_3['group_id'], preset_3['id'])
     expected_result = {"preset_actions": [
         preset_action_1_json
@@ -202,12 +202,12 @@ def test_preset_actions_resource():
     preset_action_2_json['id'] = 2
     expected_result = preset_action_2_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/groups/1/presets/1/preset_actions"
+    uri = "groups/1/presets/1/preset_actions"
     test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL PRESET_ACTIONS
     print("TEST_15 --- GETTING ALL PRESET_ACTIONS")
-    uri = "http://127.0.0.1:5000/api/groups/{}/presets/{}/preset_actions"\
+    uri = "groups/{}/presets/{}/preset_actions"\
         .format(preset_3['group_id'], preset_3['id'])
     expected_result = {
         "preset_actions": [
@@ -219,7 +219,7 @@ def test_preset_actions_resource():
 
     # GETTING ALL PRESET_ACTIONS
     print("TEST_16 --- GETTING ALL PRESET_ACTIONS")
-    uri = "http://127.0.0.1:5000/api/groups/1/presets/1/preset_actions"
+    uri = "groups/1/presets/1/preset_actions"
     expected_result = {
         "preset_actions": [
             preset_action_2_json
@@ -230,7 +230,7 @@ def test_preset_actions_resource():
 
     # DELETING ONE PRESET_ACTION
     print("TEST_17 --- GETTING ALL PRESET_ACTIONS - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/1/presets/1/preset_actions/12"
+    uri = "groups/1/presets/1/preset_actions/12"
     expected_result = {"errors": [Error(
                 "Could not find preset action with id: {}".format(12),
                 "PresetActionModel.find_by_id({}) returned None".format(12),
@@ -241,7 +241,7 @@ def test_preset_actions_resource():
 
     # DELETING ONE PRESET_ACTION
     print("TEST_18 --- GETTING ALL PRESET_ACTIONS - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/1/presets/2/preset_actions/2"
+    uri = "groups/1/presets/2/preset_actions/2"
     expected_result = {"errors": [Error(
                 "Could not find preset with id: {}".format(2),
                 "PresetModel.find_by_id({}) returned None".format(2),
@@ -252,7 +252,7 @@ def test_preset_actions_resource():
 
     # DELETING ONE PRESET_ACTION
     print("TEST_19 --- GETTING ALL PRESET_ACTIONS - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/groups/1/presets/1/preset_actions/2"
+    uri = "groups/1/presets/1/preset_actions/2"
     expected_result = "Preset action with id: 2 was successfully deleted."
     expected_status = 200
     test_delete(uri, {}, expected_result, expected_status)

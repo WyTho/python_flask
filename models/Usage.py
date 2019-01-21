@@ -27,9 +27,9 @@ class UsageModel(db.Model):
 
     def to_json(self):
         if self.id is None:
-            url = "127.0.0.1:5000/api/usages/-1"
+            url = "127.0.0.1:5000/api/v1/usages/-1"
         else:
-            url = "127.0.0.1:5000/api/usages/{}".format(self.id)
+            url = "127.0.0.1:5000/api/v1/usages/{}".format(self.id)
         return {
             'id': self.id,
             'item_id': self.item_id,

@@ -22,9 +22,9 @@ class ItemModel(db.Model):
 
     def to_json(self):
         if self.id is None:
-            url = "127.0.0.1:5000/api/items/-1"
+            url = "127.0.0.1:5000/api/v1/items/-1"
         else:
-            url = "127.0.0.1:5000/api/items/{}".format(self.id)
+            url = "127.0.0.1:5000/api/v1/items/{}".format(self.id)
         return {
             'id': self.id,
             'name': self.name,

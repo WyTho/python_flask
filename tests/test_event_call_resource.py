@@ -8,7 +8,7 @@ def test_event_call_resource():
 
     # GETTING ALL EVENT_CALLS
     print("TEST_1 --- GETTING ALL EVENT_CALLS")
-    uri = "http://127.0.0.1:5000/api/event_calls"
+    uri = "event_calls"
     expected_result = {
         "event_calls": []
     }
@@ -26,12 +26,12 @@ def test_event_call_resource():
     event_call_1_json['id'] = 1
     expected_result = event_call_1_json
     expected_status = 201
-    uri = "http://127.0.0.1:5000/api/event_calls"
+    uri = "event_calls"
     test_post(uri, body, expected_result, expected_status)
 
     # GETTING ALL EVENT_CALLS
     print("TEST_3 --- GETTING ALL EVENT_CALLS")
-    uri = "http://127.0.0.1:5000/api/event_calls"
+    uri = "event_calls"
     expected_result = {
         "event_calls": [event_call_1_json]
     }
