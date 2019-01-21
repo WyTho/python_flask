@@ -107,7 +107,7 @@ class GroupItemsResource(Resource):
 
 class GroupItemResource(Resource):
     def get(self, group_id, item_id):
-        errors = validate(gorup_id=group_id, item_id=item_id, method="GroupItemResource.get")
+        errors = validate(group_id=group_id, item_id=item_id, method="GroupItemResource.get")
         if len(errors) > 0:
             all_errors_in_json = [error.to_json() for error in errors]
             return {'errors': all_errors_in_json}, 500
