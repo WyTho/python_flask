@@ -23,6 +23,7 @@ class GroupModel(db.Model):
             url = "127.0.0.1:5000/api/groups/-1"
         return {
             'id': self.id,
+            'name': self.name,
             'is_module': self.is_module,
             'items': [
                 {
