@@ -387,7 +387,7 @@ def validate(**kwargs):
     if method == "GroupItemResource.get":
         if item is None or group is None:
             pass
-        elif item.is_in_this_group(group.id):
+        elif not item.is_in_this_group(group.id):
             errors.append(Error(
                 "Item with id {} is not in group with id {}".format(item.id, group.id),
                 "item.is_in_this_group({}) returned False".format(group.id),
