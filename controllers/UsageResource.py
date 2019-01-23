@@ -127,7 +127,7 @@ class CommandResource(Resource):
     # @todo should this be patch?
     def patch(self, usage_id, new_value):
         usage = UsageModel.find_by_id(usage_id)
-        new_value = int(new_value)
+        new_value = float(new_value)
         if usage.min_value > new_value or usage.max_value < new_value:
             return {"errors": Error(
                 "New value does not fall within the expected range. ({} - {})".format(usage.min_value, usage.max_value),

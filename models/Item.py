@@ -74,10 +74,11 @@ class ItemModel(db.Model):
 
         if last_event is not None:
             usage = UsageModel.find_by_id(last_event.usage_id)
+            print(self.name+": "+last_event.data)
             self.last_use = {
                 'last_use_timestamp': last_event.timestamp,
                 'data_type': usage.unit.value,
-                'data': last_event.data,
+                'data': float(last_event.data),
                 'usage_id': last_event.usage_id
             }
 

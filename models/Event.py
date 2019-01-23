@@ -18,9 +18,9 @@ class EventModel(db.Model):
     def to_json(self):
         data = self.data
         if data == 'True':
-            data = True
+            data = 1
         elif data == 'False':
-            data = False
+            data = 0
         return {
             'id': self.id,
             'usage_id': self.usage_id,
