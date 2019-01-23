@@ -16,6 +16,7 @@ class EventModel(db.Model):
         self.graph_id = graph_id
 
     def to_json(self):
+        # vanuit DB wordt 0 & 1 doorgestuurd
         data = self.data
         if data == 'True':
             data = 1
