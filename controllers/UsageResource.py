@@ -2,9 +2,11 @@ from flask_restful import Resource, request
 import requests
 from flask import current_app as app
 from models.Usage import UsageModel
+from models.Item import ItemModel
 from models.Error import Error
 from controllers.Validator import validate
 import json
+from datetime import datetime
 import threading
 import httplib2
 
@@ -136,5 +138,15 @@ class CommandResource(Resource):
                 ""
             ).to_json()}, 422
         print("url is: " + "{}/{}/{}".format(app.config['HOMELYNK_URI'], usage.external_item_id, new_value))
-        response = requests.get(url="{}/{}/{}".format(app.config['HOMELYNK_URI'], usage.external_item_id, new_value))
-        return response.json()
+        response = requests.get(url="{}/{}/{}".format(app.config['HOMELYNK_URI'], usage.external_item_id, int(new_value)))
+        home_response = response.json()
+        item = ItemModel.find_by_id(usage.item_id)
+        item_in_json = item.to_json()
+        fake_event = {
+                'last_use_timestamp': datetime.now().timestamp(),
+                'data_type': usage.unit.value,
+                'data': float(home_response["current_value"]),
+                'usage_id': usage.id
+            }
+        item_in_json['last_use'] = fake_event
+        return item_in_json, 200

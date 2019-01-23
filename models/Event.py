@@ -16,7 +16,6 @@ class EventModel(db.Model):
         self.graph_id = graph_id
 
     def to_json(self):
-        # vanuit DB wordt 0 & 1 doorgestuurd
         data = self.data
         if data == 'True':
             data = 1
@@ -58,7 +57,14 @@ class EventModel(db.Model):
 
     @classmethod
     def find_latest_by_usage_id(cls, usage_id):
-        return cls.query.filter_by(usage_id=usage_id).order_by(EventModel.timestamp.desc()).first()
+        event = cls.query.filter_by(usage_id=usage_id).order_by(EventModel.timestamp.desc()).first()
+        if event is None:
+            pass
+        elif event.data == "True":
+            event.data = 1
+        elif event.data == "False":
+            event.data = 0
+        return event
 
     @classmethod
     def find_next_false(cls, event):

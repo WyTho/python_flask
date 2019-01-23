@@ -65,16 +65,15 @@ class ItemModel(db.Model):
         last_event = None
         for usage in self.usages:
             event = EventModel.find_latest_by_usage_id(usage.id)
-            if last_event is None:
-                last_event = event
-            elif event is None:
+            if event is None:
                 pass
+            elif last_event is None:
+                last_event = event
             elif last_event.timestamp > event:
                 last_event = event
 
         if last_event is not None:
             usage = UsageModel.find_by_id(last_event.usage_id)
-            print(self.name+": "+last_event.data)
             self.last_use = {
                 'last_use_timestamp': last_event.timestamp,
                 'data_type': usage.unit.value,
