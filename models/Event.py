@@ -14,6 +14,7 @@ class EventModel(db.Model):
         self.timestamp = round(timestamp)
 
     def to_json(self):
+        # vanuit DB wordt 0 & 1 doorgestuurd
         data = self.data
         if data == 'True':
             data = True
