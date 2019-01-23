@@ -26,7 +26,7 @@ def upgrade():
                     sa.Column('usage', sa.String(255), nullable=False),
                     sa.ForeignKeyConstraint(['item_id'], ['item.id'], ),
                     sa.PrimaryKeyConstraint('id'))
-    op.drop_constraint('event_ibfk_1', 'event', type_='foreignkey')
+    op.drop_constraint('event_ibfk_1', 'event', type='foreignkey')
     op.drop_column('event', 'item_id')
     op.add_column('event', sa.Column('usage_id', sa.INTEGER(), nullable=False))
     op.create_foreign_key(None, 'event', 'usage', ['usage_id'], ['id'])

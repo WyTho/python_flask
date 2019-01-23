@@ -2,6 +2,7 @@ from flask_restful import Resource, request
 from models.Event import EventModel
 from models.Usage import UsageModel
 from models.UnitEnum import UnitEnum
+from models.Error import Error
 from datetime import datetime
 import json
 
@@ -14,6 +15,7 @@ class EventsResource(Resource):
         return {"events": all_in_json}, 200
 
     def post(self):
+        errors = []
         if 'usage_id' in request.form.keys():
             usage_id = request.form['usage_id']
             data_type = request.form['data_type']
@@ -26,14 +28,32 @@ class EventsResource(Resource):
 
         usage = UsageModel.find_by_id(usage_id)
         if usage is None:
-            return 'Could not find usage with id: {}'.format(usage_id), 404
+            errors.append(Error(
+                "Cannot find usage with id: {}".format(usage_id),
+                "UsageModel.find_by_id({}) returns None".format(usage_id),
+                404,
+                "https://en.wikipedia.org/wiki/HTTP_404"))
         if UnitEnum.has_value(data_type):
             data_type = UnitEnum(data_type)
         else:
-            return '"{}" is not a valid unit type.'.format(data_type), 400
+            errors.append(Error(
+                '"{}" is not a valid unit type.'.format(data_type),
+                "UnitEnum.has_value({}) returned False".format(data_type), 400,
+                "https://en.wikipedia.org/wiki/HTTP_400"
+            ))
+
+        if len(errors) > 0:
+            all_errors_in_json = [error.to_json() for error in errors]
+            return {"errors": all_errors_in_json}, 422
 
         if usage.unit != data_type:
-            return 'The unit type of the usage with id "{}" does not match given "{}"'.format(usage_id, data_type.value)
+            error = Error(
+                'The unit type of the usage with id "{}" does not match the given "{}".'.format(usage_id, data_type),
+                "usage.unit does not equal data_type.",
+                422,
+                "https://en.wikipedia.org/wiki/HTTP_422"
+            )
+            return {"errors": error.to_json()}, 422
 
         event = EventModel(usage_id, data, round(datetime.now().timestamp()))
         event.save_to_db()

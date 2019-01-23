@@ -26,6 +26,10 @@ class UsageModel(db.Model):
         self.max_value = max_value
 
     def to_json(self):
+        if self.id is None:
+            url = "127.0.0.1:5000/api/v1/usages/-1"
+        else:
+            url = "127.0.0.1:5000/api/v1/usages/{}".format(self.id)
         return {
             'id': self.id,
             'item_id': self.item_id,
@@ -35,7 +39,8 @@ class UsageModel(db.Model):
             'address': self.address,
             'unit': self.unit.value,
             'min_value': self.min_value,
-            'max_value': self.max_value
+            'max_value': self.max_value,
+            'url': url
         }
 
     @classmethod
@@ -83,6 +88,10 @@ class UsageModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def delete_from_db(self):
+        db.session.remove(self)
+        db.session.commit()
+
     def __repr__(self):
-        return "<Usage id:'{}', item_id:'{}', usage_type:'{}', usage:'{}'>"\
-            .format(self.id, self.item_id, self.usage_type.value, self.usage)
+        return "<Usage id:'{}'>"\
+            .format(self.id)

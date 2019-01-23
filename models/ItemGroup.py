@@ -26,7 +26,7 @@ class ItemGroupModel(db.Model):
 
     @classmethod
     def find_by_group_id(cls, group_id):
-        return cls.query.filter_by(id=group_id).all()
+        return cls.query.filter_by(group_id=group_id).all()
 
     @classmethod
     def find_groups_by_item_id(cls, item_id):
@@ -45,7 +45,7 @@ class ItemGroupModel(db.Model):
         return items
 
     @classmethod
-    def find_by_group_id_and_item_id(cls, item_id, group_id):
+    def find_by_item_id_and_group_id(cls, item_id, group_id):
         item_group = cls.query.filter_by(group_id=group_id).filter_by(item_id=item_id).first()
         return item_group
 

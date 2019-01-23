@@ -5,19 +5,27 @@ class EventModel(db.Model):
     __tablename__ = '_event'
     id = db.Column(db.Integer, primary_key=True)
     usage_id = db.Column(db.Integer, db.ForeignKey('_usage.id'))
+    graph_id = db.Column(db.Integer, db.ForeignKey('_graph.id'), nullable=True)
     data = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.Integer, nullable=False, default=0)
 
-    def __init__(self, usage_id, data, timestamp):
+    def __init__(self, usage_id, data, timestamp, graph_id=None):
         self.usage_id = usage_id
         self.data = data
         self.timestamp = round(timestamp)
+        self.graph_id = graph_id
 
     def to_json(self):
+        # vanuit DB wordt 0 & 1 doorgestuurd
+        data = self.data
+        if data == 'True':
+            data = 1
+        elif data == 'False':
+            data = 0
         return {
             'id': self.id,
             'usage_id': self.usage_id,
-            'data': self.data,
+            'data': data,
             'timestamp': self.timestamp
         }
 
@@ -43,6 +51,8 @@ class EventModel(db.Model):
             results = results.filter(EventModel.timestamp > kwargs['after_timestamp'])
         if 'before_timestamp' in kwargs:
             results = results.filter(EventModel.timestamp < kwargs['before_timestamp'])
+        if 'graph_id' in kwargs:
+            results = results.filter(EventModel.graph_id == kwargs['graph_id'])
 
         return results.all()
 

@@ -21,13 +21,18 @@ class ItemModel(db.Model):
         self.groups = ItemGroup.ItemGroupModel.find_groups_by_item_id(self.id)
 
     def to_json(self):
+        if self.id is None:
+            url = "127.0.0.1:5000/api/v1/items/-1"
+        else:
+            url = "127.0.0.1:5000/api/v1/items/{}".format(self.id)
         return {
             'id': self.id,
             'name': self.name,
             'comment': self.comment,
             'last_use': self.last_use,
             'usages': [usage.to_json() for usage in self.usages],
-            'groups': [{'id': group.id, 'name': group.name} for group in self.groups]
+            'groups': [{'id': group.id, 'name': group.name} for group in self.groups],
+            'url': url
         }
 
     @classmethod
@@ -69,10 +74,19 @@ class ItemModel(db.Model):
 
         if last_event is not None:
             usage = UsageModel.find_by_id(last_event.usage_id)
+            print(self.name+": "+last_event.data)
             self.last_use = {
                 'last_use_timestamp': last_event.timestamp,
                 'data_type': usage.unit.value,
-                'data': last_event.data}
+                'data': float(last_event.data),
+                'usage_id': last_event.usage_id
+            }
+
+    def has_usage(self, usage_id):
+        for usage in self.usages:
+            if usage.id == usage_id:
+                return True
+        return False
 
     def is_in_module(self):
         for group in self.groups:
@@ -100,4 +114,4 @@ class ItemModel(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Item name:'{}', address:'{}', comment:'{}'>".format(self.name, self.address, self.comment)
+        return "<Item id:'{}'>".format(self.id)

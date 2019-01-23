@@ -1,5 +1,6 @@
 from models.Event import EventModel
 from models.UnitEnum import UnitEnum
+from models.Error import Error
 from tests.test_calls import test_get, test_post, send_get
 from datetime import datetime
 
@@ -9,7 +10,7 @@ def test_event_resource():
 
     # GETTING ALL USAGES
     print("TEST_1 --- GETTING ALL EVENTS")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "events"
     expected_result = {
         "events": []
     }
@@ -18,8 +19,8 @@ def test_event_resource():
 
     # POST ONE EVENT
     print("TEST_2 --- POSTING ONE EVENT")
-    uri = "http://127.0.0.1:5000/api/event"
-    usage_1 = send_get('http://127.0.0.1:5000/api/usage/1')
+    uri = "events"
+    usage_1 = send_get('usages/1')
     event_1 = EventModel(usage_1['id'], 'True', round(datetime.now().timestamp()))
     event_1_json = event_1.to_json()
     event_1_json['id'] = 1
@@ -36,13 +37,13 @@ def test_event_resource():
 
     # GETTING ONE EVENT
     print("TEST_3 --- GETTING ONE EVENT")
-    uri = "http://127.0.0.1:5000/api/event/1"
+    uri = "events/1"
     expected_status = 200
     test_get(uri, expected_result, expected_status)
 
     # GETTING ALL EVENTS
     print("TEST_4 --- GETTING ALL EVENTS")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "events"
     expected_result = {
         "events": [event_1_json]
     }
@@ -51,26 +52,34 @@ def test_event_resource():
 
     # POST ONE EVENT
     print("TEST_5 --- POSTING ONE EVENT - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "events"
     body = {
         "usage_id": 17,
         "data_type": UnitEnum.TOGGLE.value,
         "data": 'True'
     }
-
-    expected_result = "Could not find usage with id: 17"
-    expected_status = 404
+    error = Error(
+                "Cannot find usage with id: {}".format(17),
+                "UsageModel.find_by_id({}) returns None".format(17),
+                404,
+                "https://en.wikipedia.org/wiki/HTTP_404")
+    expected_result = {"errors": [error.to_json()]}
+    expected_status = 422
     test_post(uri, body, expected_result, expected_status)
 
     # POST ONE EVENT
     print("TEST_6 --- POSTING ONE EVENT - BAD REQUEST")
-    uri = "http://127.0.0.1:5000/api/event"
+    uri = "events"
     body = {
         "usage_id": 1,
         "data_type": "KILO WHAT?",
         "data": 'True'
     }
-
-    expected_result = '"KILO WHAT?" is not a valid unit type.'
-    expected_status = 400
+    error = Error(
+                '"{}" is not a valid unit type.'.format("KILO WHAT?"),
+                "UnitEnum.has_value({}) returned False".format("KILO WHAT?"), 400,
+                "https://en.wikipedia.org/wiki/HTTP_400"
+            )
+    expected_result = {"errors": [error.to_json()]}
+    expected_status = 422
     test_post(uri, body, expected_result, expected_status)

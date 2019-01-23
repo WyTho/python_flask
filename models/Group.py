@@ -1,5 +1,6 @@
 from db import db
 from . import ItemGroup
+from models.Error import Error
 
 
 class GroupModel(db.Model):
@@ -15,6 +16,10 @@ class GroupModel(db.Model):
         self.items = ItemGroup.ItemGroupModel.find_items_by_group_id(self.id)
 
     def to_json(self):
+        if id is not None:
+            url = "127.0.0.1:5000/api/v1/groups/{}".format(self.id)
+        else:
+            url = "127.0.0.1:5000/api/v1/groups/-1"
         return {
             'id': self.id,
             'name': self.name,
@@ -24,7 +29,11 @@ class GroupModel(db.Model):
                     'id': item.id,
                     'name': item.name,
                     'comment': item.comment,
+                    'url': '127.0.0.1:5000/api/v1/items/{}'.format(item.id)
                 } for item in self.items],
+            # @todo during testing I cannot reach into app.config
+            # 'url': app.config['API_URI'] + "groups/{}".format(self.id)
+            'url': url
         }
 
     @classmethod
@@ -42,9 +51,25 @@ class GroupModel(db.Model):
         group.items = ItemGroup.ItemGroupModel.find_items_by_group_id(group.id)
         return group
 
+
     @classmethod
     def find_by_id_without_items(cls, group_id):
         return cls.query.filter_by(id=group_id).first()
+
+    def update_name(self, name):
+        if len(name) < 3:
+            return Error("Name must be at least 3 characters long.",
+                         "Name parameter must be at least 3 characters long.",
+                         400,
+                         "https://en.wikipedia.org/wiki/HTTP_400")
+        elif len(name) > 255:
+            return Error("Name cannot be longer than 255 characters.",
+                         "Name parameter cannot be longer than 255 characters.",
+                         400,
+                         "https://en.wikipedia.org/wiki/HTTP_400")
+        self.name = name
+        db.session.commit()
+        return self
 
     def save_to_db(self):
         db.session.add(self)
