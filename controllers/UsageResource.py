@@ -135,5 +135,6 @@ class CommandResource(Resource):
                 422,
                 ""
             ).to_json()}, 422
-        response = requests.get(url="{}alias={}&value={}".format(app.config['HOMELYNK_URI'], usage.address, new_value))
+        print("url is: " + "{}/{}/{}".format(app.config['HOMELYNK_URI'], usage.external_item_id, new_value))
+        response = requests.get(url="{}/{}/{}".format(app.config['HOMELYNK_URI'], usage.external_item_id, new_value))
         return response.json()
