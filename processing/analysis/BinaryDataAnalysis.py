@@ -65,8 +65,6 @@ class BinaryDataAnalysis:
                     {...}
                 ]
         """
-        # todo? cut off trailing days?
-
         self.lookup_table = self.create_lookup_table(
             df=df
         )
@@ -89,10 +87,11 @@ class BinaryDataAnalysis:
                 hashcode=key
             )
             result.append({
-                'item_ids': items,
+                'item_ids': [int(item) for item in items],
                 'is_predicted_group_percentage': predicted_groups[key]['is_predicted_group_percentage'],
                 'is_relevant_group_percentage': predicted_groups[key]['is_relevant_group_percentage']
             })
+        print('here', 16)
 
         return result
 
@@ -117,20 +116,21 @@ class BinaryDataAnalysis:
         return lookup_dict
 
     def clean_dataframe(self, df):
-        """Convert non-nummeric values in the dataframe to numbers so that the dataframe can be used to fit a model
+        """Convert all the id's to numbers ranging from 0 to the amount of unique id's
+            e.g. with events for items with id's 33, 35, 37 & 45 the id's will be 0, 1, 2, 3
 
         Args:
             df: The dataframe to clean.
 
         Returns:
-            df_fit: The dataframe with nummeric values
+            df_fit: The dataframe with ascending id's from 0 to the amount of unique ones
         """
+        df_ids_only = pd.DataFrame()
+        df_ids_only['id'] = df['id']
         d = defaultdict(LabelEncoder)
-        df_fit = df.apply(lambda x: d[x.name].fit_transform(x))
-        if 'state' in df.columns:
-            df_fit['state'] = df['state']
-        if 'time' in df.columns:
-            df_fit['time'] = df['time']
+        df_ids_only = df_ids_only.apply(lambda x: d[x.name].fit_transform(x))
+        df_fit = df
+        df_fit['id'] = df_ids_only['id']
         return df_fit
 
     def get_week_clusters_hash_codes(self, df):
