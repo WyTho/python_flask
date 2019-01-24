@@ -33,7 +33,7 @@ class BinaryDataAnalysis:
     def __init__(self,
                  eps=5,
                  cluster_degregation=2,
-                 max_cluster_distance=7.5,  # minutes
+                 max_cluster_distance=7.5,
                  weeks=5,
                  decay_strength=0.5,
                  cluster_threshold=25,
@@ -91,7 +91,6 @@ class BinaryDataAnalysis:
                 'is_predicted_group_percentage': predicted_groups[key]['is_predicted_group_percentage'],
                 'is_relevant_group_percentage': predicted_groups[key]['is_relevant_group_percentage']
             })
-        print('here', 16)
 
         return result
 

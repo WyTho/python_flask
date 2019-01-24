@@ -1,6 +1,5 @@
 import pandas as pd
-from processing.analysis import DataFrameValidator
-from processing.analysis import BinaryDataAnalysis
+from processing.analysis import DataFrameValidator, BinaryDataAnalysis
 
 
 def analyze_fake_event_data():
