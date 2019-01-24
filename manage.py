@@ -169,7 +169,7 @@ def update_seed():
                 minutes=random.randint(0, 60),
                 seconds=random.randint(0, 60)
             )).timestamp()
-            items.append(EventModel(6, 'True', toilet_break_timestamp))
+            items.append(EventModel(6, 'True', toilet_break_timestamp, 2))
 
         for i in range(0, 4):
             daily_shower_start_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
@@ -177,12 +177,12 @@ def update_seed():
                 minutes=random.randint(0, 60),
                 seconds=random.randint(0, 60)
             )).timestamp()
-            items.append(EventModel(7, 'True', daily_shower_start_timestamp))
+            items.append(EventModel(7, 'True', daily_shower_start_timestamp, 2))
             daily_shower_end_timestamp = (datetime.fromtimestamp(daily_shower_start_timestamp) + timedelta(
                 minutes=random.randint(5, 15),
                 seconds=random.randint(0, 60)
             )).timestamp()
-            items.append(EventModel(7, 'False', daily_shower_end_timestamp))
+            items.append(EventModel(7, 'False', daily_shower_end_timestamp, 2))
         # 24 hours per day
         for i in range(0, 24):
             y = 0
@@ -214,7 +214,8 @@ def update_seed():
                     temp = 19
 
                 items.append(
-                    EventModel(1, temp * random.uniform(0.9, 1.1), from_date))
+                    EventModel(1, temp * random.uniform(0.9, 1.1), from_date, 1)
+                )
                 from_date += 6 * 60
                 y += 1
 
