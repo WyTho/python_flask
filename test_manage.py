@@ -7,6 +7,7 @@ from tests.test_group_resource import test_group_resource
 from tests.test_event_call_resource import test_event_call_resource
 from tests.test_usage_resource import test_usage_resource
 from tests.test_event_resource import test_event_resource
+from tests.test_event_analysis import test_event_analysis
 from tests.test_graph_resource import test_graph_resource
 from tests.test_schedule_resource import test_schedule_resource
 from tests.test_presets_resource import test_presets_resource
@@ -28,6 +29,7 @@ def run_tests():
     test_event_call_resource()
     test_usage_resource()
     test_event_resource()
+    test_event_analysis()
     test_graph_resource()
     test_schedule_resource()
     test_presets_resource()
