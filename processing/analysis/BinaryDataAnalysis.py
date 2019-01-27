@@ -31,12 +31,12 @@ class BinaryDataAnalysis:
     """
 
     def __init__(self,
-                 eps=5,
+                 eps=4,
                  cluster_degregation=2,
                  max_cluster_distance=7.5,
-                 weeks=5,
+                 weeks=15,
                  decay_strength=0.5,
-                 cluster_threshold=7,
+                 cluster_threshold=5,
                  threshold_percentage=90):
         self.eps = eps
         self.cluster_degregation = cluster_degregation
