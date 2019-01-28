@@ -68,7 +68,6 @@ class BinaryDataAnalysis:
         self.lookup_table = self.create_lookup_table(
             df=df
         )
-        print(self.lookup_table)
         df_fit = self.clean_dataframe(
             df=df
         )
@@ -83,7 +82,6 @@ class BinaryDataAnalysis:
         )
 
         result = []
-        # print(predicted_groups)
         for key in predicted_groups:
             items = self.get_lookup_values(
                 hashcode=key
@@ -107,11 +105,9 @@ class BinaryDataAnalysis:
                          { 0: 1743, 1: 1749, 2: 1803, 3: 1890, 4: 1911}
         """
         df_lookup = pd.DataFrame(data={'id': pd.Series(df['id']).unique()})
-        print(df_lookup)
         df_lookup['hashcode'] = self.clean_dataframe(
             df=df_lookup.copy()
         )['id']
-        print(df_lookup)
         lookup_dict = dict()
         for index, row in df_lookup.iterrows():
             lookup_dict[row['hashcode']] = row['id']
