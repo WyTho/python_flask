@@ -11,6 +11,7 @@ from controllers.UsageResource import UsageResource, UsagesResource, CommandReso
 from controllers.ScheduleResource import ScheduleResource, SchedulesResource
 from controllers.ScheduledUsageResource import ScheduledUsageResource, ScheduledUsagesResource
 from controllers.ScheduleDaysResource import ScheduleDaysResource, ScheduleDayResource
+from controllers.AnalyzeEventsResource import AnalyzeEventsResource
 
 
 app = Flask(__name__)
@@ -54,6 +55,9 @@ api.add_resource(ScheduledUsagesResource, baseurl+'schedules/<int:schedule_id>/s
 api.add_resource(ScheduledUsageResource, baseurl+'schedules/<int:schedule_id>/scheduled_usages/<int:scheduled_usage_id>')
 api.add_resource(ScheduleDayResource, baseurl+'schedules/<int:schedule_id>/schedule_days/<int:schedule_day_id>')
 api.add_resource(ScheduleDaysResource, baseurl+'schedules/<int:schedule_id>/schedule_days')
+
+# For fake-data analysis
+api.add_resource(AnalyzeEventsResource, baseurl+'events/analyze')
 
 if __name__ == "__main__":
     from db import db
