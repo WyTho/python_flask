@@ -93,7 +93,11 @@ def seed():
         # START CREATING EVENTS
         print('Creating events')
         till_date = datetime.now().timestamp()
-        from_date = 1538352000
+        about_one_month = (60 * 60 * 24 * 30)
+        from_date = till_date - about_one_month
+
+        # make sure the timestamps are never in the future
+        limit_time = lambda timestamp: timestamp if timestamp < till_date else till_date
 
         keep_going = True
         while keep_going:
@@ -103,7 +107,7 @@ def seed():
                     minutes=random.randint(0, 60),
                     seconds=random.randint(0, 60)
                 )).timestamp()
-                items.append(EventModel(6, 'True', toilet_break_timestamp, 2))
+                items.append(EventModel(6, 'True', limit_time(toilet_break_timestamp), 2))
 
             for i in range(0, 4):
                 daily_shower_start_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
@@ -111,12 +115,12 @@ def seed():
                     minutes=random.randint(0, 60),
                     seconds=random.randint(0, 60)
                 )).timestamp()
-                items.append(EventModel(7, 'True', daily_shower_start_timestamp, 2))
+                items.append(EventModel(7, 'True', limit_time(daily_shower_start_timestamp), 2))
                 daily_shower_end_timestamp = (datetime.fromtimestamp(daily_shower_start_timestamp) + timedelta(
                     minutes=random.randint(5, 15),
                     seconds=random.randint(0, 60)
                 )).timestamp()
-                items.append(EventModel(7, 'False', daily_shower_end_timestamp, 2))
+                items.append(EventModel(7, 'False', limit_time(daily_shower_end_timestamp), 2))
             for i in range(0, 24):
                 if not keep_going:
                     break
@@ -145,10 +149,13 @@ def seed():
         print('inserting data into db, this may take a while...')
         current = 1
         total = len(items)
+
+        # one last flush of the toilet at the current timestamp
+        items.append(EventModel(6, 'True', till_date, 2))
         for item in items:
             print('{} out of {}'.format(current, total))
-            current += 1
             item.save_to_db()
+            current += 1
 
 
 @manager.command
@@ -156,6 +163,9 @@ def update_seed():
     db.init_app(app)
     items = []
     till_date = datetime.now().timestamp()
+
+    # make sure the timestamps are never in the future
+    limit_time = lambda timestamp: timestamp if timestamp < till_date else till_date
 
     # getting highest timestamp value in Event's table. Add 6 minutes to that and use that as the first timestamp.
     from_date = (db.session.query(db.func.max(EventModel.timestamp)).first()[0]) #md + (6 * 60)
@@ -169,7 +179,7 @@ def update_seed():
                 minutes=random.randint(0, 60),
                 seconds=random.randint(0, 60)
             )).timestamp()
-            items.append(EventModel(6, 'True', toilet_break_timestamp, 2))
+            items.append(EventModel(6, 'True', limit_time(toilet_break_timestamp), 2))
 
         for i in range(0, 4):
             daily_shower_start_timestamp = (datetime.fromtimestamp(from_date) + timedelta(
@@ -177,12 +187,12 @@ def update_seed():
                 minutes=random.randint(0, 60),
                 seconds=random.randint(0, 60)
             )).timestamp()
-            items.append(EventModel(7, 'True', daily_shower_start_timestamp, 2))
+            items.append(EventModel(7, 'True', limit_time(daily_shower_start_timestamp), 2))
             daily_shower_end_timestamp = (datetime.fromtimestamp(daily_shower_start_timestamp) + timedelta(
                 minutes=random.randint(5, 15),
                 seconds=random.randint(0, 60)
             )).timestamp()
-            items.append(EventModel(7, 'False', daily_shower_end_timestamp, 2))
+            items.append(EventModel(7, 'False', limit_time(daily_shower_end_timestamp), 2))
         # 24 hours per day
         for i in range(0, 24):
             y = 0
@@ -222,10 +232,13 @@ def update_seed():
     print('inserting data into db, this may take a while...')
     current = 1
     total = len(items)
+
+    # one last flush of the toilet at the current timestamp
+    items.append(EventModel(6, 'True', till_date, 2))
     for item in items:
         print('{} out of {}'.format(current, total))
-        current += 1
         item.save_to_db()
+        current += 1
 
 
 if __name__ == '__main__':
